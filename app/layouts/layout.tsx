@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import { font_primary, font_secondary } from "./fonts";
-import "./globals.css";
-
-// Layout
+import { font_primary, font_secondary } from "@/styles/fonts";
+import "./global.css"
 
 export default function RootLayout({
   children,
