@@ -1,0 +1,43 @@
+services:
+  db-event:
+    image: ghcr.io/bandwidth-gig-guide/database-event:latest
+    container_name: db-event
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: db-event
+    networks:
+      - network-bandwidth
+
+  service-event:
+    image: ghcr.io/bandwidth-gig-guide/service-event:latest
+    container_name: service-event
+    networks:
+      - network-bandwidth
+
+  service-artist:
+    image: ghcr.io/bandwidth-gig-guide/service-artist:latest
+    container_name: service-artist
+    networks:
+      - network-bandwidth
+
+  service-venue:
+    image: ghcr.io/bandwidth-gig-guide/service-venue:latest
+    container_name: service-venue
+    networks:
+      - network-bandwidth
+
+  api-gateway:
+    image: ghcr.io/bandwidth-gig-guide/api-gateway:latest
+    container_name: api-gateway
+    depends_on:
+      - service-event
+      - service-artist
+      - service-venue
+    ports:
+      - "80:80"
+    networks:
+      - network-bandwidth
+
+networks:
+  network-bandwidth:
+    driver: bridge
