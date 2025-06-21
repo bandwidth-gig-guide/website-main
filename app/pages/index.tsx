@@ -1,9 +1,10 @@
 import Link from "next/link";
 import React, { useState, useEffect } from "react"
 import axios from "axios"
+import { Event } from "../types/Event"
 
 const Home = () => {
-  const [events, setEvents] = useState([]);
+  const [events, setEvents] = useState<Event[]>([]);
   
   useEffect(() => {
     axios.get('http://localhost:80/event/')
