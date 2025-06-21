@@ -8,7 +8,8 @@ const EventDetail = () => {
   const { id } = router.query;
 
   useEffect(() => {
-    axios.get('http://localhost:80/event/{id}')
+    if (!id) return;
+    axios.get(`http://localhost:80/event/${id}`)
       .then(response => {
         setEvent(response.data);
       })
