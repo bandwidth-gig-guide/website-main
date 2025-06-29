@@ -1,10 +1,7 @@
 services:
-  db-event:
-    image: ghcr.io/bandwidth-gig-guide/database-event:latest
-    container_name: db-event
-    environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: db-event
+  db-main:
+    image: ghcr.io/bandwidth-gig-guide/db-main:latest
+    container_name: db-main
     networks:
       - network-bandwidth
 
