@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react"
 import axios from "axios"
 import { Event } from "../../types/Event"
+import apiUrl from "../../api.config"
 
 const EventDetail = () => {
   const [event, setEvent] = useState<Event>({});
@@ -9,7 +10,7 @@ const EventDetail = () => {
   const { id } = router.query;
 
   useEffect(() => {
-    axios.get('http://localhost:80/event/{id}')
+    axios.get(`${apiUrl}/event/{id}`)
       .then(response => {
         setEvent(response.data);
       })
