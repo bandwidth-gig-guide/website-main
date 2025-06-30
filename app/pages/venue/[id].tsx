@@ -1,11 +1,11 @@
 import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react"
 import axios from "axios"
-import { Event } from "../../types/Event"
+import { Venue } from "../../types/Venue"
 import apiUrl from "../../api.config"
 
-const EventDetail = () => {
-  const [event, setEvent] = useState<Event>({} as Event); 
+const VenueDetail = () => {
+  const [venue, setVenue] = useState<Venue>({} as Venue); 
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isError, setIsError] = useState<boolean>(false);
 
@@ -15,14 +15,14 @@ const EventDetail = () => {
   useEffect(() => {
     if (!id) {
       setIsError(true);
-      alert("Could not find event")
-      router.push('/event');
+      alert("Could not find venue")
+      router.push('/venue');
       return;
     }
 
-    axios.get(`${apiUrl}/event/${id}`)
+    axios.get(`${apiUrl}/venue/${id}`)
       .then(response => {
-        setEvent(response.data);
+        setVenue(response.data);
       })
       .catch(error => {
         console.error(error);
@@ -37,7 +37,7 @@ const EventDetail = () => {
   if (isError) {
     return (
       <div>
-        <p>Could not load event: {id}</p>
+        <p>Could not load venue: {id}</p>
       </div>
     )
   }
@@ -45,17 +45,17 @@ const EventDetail = () => {
   if (isLoading) {
     return (
       <div>
-        <p>Loading event: {id}</p>
+        <p>Loading venue: {id}</p>
       </div>
     )
   }
 
   return (
     <div>
-      <h1>{event.Title}</h1>
-      <p>{JSON.stringify(event)}</p>
+      <h1>{venue.Title}</h1>
+      <p>{JSON.stringify(venue)}</p>
     </div>
   );
 };
 
-export default EventDetail;
+export default VenueDetail;

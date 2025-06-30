@@ -2,12 +2,13 @@ import Link from "next/link";
 import React, { useState, useEffect } from "react"
 import axios from "axios"
 import { Event as EventType } from "../../types/Event"
+import apiUrl from "../../api.config"
 
 const Event = () => {
   const [events, setEvents] = useState<EventType[]>([]);
 
   useEffect(() => {
-    axios.get('http://localhost:80/event/')
+    axios.get(`${apiUrl}/event/`)
       .then(response => {
         setEvents(response.data);
       })
@@ -18,23 +19,13 @@ const Event = () => {
 
   return (
     <div>
-      <h1>Event</h1>
-      <ul>
-        <li>
-          <Link href="/event/1">Event 1</Link>
-        </li>
-        <li>
-          <Link href="/event/2">Event 2</Link>
-        </li>
-        <li>
-            <Link href="/">Home</Link>
-        </li>
-      </ul>
-      <h2>Test</h2>
+      <h1>All Events</h1>
       <ul>
         {events.map(event => (
           <li key={event.EventID}>
-            {event.Title}
+            <Link href={`/event/${event.EventID}`}>
+              {JSON.stringify(event)}
+            </Link>
           </li>
         ))}
       </ul>

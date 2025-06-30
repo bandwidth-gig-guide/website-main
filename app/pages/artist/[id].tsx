@@ -1,11 +1,11 @@
 import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react"
 import axios from "axios"
-import { Event } from "../../types/Event"
+import { Artist } from "../../types/Artist"
 import apiUrl from "../../api.config"
 
-const EventDetail = () => {
-  const [event, setEvent] = useState<Event>({} as Event); 
+const ArtistDetail = () => {
+  const [artist, setArtist] = useState<Artist>({} as Artist); 
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isError, setIsError] = useState<boolean>(false);
 
@@ -15,14 +15,14 @@ const EventDetail = () => {
   useEffect(() => {
     if (!id) {
       setIsError(true);
-      alert("Could not find event")
-      router.push('/event');
+      alert("Could not find artist")
+      router.push('/artist');
       return;
     }
 
-    axios.get(`${apiUrl}/event/${id}`)
+    axios.get(`${apiUrl}/artist/${id}`)
       .then(response => {
-        setEvent(response.data);
+        setArtist(response.data);
       })
       .catch(error => {
         console.error(error);
@@ -37,7 +37,7 @@ const EventDetail = () => {
   if (isError) {
     return (
       <div>
-        <p>Could not load event: {id}</p>
+        <p>Could not load artist: {id}</p>
       </div>
     )
   }
@@ -45,17 +45,17 @@ const EventDetail = () => {
   if (isLoading) {
     return (
       <div>
-        <p>Loading event: {id}</p>
+        <p>Loading artist: {id}</p>
       </div>
     )
   }
 
   return (
     <div>
-      <h1>{event.Title}</h1>
-      <p>{JSON.stringify(event)}</p>
+      <h1>{artist.Title}</h1>
+      <p>{JSON.stringify(artist)}</p>
     </div>
   );
 };
 
-export default EventDetail;
+export default ArtistDetail;
