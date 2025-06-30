@@ -13,8 +13,8 @@ const Home = () => {
       <h1>Home</h1>
       <ul>
         {routes.map(route => (
-          <li>
-            <Link key={route.href} href={route.href}>{route.label}</Link>
+          <li key={route.label} >
+            <Link href={route.href}>{route.label}</Link>
           </li>
         ))}
       </ul>
