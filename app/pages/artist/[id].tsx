@@ -3,14 +3,15 @@ import { useRouter } from "next/router";
 import axios from "axios"
 
 // Config
-import apiUrl from "../../api.config"
+import apiUrl from "@/api.config";
 
 // Types
-import { Artist } from "../../types/Artist"
+import { Artist } from "@/types/Artist";
 import { ArtistSocial } from "@/types/Social";
-import { ArtistFeatured } from "@/types/Featured";
+// import { ArtistFeatured } from "@/types/Featured";
 import { ArtistType } from "@/types/Type";
 import { ArtistTag } from "@/types/Tag";
+import { ArtistImage } from "@/types/Image";
 
 
 const ArtistDetail = () => {
@@ -25,6 +26,7 @@ const ArtistDetail = () => {
 	// const [artistFeatured, setArtistFeatured] = useState<ArtistFeatured>({} as ArtistFeatured);
 	const [artistType, setArtistType] = useState<ArtistType>({} as ArtistType);
 	const [artistTag, setArtistTag] = useState<ArtistTag>({} as ArtistTag);
+	const [artistImage, setArtistImage] = useState<ArtistImage>({} as ArtistImage);
 
 
 	// Routing & Params
@@ -45,14 +47,16 @@ const ArtistDetail = () => {
 		// const fetchArtistFeatured = axios.get(`${apiUrl}/artist/featured/${id}`); // Stop throwing 404s if the request is valid
 		const fetchArtistType = axios.get(`${apiUrl}/artist/type/${id}`);
 		const fetchArtistTag = axios.get(`${apiUrl}/artist/tag/${id}`);
+		const fetchArtistImage = axios.get(`${apiUrl}/artist/image/${id}`);
 
 
-		Promise.all([fetchArtist, fetchArtistSocial, fetchArtistType, fetchArtistTag])
-			.then(([resArtist, resArtistSocial, resArtistType, resArtistTag]) => {
+		Promise.all([fetchArtist, fetchArtistSocial, fetchArtistType, fetchArtistTag, fetchArtistImage])
+			.then(([resArtist, resArtistSocial, resArtistType, resArtistTag, resArtistImage]) => {
 				setArtist(resArtist.data);
 				setArtistSocial(resArtistSocial.data);
 				setArtistType(resArtistType.data);
-				setArtistType(resArtistTag.data);
+				setArtistTag(resArtistTag.data);
+				setArtistImage(resArtistImage.data);
 			})
 			.catch(error => {
 				console.error(error);
@@ -88,6 +92,7 @@ const ArtistDetail = () => {
 			{/* <p>{JSON.stringify(artistFeatured)}</p> */}
 			<p>{JSON.stringify(artistType)}</p>
 			<p>{JSON.stringify(artistTag)}</p>
+			<p>{JSON.stringify(artistImage)}</p>
 		</div>
 	);
 };
