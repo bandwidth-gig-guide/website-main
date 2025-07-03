@@ -23,6 +23,12 @@ services:
     networks:
       - network-bandwidth
 
+  service-account:
+    image: ghcr.io/bandwidth-gig-guide/service-account:latest
+    container_name: service-account
+    networks:
+      - network-bandwidth
+
   api-gateway:
     image: ghcr.io/bandwidth-gig-guide/api-gateway:latest
     container_name: api-gateway
@@ -30,6 +36,7 @@ services:
       - service-event
       - service-artist
       - service-venue
+      - service-account
     ports:
       - "80:80"
     networks:
