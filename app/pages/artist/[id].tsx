@@ -3,15 +3,15 @@ import { useRouter } from "next/router";
 import axios from "axios"
 
 // Config
-import apiUrl from "@/api.config";
+import apiUrl from "../../api.config";
 
 // Types
-import { Artist } from "@/types/Artist";
-import { ArtistSocial } from "@/types/Social";
-// import { ArtistFeatured } from "@/types/Featured";
-import { ArtistType } from "@/types/Type";
-import { ArtistTag } from "@/types/Tag";
-import { ArtistImage } from "@/types/Image";
+import { Artist } from "../../types/Artist";
+import { ArtistSocial } from "../../types/Social";
+// import { ArtistFeatured } from "../../types/Featured";
+import { ArtistType } from "../../types/Type";
+import { ArtistTag } from "../../types/Tag";
+import { ArtistImage } from "../../types/Image";
 
 
 const ArtistDetail = () => {
