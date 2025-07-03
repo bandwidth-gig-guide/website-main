@@ -9,6 +9,7 @@ import apiUrl from "../../api.config"
 import { Artist } from "../../types/Artist"
 import { ArtistSocial } from "@/types/Social";
 import { ArtistFeatured } from "@/types/Featured";
+import { ArtistType } from "@/types/Type";
 
 
 const ArtistDetail = () => {
@@ -21,6 +22,8 @@ const ArtistDetail = () => {
 	const [artist, setArtist] = useState<Artist>({} as Artist);
 	const [artistSocial, setArtistSocial] = useState<ArtistSocial>({} as ArtistSocial);
 	// const [artistFeatured, setArtistFeatured] = useState<ArtistFeatured>({} as ArtistFeatured);
+	const [artistType, setArtistType] = useState<ArtistType>({} as ArtistType);
+
 
 	// Routing & Params
 	const router = useRouter();
@@ -38,11 +41,14 @@ const ArtistDetail = () => {
 		const fetchArtist = axios.get(`${apiUrl}/artist/${id}`);
 		const fetchArtistSocial = axios.get(`${apiUrl}/artist/social/${id}`);
 		// const fetchArtistFeatured = axios.get(`${apiUrl}/artist/featured/${id}`); // Stop throwing 404s if the request is valid
+		const fetchArtistType = axios.get(`${apiUrl}/artist/type/${id}`);
 
-		Promise.all([fetchArtist, fetchArtistSocial])
-			.then(([artistRes, socialRes]) => {
-				setArtist(artistRes.data);
-				setArtistSocial(socialRes.data);
+
+		Promise.all([fetchArtist, fetchArtistSocial, fetchArtistType])
+			.then(([resArtist, resArtistSocial, resArtistType]) => {
+				setArtist(resArtist.data);
+				setArtistSocial(resArtistSocial.data);
+				setArtistType(resArtistType.data);
 			})
 			.catch(error => {
 				console.error(error);
@@ -76,6 +82,7 @@ const ArtistDetail = () => {
 			<p>{JSON.stringify(artist)}</p>
 			<p>{JSON.stringify(artistSocial)}</p>
 			{/* <p>{JSON.stringify(artistFeatured)}</p> */}
+			<p>{JSON.stringify(artistType)}</p>
 		</div>
 	);
 };
