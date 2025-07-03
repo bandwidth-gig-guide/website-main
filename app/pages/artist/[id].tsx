@@ -1,61 +1,78 @@
-import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react"
+import { useRouter } from "next/router";
 import axios from "axios"
-import { Artist } from "../../types/Artist"
+
+// Config
 import apiUrl from "../../api.config"
 
+// Types
+import { Artist } from "../../types/Artist"
+import { ArtistSocial } from "@/types/Social";
+
+
 const ArtistDetail = () => {
-  const [artist, setArtist] = useState<Artist>({} as Artist); 
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [isError, setIsError] = useState<boolean>(false);
 
-  const router = useRouter();
-  const { id } = router.query;
+	// Page States
+	const [isLoading, setIsLoading] = useState<boolean>(true);
+	const [isError, setIsError] = useState<boolean>(false);
 
-  useEffect(() => {
-    if (!id) {
-      setIsError(true);
-      alert("Could not find artist")
-      router.push('/artist');
-      return;
-    }
+	// Objects
+	const [artist, setArtist] = useState<Artist>({} as Artist);
+	const [artistSocial, setArtistSocial] = useState<ArtistSocial>({} as ArtistSocial);
 
-    axios.get(`${apiUrl}/artist/${id}`)
-      .then(response => {
-        setArtist(response.data);
-      })
-      .catch(error => {
-        console.error(error);
-        setIsError(true);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+	// Routing & Params
+	const router = useRouter();
+	const { id } = router.query;
 
-    }, [id]);
-  
-  if (isError) {
-    return (
-      <div>
-        <p>Could not load artist: {id}</p>
-      </div>
-    )
-  }
+	// API Calls
+	useEffect(() => {
+		if (!id) {
+			setIsError(true);
+			alert("Could not find artist")
+			router.push('/artist');
+			return;
+		}
 
-  if (isLoading) {
-    return (
-      <div>
-        <p>Loading artist: {id}</p>
-      </div>
-    )
-  }
+		const fetchArtist = axios.get(`${apiUrl}/artist/${id}`);
+		const fetchArtistSocial = axios.get(`${apiUrl}/artist/social/${id}`);
 
-  return (
-    <div>
-      <h1>{artist.Title}</h1>
-      <p>{JSON.stringify(artist)}</p>
-    </div>
-  );
+		Promise.all([fetchArtist, fetchArtistSocial])
+			.then(([artistRes, socialRes]) => {
+				setArtist(artistRes.data);
+				setArtistSocial(socialRes.data);
+			})
+			.catch(error => {
+				console.error(error);
+				setIsError(true);
+			})
+			.finally(() => {
+				setIsLoading(false);
+			});
+	}, [id]);
+
+	if (isError) {
+		return (
+			<div>
+				<p>Could not load artist: {id}</p>
+			</div>
+		)
+	}
+
+	if (isLoading) {
+		return (
+			<div>
+				<p>Loading artist: {id}</p>
+			</div>
+		)
+	}
+
+	return (
+		<div>
+			<h1>{artist.Title}</h1>
+			<p>{JSON.stringify(artist)}</p>
+			<p>{JSON.stringify(artistSocial)}</p>
+		</div>
+	);
 };
 
 export default ArtistDetail;
