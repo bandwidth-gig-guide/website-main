@@ -8,7 +8,6 @@ import apiUrl from "../../api.config";
 // Types
 import { Artist } from "../../types/Artist";
 import { ArtistSocial } from "../../types/Social";
-// import { ArtistFeatured } from "../../types/Featured";
 import { ArtistType } from "../../types/Type";
 import { ArtistTag } from "../../types/Tag";
 import { ArtistImage } from "../../types/Image";
@@ -23,7 +22,6 @@ const ArtistDetail = () => {
 	// Objects
 	const [artist, setArtist] = useState<Artist>({} as Artist);
 	const [artistSocial, setArtistSocial] = useState<ArtistSocial>({} as ArtistSocial);
-	// const [artistFeatured, setArtistFeatured] = useState<ArtistFeatured>({} as ArtistFeatured);
 	const [artistType, setArtistType] = useState<ArtistType>({} as ArtistType);
 	const [artistTag, setArtistTag] = useState<ArtistTag>({} as ArtistTag);
 	const [artistImage, setArtistImage] = useState<ArtistImage>({} as ArtistImage);
@@ -38,13 +36,12 @@ const ArtistDetail = () => {
 		if (!id) {
 			setIsError(true);
 			alert("Could not find artist")
-			router.push('/artist');
+			// router.push('/artist');
 			return;
 		}
 
 		const fetchArtist = axios.get(`${apiUrl}/artist/${id}`);
 		const fetchArtistSocial = axios.get(`${apiUrl}/artist/social/${id}`);
-		// const fetchArtistFeatured = axios.get(`${apiUrl}/artist/featured/${id}`); // Stop throwing 404s if the request is valid
 		const fetchArtistType = axios.get(`${apiUrl}/artist/type/${id}`);
 		const fetchArtistTag = axios.get(`${apiUrl}/artist/tag/${id}`);
 		const fetchArtistImage = axios.get(`${apiUrl}/artist/image/${id}`);
@@ -87,12 +84,11 @@ const ArtistDetail = () => {
 	return (
 		<div>
 			<h1>{artist.Title}</h1>
-			<p>{JSON.stringify(artist)}</p>
-			<p>{JSON.stringify(artistSocial)}</p>
-			{/* <p>{JSON.stringify(artistFeatured)}</p> */}
-			<p>{JSON.stringify(artistType)}</p>
-			<p>{JSON.stringify(artistTag)}</p>
-			<p>{JSON.stringify(artistImage)}</p>
+			<p><strong>Artist:</strong> {JSON.stringify(artist)}</p>
+			<p><strong>ArtistSocial:</strong> {JSON.stringify(artistSocial)}</p>
+			<p><strong>ArtistType:</strong> {JSON.stringify(artistType)}</p>
+			<p><strong>ArtistTag:</strong> {JSON.stringify(artistTag)}</p>
+			<p><strong>ArtistImage:</strong> {JSON.stringify(artistImage)}</p>
 		</div>
 	);
 };
