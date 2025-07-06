@@ -24,7 +24,7 @@ const Event = () => {
         {events.map(event => (
           <li key={event.EventID}>
             <Link href={`/event/${event.EventID}`}>
-              {JSON.stringify(event)}
+              {event.Title}
             </Link>
           </li>
         ))}

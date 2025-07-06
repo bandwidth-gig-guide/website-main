@@ -24,7 +24,7 @@ const Artist = () => {
         {artists.map(artist => (
           <li key={artist.ArtistID}>
             <Link href={`/artist/${artist.ArtistID}`}>
-              {JSON.stringify(artist)}
+              {artist.Title}
             </Link>
           </li>
         ))}

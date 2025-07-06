@@ -24,7 +24,7 @@ const Venue = () => {
         {venues.map(venue => (
           <li key={venue.VenueID}>
             <Link href={`/venue/${venue.VenueID}`}>
-              {JSON.stringify(venue)}
+              {venue.Title}
             </Link>
           </li>
         ))}

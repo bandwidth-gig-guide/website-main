@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Head from "next/head"
 
 const routes = [
   { href: "/event", label: "Event" },
@@ -7,18 +7,17 @@ const routes = [
 ];
 
 const Home = () => {
-
   return (
-    <div>
-      <h1>Home</h1>
-      <ul>
-        {routes.map(route => (
-          <li key={route.label} >
-            <Link href={route.href}>{route.label}</Link>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <>
+      <Head>
+        <title>Bandwidth</title>
+        <meta name="description" content="Welcome to my website" />
+      </Head>
+
+      <div>
+        <h1>Home</h1>
+      </div>
+    </>
   );
 };
 
