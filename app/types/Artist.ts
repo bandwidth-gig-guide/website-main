@@ -1,7 +1,7 @@
 import { StateCode } from "./enums/StateCode";
 
 export type Artist = {
-  artistId: string;
+  artistId: uuid;
   title: string;
   country: string;
   city: string;

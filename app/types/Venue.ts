@@ -1,7 +1,7 @@
 import { StateCode } from "./enums/StateCode";
 
 export type Venue = {
-  venueId: string;
+  venueId: uuid;
   title: string;
   streetAddress: string;
   city: string;

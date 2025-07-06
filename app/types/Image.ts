@@ -1,17 +1,17 @@
 type Image = {
-//  specializedId: string
-    imageId: string;
+//  specializedId: uuid
+    imageId: uuid;
     displayOrder: Int16Array;
 };
 
 export type ArtistImage = {
-    artistId: string;
+    artistId: uuid;
 } & Image;
 
 export type VenueImage = {
-    venueId: string;
+    venueId: uuid;
 } & Image;
 
 export type EventImage = {
-    eventId: string;
+    eventId: uuid;
 } & Image;

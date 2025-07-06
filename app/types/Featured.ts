@@ -1,18 +1,18 @@
 type Featured = {
-//  specializedId: string
-    imageId: string;
+//  specializedId: uuid
+    imageId: uuid;
     startDateTime: Date;
     endDateTime: Date;
 };
 
 export type ArtistFeatured = {
-    artistId: string;
+    artistId: uuid;
 } & Featured;
 
 export type VenueFeatured = {
-    venueId: string;
+    venueId: uuid;
 } & Featured;
 
 export type EventFeatured = {
-    eventId: string;
+    eventId: uuid;
 } & Featured;

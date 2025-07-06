@@ -1,7 +1,7 @@
 export type Event = {
-  eventId: string;
-  venueId: string;
-  stageId: string;
+  eventId: uuid;
+  venueId: uuid;
+  stageId: uuid;
   title: string;
   description: string;
   startDateTime: Date;

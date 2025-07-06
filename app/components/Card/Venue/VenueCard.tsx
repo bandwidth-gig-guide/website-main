@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const VenueCard: React.FC<{ venueId: string }> = ({ venueId }) => {
+const VenueCard: React.FC<{ venueId: uuid }> = ({ venueId }) => {
     return (
         <div>
             <Link href={`/venue/${ venueId }`}>

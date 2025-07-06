@@ -1,6 +1,6 @@
 import Link from "next/link"
 
-const ArtistCard: React.FC<{ artistId: string }> = ({ artistId }) => {
+const ArtistCard: React.FC<{ artistId: uuid }> = ({ artistId }) => {
     return (
         <div>
             <Link href={`/artist/${ artistId }`}>
