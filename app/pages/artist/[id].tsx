@@ -11,7 +11,7 @@ import { ArtistSocial } from "../../types/Social";
 import { ArtistType } from "../../types/Type";
 import { ArtistTag } from "../../types/Tag";
 import { ArtistImage } from "../../types/Image";
-import { FeaturedCheck as ArtistFeaturedCheck } from "@/types/FeaturedCheck";
+import { FeaturedCheck as ArtistFeaturedCheck } from "../../types/FeaturedCheck";
 
 
 const ArtistDetail = () => {
