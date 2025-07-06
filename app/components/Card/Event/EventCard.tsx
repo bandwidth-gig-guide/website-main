@@ -1,10 +1,10 @@
 import Link from "next/link"
 
-const EventCard: React.FC<{ EventID: string }> = ({ EventID }) => {
+const EventCard: React.FC<{ eventId: string }> = ({ eventId }) => {
     return (
         <div>
-            <Link href={`/event/${EventID}`}>
-                <p>EventCard: { EventID }</p>
+            <Link href={`/event/${ eventId }`}>
+                <p>EventCard: { eventId }</p>
             </Link>
         </div>
     );

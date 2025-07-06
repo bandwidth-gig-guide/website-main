@@ -1,10 +1,10 @@
 import Link from "next/link"
 
-const ArtistCard: React.FC<{ ArtistID: string }> = ({ ArtistID }) => {
+const ArtistCard: React.FC<{ artistId: string }> = ({ artistId }) => {
     return (
         <div>
-            <Link href={`/artist/${ArtistID}`}>
-                <p>ArtistCard: { ArtistID }</p>
+            <Link href={`/artist/${ artistId }`}>
+                <p>ArtistCard: { artistId }</p>
             </Link>
         </div>
     );

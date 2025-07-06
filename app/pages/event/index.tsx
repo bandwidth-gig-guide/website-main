@@ -22,9 +22,9 @@ const Event = () => {
       <h1>All Events</h1>
       <ul>
         {events.map(event => (
-          <li key={event.EventID}>
-            <Link href={`/event/${event.EventID}`}>
-              {event.Title}
+          <li key={event.eventId}>
+            <Link href={`/event/${event.eventId}`}>
+              {event.title}
             </Link>
           </li>
         ))}

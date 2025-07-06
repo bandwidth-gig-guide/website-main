@@ -1,11 +1,11 @@
 export type Event = {
-  EventID: string;
-  VenueID: string;
-  StageID: string;
-  Title: string;
-  Description: string;
-  StartDateTime: Date;
-  EndDateTime: Date;
-  OriginalPostURL: string;
-  TicketSaleURL: string;
+  eventId: string;
+  venueId: string;
+  stageId: string;
+  title: string;
+  description: string;
+  startDateTime: Date;
+  endDateTime: Date;
+  originalPostUrl: string;
+  ticketSaleUrl: string;
 };

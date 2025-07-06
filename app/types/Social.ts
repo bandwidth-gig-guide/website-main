@@ -1,18 +1,18 @@
 type Social = {
-//  SpecializedID: string
-    SocialPlatform: string;
-    Handle: string;
-    URL: string;
+//  specializedId: string
+    socialPlatform: string;
+    handle: string;
+    url: string;
 };
 
 export type ArtistSocial = {
-    ArtistID: string;
+    artistId: string;
 } & Social;
 
 export type VenueSocial = {
-    VenueID: string;
+    venueId: string;
 } & Social;
 
 export type EventSocial = {
-    EventID: string;
+    eventId: string;
 } & Social;

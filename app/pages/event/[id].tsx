@@ -52,7 +52,7 @@ const EventDetail = () => {
 
   return (
     <div>
-      <h1>{event.Title}</h1>
+      <h1>{event.title}</h1>
       <p>{JSON.stringify(event)}</p>
     </div>
   );

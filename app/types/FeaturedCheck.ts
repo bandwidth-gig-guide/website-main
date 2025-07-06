@@ -1,4 +1,4 @@
 export type FeaturedCheck = {
-    IsFeatured: boolean;
-    ImageID: string;
+    isFeatured: boolean;
+    imageId: string;
 };

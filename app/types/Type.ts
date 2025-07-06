@@ -1,16 +1,16 @@
 type Type = {
-//  SpecializedID: string
-    Type: string;
+//  specializedID: string
+    type: string;
 };
 
 export type ArtistType = {
-    ArtistID: string;
+    artistId: string;
 } & Type;
 
 export type VenueType = {
-    VenueID: string;
+    venueId: string;
 } & Type;
 
 export type EventType = {
-    EventID: string;
+    eventId: string;
 } & Type;

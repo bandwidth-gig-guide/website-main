@@ -20,8 +20,8 @@ const Artist = () => {
       <h1>All Artists</h1>
       <ul>
         {artists.map(artist => (
-          <li key={artist.ArtistID}>
-            <Card ArtistID={artist.ArtistID} />
+          <li key={artist.artistId}>
+            <Card ArtistID={artist.artistId} />
           </li>
         ))}
       </ul>

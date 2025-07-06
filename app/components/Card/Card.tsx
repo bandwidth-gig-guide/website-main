@@ -3,15 +3,15 @@ import EventCard from "./Event/EventCard"
 import VenueCard from "./Venue/VenueCard"
 
 type Props = {
-    ArtistID?: string;
-    EventID?: string;
-    VenueID?: string;
+    artistId?: string;
+    eventId?: string;
+    venueId?: string;
 };
 
-const Card: React.FC<Props> = ({ ArtistID, EventID, VenueID }) => {
-    if (ArtistID) return <ArtistCard ArtistID={ArtistID} />;
-    if (EventID) return <EventCard EventID={EventID} />;
-    if (VenueID) return <VenueCard VenueID={VenueID} />;
+const Card: React.FC<Props> = ({ artistId, eventId, venueId }) => {
+    if (artistId) return <ArtistCard artistId={artistId} />;
+    if (eventId) return <EventCard eventId={eventId} />;
+    if (venueId) return <VenueCard venueId={venueId} />;
     return null;
 };
 

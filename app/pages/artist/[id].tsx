@@ -88,7 +88,7 @@ const ArtistDetail = () => {
 
 	return (
 		<div>
-			<h1>{artist.Title}</h1>
+			<h1>{artist.title}</h1>
 			<p><strong>Artist:</strong> {JSON.stringify(artist)}</p>
 			<p><strong>ArtistSocial:</strong> {JSON.stringify(artistSocial)}</p>
 			<p><strong>ArtistType:</strong> {JSON.stringify(artistType)}</p>
