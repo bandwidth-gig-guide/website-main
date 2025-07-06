@@ -3,18 +3,16 @@ import React, { useState, useEffect } from "react"
 import axios from "axios"
 import { Artist as ArtistType } from "../../types/Artist"
 import apiUrl from "../../api.config"
+import Card from "./../../components/Card/Card"
 
 const Artist = () => {
   const [artists, setArtists] = useState<ArtistType[]>([]);
 
   useEffect(() => {
-    axios.get(`${apiUrl}/artist/`)
-      .then(response => {
-        setArtists(response.data);
-      })
-      .catch(error => {
-        console.error(error);
-      });
+    axios
+      .get(`${apiUrl}/artist/`)
+      .then(response => { setArtists(response.data); })
+      .catch(error => { console.error(error); });
   }, []);
 
   return (
@@ -23,9 +21,7 @@ const Artist = () => {
       <ul>
         {artists.map(artist => (
           <li key={artist.ArtistID}>
-            <Link href={`/artist/${artist.ArtistID}`}>
-              {artist.Title}
-            </Link>
+            <Card ArtistID={artist.ArtistID} />
           </li>
         ))}
       </ul>
