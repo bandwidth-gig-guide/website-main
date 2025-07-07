@@ -23,7 +23,7 @@ main {
     width: 100%;
     max-width: var(--spacing-app-max);
     margin: auto;
-    padding: var(--spacing-inset-desktop) var(--spacing-edge-desktop);
+    padding: var(--spacing-06) var(--spacing-edge-desktop);
 }
 
 a {

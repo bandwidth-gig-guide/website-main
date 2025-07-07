@@ -16,11 +16,6 @@
     --spacing-edge-tablet: var(--spacing-04);
     --spacing-edge-mobile: var(--spacing-02);
 
-    /* From top & bottom of container */
-    --spacing-inset-desktop: var(--spacing-03);
-    --spacing-inset-tablet: var(--spacing-03);
-    --spacing-inset-mobile: var(--spacing-03);
-
     /* Inline text spacing */
     --spacing-inline: var(--spacing-04);
 

@@ -10,6 +10,16 @@ import camelcaseKeys from "camelcase-keys";
 // Custom
 import apiUrl from "../../api.config"
 import { Artist } from "../../types/Artist"
+import Carousel from "../../components/Carousel/Carousel"
+import PageHeader from "../../components/PageHeader/PageHeader";
+import { PageType } from "../../types/enums/PageType"
+import Description from "../../components/Description/Description"
+import FeatureHighlight from "../../components/FeatureHighlight/FeatureHighlight";
+import UpcomingEvents from "../../components/UpcomingEvents/UpcomingEvents";
+import Socials from "../../components/Socials/Socials";
+import Embeds from "../../components/Embeds/Embeds";
+import Comments from "../../components/Comments/Comments";
+import TypesAndTags from "../../components/TypesAndTags/TypesAndTags";
 
 
 const ArtistDetail = () => {
@@ -36,6 +46,11 @@ const ArtistDetail = () => {
       router.push('/Artist');
     }
   }, [isError]);
+
+  const items = [
+    `${artist.city}${artist.country ? `, ${artist.country}` : ""}`, // E.g., Melbourne, Australia
+    artist.yearFounded ? `Founded ${artist.yearFounded}` : "" // E.g., Founded 2019
+  ].filter(Boolean);
   
   // Return
   return (
@@ -45,8 +60,15 @@ const ArtistDetail = () => {
         <meta name="description" content="" />
       </Head>
       <div>
-        <h1>{artist.title}</h1>
-        <p>{JSON.stringify(artist)}</p>
+        <Carousel />
+        <PageHeader title={artist.title} pageType={PageType.Artist}/>
+        <FeatureHighlight items={items} />
+        <Description text={artist.description} />
+        <TypesAndTags id={artist.artistId} pageType={PageType.Artist} />
+        <UpcomingEvents artistId={artist.artistId} />
+        <Socials artistId={artist.artistId} />
+        <Embeds artistId={artist.artistId} />
+        <Comments artistId={artist.artistId} />
       </div>
     </>
   );

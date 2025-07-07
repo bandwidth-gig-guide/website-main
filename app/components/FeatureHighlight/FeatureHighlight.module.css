@@ -1,0 +1,20 @@
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom: 1px solid var(--color-muted);
+    padding: var(--spacing-06) 0;
+    
+    p {
+        display: inline-block;
+        flex: 1;
+        text-align: center;
+        border-left: 1px solid var(--color-muted)
+    }
+
+    p:first-child {
+        border-left: none;
+    }
+
+}

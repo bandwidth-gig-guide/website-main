@@ -1,0 +1,26 @@
+.wrapper {
+    padding: var(--spacing-06) 0 var(--spacing-07);
+    border-bottom: 1px solid var(--color-muted);
+
+    h2 {
+        font-weight: 700;
+        font-size: var(--font-size-04);
+        margin: var(--spacing-01) 0;
+    }
+
+    p {
+        font-weight: 400;
+    }
+
+    img {
+        height: 20px;
+        object-fit: contain;
+    }
+
+    .bottomRow {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: var(--spacing-03);
+    }
+}

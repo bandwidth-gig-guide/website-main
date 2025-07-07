@@ -1,0 +1,7 @@
+.wrapper {
+    background-color:burlywood;
+    height: 560px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

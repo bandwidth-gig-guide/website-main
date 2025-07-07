@@ -32,7 +32,7 @@
     }
 
     .bottomRow {
-        color: var(--color-muted);
+        color: var(--color-text-muted);
         font-weight: 400;
     }
 }

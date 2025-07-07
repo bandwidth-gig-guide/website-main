@@ -2,10 +2,11 @@
     --color-primary: #3498db;
     --color-secondary: #2ecc71;
     --color-accent: #e67e22;
-    --color-background: #fff;
-    --color-surface: #f4a5a5;
+    --color-background: #ffffff;
+    --color-surface: #f8f8f8;
     --color-surface-dark: #272727;
     --color-text: #000;
+    --color-text-muted: #838383;
     --color-text-light: #fff;
-    --color-muted: #998e8e;
+    --color-muted: #cdcdcd;
 }
