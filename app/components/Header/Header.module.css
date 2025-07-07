@@ -1,5 +1,39 @@
 .wrapper {
+    background-color: var(--color-surface);
+
+    header {
+        margin: auto;
+        width: 100%;
+        max-width: var(--spacing-app-max);
+        padding: var(--spacing-inset-desktop) var(--spacing-edge-desktop);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    h1 {
+        display: inline-block;
+        font-size: var(--font-size-04);
+        font-weight: 700;
+        text-align: left;
+    }
+
+    nav {
+        display: flex;
+        align-items: center;
+    }
+
     ul {
-        background-color: lightcoral;
+        display: flex;
+        flex-direction: row;
+        gap: 16px;
+    }
+
+    li {
+        list-style: none;
+    }
+
+    li a {
+        padding: 8px 16px;
     }
 }

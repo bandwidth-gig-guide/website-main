@@ -1,60 +1,54 @@
-import { useRouter } from "next/router";
+// React / Next
 import React, { useState, useEffect } from "react"
+import Head from 'next/head';
+import { useRouter } from "next/router";
+
+// External
 import axios from "axios"
-import { Event } from "../../types/Event"
+import camelcaseKeys from "camelcase-keys";
+
+// Custom
 import apiUrl from "../../api.config"
+import { Event } from "../../types/Event"
+
 
 const EventDetail = () => {
+
+  // State
   const [event, setEvent] = useState<Event>({} as Event); 
-  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isError, setIsError] = useState<boolean>(false);
 
+  // Router
   const router = useRouter();
   const { id } = router.query;
 
+  // Get Event Details
   useEffect(() => {
-    if (!id) {
-      setIsError(true);
-      alert("Could not find event")
-      router.push('/event');
-      return;
-    }
-
     axios.get(`${apiUrl}/event/${id}`)
-      .then(response => {
-        setEvent(response.data);
-      })
-      .catch(error => {
-        console.error(error);
-        setIsError(true);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-
+      .then(response => { setEvent(camelcaseKeys(response.data, { deep: true }))})
+      .catch(() => { setIsError(true)})
     }, [id]);
+
+  // Handle Error
+  useEffect(() => {
+    if (isError) {
+      // Display a snackbar.
+      router.push('/event');
+    }
+  }, [isError]);
   
-  if (isError) {
-    return (
-      <div>
-        <p>Could not load event: {id}</p>
-      </div>
-    )
-  }
-
-  if (isLoading) {
-    return (
-      <div>
-        <p>Loading event: {id}</p>
-      </div>
-    )
-  }
-
+  // Return
   return (
-    <div>
-      <h1>{event.title}</h1>
-      <p>{JSON.stringify(event)}</p>
-    </div>
+    <>
+      <Head>
+        <title>Bandwidth | {event.title}</title>
+        <meta name="description" content="" />
+      </Head>
+      <div>
+        <h1>{event.title}</h1>
+        <p>{JSON.stringify(event)}</p>
+      </div>
+    </>
   );
 };
 

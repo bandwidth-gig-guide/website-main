@@ -1,9 +1,13 @@
 import Head from "next/head"
+import SectionHeader from "../components/SectionHeader/SectionHeader";
 
 const routes = [
-  { href: "/event", label: "Event" },
-  { href: "/artist", label: "Artist" },
-  { href: "/venue", label: "Venue" },
+  { title: "Events", route: "/event" },
+  { title: "Artists", route: "/artist" },
+  { title: "Venues", route: "/venue" },
+  { title: "Articles" },
+  { title: "Teachers" },
+  { title: "Stores" },
 ];
 
 const Home = () => {
@@ -13,10 +17,10 @@ const Home = () => {
         <title>Bandwidth</title>
         <meta name="description" content="Welcome to my website" />
       </Head>
+      {routes.map(route => (
+        <SectionHeader title={route.title} route={route.route || undefined} />
+      ))}
 
-      <div>
-        <h1>Home</h1>
-      </div>
     </>
   );
 };

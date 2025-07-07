@@ -1,12 +1,7 @@
 import ArtistCard from "./Artist/ArtistCard"
 import EventCard from "./Event/EventCard"
 import VenueCard from "./Venue/VenueCard"
-
-type Props = {
-    artistId?: string;
-    eventId?: string;
-    venueId?: string;
-};
+import { Props } from './Props'
 
 const Card: React.FC<Props> = ({ artistId, eventId, venueId }) => {
     if (artistId) return <ArtistCard artistId={artistId} />;

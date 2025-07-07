@@ -1,0 +1,24 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-05);
+
+    h2 {
+        font-weight: 400;
+        font-size: var(--font-size-05);
+        display: inline;
+    }
+
+    p {
+        font-weight: 400;
+        font-size: var(--font-size-01);
+        display: inline;
+        margin-left: var(--spacing-inline);
+    }
+
+    img {
+        height: var(--font-size-05);
+        object-fit: contain;
+    }
+}

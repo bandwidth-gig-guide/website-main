@@ -1,5 +1,11 @@
 .wrapper {
-    ul {
-        background-color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 320px;
+    background-color: var(--color-surface-dark);
+
+    p {
+        color: var(--color-text-light);
     }
 }

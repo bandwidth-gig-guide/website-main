@@ -1,7 +1,14 @@
+@import './fonts.css';
+@import './palette.css';
+@import './spacing.css';
+
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    color: var(--color-text);
+    font-family: "Work Sans", sans-serif;
+    font-size: var(--font-size);
 }
 
 .app-wrapper {
@@ -12,8 +19,13 @@
 
 main {
     flex-grow: 1;
+    background-color: var(--color-background);
+    width: 100%;
+    max-width: var(--spacing-app-max);
+    margin: auto;
+    padding: var(--spacing-inset-desktop) var(--spacing-edge-desktop);
 }
 
-footer {
-    width: 100%;
+a {
+    text-decoration: none;
 }
