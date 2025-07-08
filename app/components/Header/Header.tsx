@@ -1,12 +1,20 @@
 import Link from "next/link";
 import styles from './Header.module.css'
 import { routes } from './Routes'
+import { LocationScope } from "../../types/enums/LocationScope";
 
-const Header = () => {
+interface Props {
+	location: LocationScope;
+}
+
+const Header: React.FC<Props> = ({ location }) => {
 	return (
 		<div className={styles.wrapper}>
 			<header>
-				<Link href="/"><h1>Bandwidth</h1></Link>
+				<Link href="/" className={styles.siteName}>
+					<h1>Bandwidth</h1>
+					<p>{location} Gig Guide</p>
+				</Link>
 				<nav>
 					<ul>
 						{routes.map(route => (
@@ -17,7 +25,7 @@ const Header = () => {
 					</ul>
 				</nav>
 			</header>
-		</div>
+		</div >
 	);
 };
 

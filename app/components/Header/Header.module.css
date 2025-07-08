@@ -11,6 +11,16 @@
         justify-content: space-between;
     }
 
+    .siteName {
+        display: flex;
+        flex-direction: column;
+
+        p {
+            transform: translate(1px, -4px);
+            font-size: var(--font-size-01);
+        }
+    }
+
     h1 {
         display: inline-block;
         font-size: var(--font-size-04);
@@ -26,14 +36,26 @@
     ul {
         display: flex;
         flex-direction: row;
-        gap: 16px;
     }
 
     li {
         list-style: none;
+        display: flex;
+        transition: all 0.3s ease-in-out;
+    }
+
+    li a:hover,
+    li a:focus {
+        color: var(--color-text);
+        font-weight: 500;
     }
 
     li a {
+        position: relative;
+        overflow: visible;
+        display: inline-block;
+        color: var(--color-text-muted);
         padding: 8px 16px;
+
     }
 }

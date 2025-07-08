@@ -1,5 +1,9 @@
 export const routes = [
-    { href: "/event", label: "Events" },
-    { href: "/artist", label: "Artists" },
-    { href: "/venue", label: "Venues" },
+    { label: "Events", href: "/event" },
+    { label: "Artists", href: "/artist" },
+    { label: "Venues", href: "/venue" },
+    { label: "Articles", href: "/" },
+    { label: "Teachers", href: "/" },
+    { label: "Stores", href: "/" },
+    { label: "About", href: "/" },
 ];
