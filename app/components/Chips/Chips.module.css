@@ -17,3 +17,7 @@
         background-color: var(--color-surface);
     }
 }
+
+.empty {
+    border-bottom: 1px solid var(--color-muted);
+}

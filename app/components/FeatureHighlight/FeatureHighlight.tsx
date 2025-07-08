@@ -8,8 +8,8 @@ interface Props {
 const FeatureHighlight: React.FC<Props> = ({ items }) => {
   return (
     <div className={styles.wrapper}>
-        {items.map(item => (
-          <p>{item}</p>
+        {items.map((item, index) => (
+          <p key={index}>{item}</p>
         ))}
     </div>
   )

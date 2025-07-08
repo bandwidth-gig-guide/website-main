@@ -23,4 +23,8 @@
         align-items: center;
         gap: var(--spacing-03);
     }
+
+    .isFeatured {
+        color: var(--color-accent);
+    }
 }

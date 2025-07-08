@@ -10,6 +10,8 @@ import camelcaseKeys from "camelcase-keys";
 // Custom
 import apiUrl from "../../api.config"
 import { Artist } from "../../types/Artist"
+import { ArtistSocial } from "../../types/Social"
+import { FeaturedCheck } from "../../types/FeaturedCheck";
 import Carousel from "../../components/Carousel/Carousel"
 import PageHeader from "../../components/PageHeader/PageHeader";
 import { PageType } from "../../types/enums/PageType"
@@ -19,13 +21,17 @@ import UpcomingEvents from "../../components/UpcomingEvents/UpcomingEvents";
 import Socials from "../../components/Socials/Socials";
 import Embeds from "../../components/Embeds/Embeds";
 import Comments from "../../components/Comments/Comments";
-import TypesAndTags from "../../components/TypesAndTags/TypesAndTags";
+import Chips from "../../components/Chips/Chips";
 
 
 const ArtistDetail = () => {
 
   // State
   const [artist, setArtist] = useState<Artist>({} as Artist); 
+  const [tags, setTags] = useState<string[]>([]);
+  const [types, setTypes] = useState<string[]>([]);
+  const [socials, setSocials] = useState<ArtistSocial[]>([]);
+  const [isFeatured, setIsFeatured] = useState<FeaturedCheck>({} as FeaturedCheck);
   const [isError, setIsError] = useState<boolean>(false);
 
   // Router
@@ -34,10 +40,31 @@ const ArtistDetail = () => {
 
   // Get Artist Details
   useEffect(() => {
+    if (!id) return;
+
     axios.get(`${apiUrl}/artist/${id}`)
       .then(response => { setArtist(camelcaseKeys(response.data, { deep: true }))})
       .catch(() => { setIsError(true)})
+
+    axios.get(`${apiUrl}/artist/tag/${id}`)
+      .then(response => { setTags(response.data) })
+      .catch(() => { setIsError(true)})
+
+    axios.get(`${apiUrl}/artist/type/${id}`)
+      .then(response => { setTypes(response.data) })
+      .catch(() => { setIsError(true)})
+
+    axios.get(`${apiUrl}/artist/social/${id}`)
+      .then(response => { setSocials(camelcaseKeys(response.data, { deep: true }))})
+      .catch(() => { setIsError(true)})
+
+    axios.get(`${apiUrl}/artist/featured/${id}`)
+      .then(response => { setIsFeatured(response.data) })
+      .catch(() => { setIsError(true)})
+
     }, [id]);
+
+    
 
   // Handle Error
   useEffect(() => {
@@ -61,12 +88,12 @@ const ArtistDetail = () => {
       </Head>
       <div>
         <Carousel />
-        <PageHeader title={artist.title} pageType={PageType.Artist}/>
+        <PageHeader title={artist.title} pageType={PageType.Artist} isFeatured={isFeatured.isFeatured}/>
         <FeatureHighlight items={items} />
         <Description text={artist.description} />
-        <TypesAndTags id={artist.artistId} pageType={PageType.Artist} />
+        <Chips tags={tags} types={types} />
         <UpcomingEvents artistId={artist.artistId} />
-        <Socials artistId={artist.artistId} />
+        <Socials socials={socials} />
         <Embeds artistId={artist.artistId} />
         <Comments artistId={artist.artistId} />
       </div>

@@ -1,4 +1,30 @@
 .wrapper {
     padding: var(--spacing-06) 0;
+
+    .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+
+    a {
+        display: flex;
+        flex-direction: row;
+        justify-content: left;
+        align-items: center;
+        gap: var(--spacing-04);
+        font-size: var(--font-size-03);
+        padding: 12px;
+        border-radius: 8px;
+
+        img {
+            height: var(--font-size-03);
+        }
+    }
+
+    a:hover, 
+    a:focus {
+        background-color: var(--color-surface);
+    }
     
 }
