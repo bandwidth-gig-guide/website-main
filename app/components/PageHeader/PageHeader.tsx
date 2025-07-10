@@ -4,12 +4,13 @@ import { Props } from './Props'
 
 const PageHeader: React.FC<Props> = ({ title, pageType, isFeatured, subtitle }) => {
 
-	const icon = pageType === "Venue" ? '/location-pin.svg' : "";
+	const icon = pageType === "venue" ? '/location-pin.svg' : "";
+	const type = pageType.charAt(0).toUpperCase() + pageType.slice(1)
 
 	return (
 		<div className={styles.wrapper}>
 			<p className={isFeatured ? styles.isFeatured : styles.topRow}>
-				| {isFeatured ? "Featured " : ""}{pageType}
+				| {isFeatured ? "Featured " : ""}{type}
 			</p>
 			<h2>{title}</h2>
 			{subtitle &&

@@ -19,7 +19,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                 <meta charSet="utf-8" />
             </Head>
             <div className='app-wrapper'>
-                <Header location={location} setLocation={setLocation} />
+                <Header location={location} />
                 <main><Component {...pageProps} /></main>
                 <Footer />
             </div>

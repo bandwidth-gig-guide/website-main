@@ -20,7 +20,6 @@ const Home = () => {
       {routes.map(route => (
         <SectionHeader title={route.title} route={route.route || undefined} />
       ))}
-
     </>
   );
 };

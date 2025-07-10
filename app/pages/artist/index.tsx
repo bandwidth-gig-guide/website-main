@@ -11,6 +11,7 @@ import apiUrl from "../../api.config"
 import { Artist as ArtistType } from "../../types/Artist"
 import Card from "../../components/Card/Card"
 import SectionHeader from "../../components/SectionHeader/SectionHeader";
+import CardArtist from "../../components/CardTemp/CardArtist/CardArtist";
 
 const Artist = () => {
   const [artists, setArtists] = useState<ArtistType[]>([]);
@@ -31,7 +32,7 @@ const Artist = () => {
       <div>
         <SectionHeader title="Artists" />
         {artists.map(artist => (
-            <Card 
+            <CardArtist 
               key={artist.artistId}
               artistId={artist.artistId} 
             />

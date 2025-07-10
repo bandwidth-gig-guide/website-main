@@ -1,5 +1,5 @@
 export enum PageType {
-    Artist = 'Artist',
-    Event = 'Event',
-    Venue = 'Venue',
+    Artist = 'artist',
+    Event = 'event',
+    Venue = 'venue',
 }
