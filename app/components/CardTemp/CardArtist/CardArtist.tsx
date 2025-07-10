@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { Artist } from '../../../types/Artist'
+import { ArtistCard } from '../../../types/ArtistCard'
 import { ArtistImage } from '../../../types/Image'
 import axios from "axios"
 import camelcaseKeys from "camelcase-keys";
@@ -12,21 +12,15 @@ interface Props {
 }
 
 const CardArtist: React.FC<Props> = ({ artistId }) => {
-	const [artist, setArtist] = useState<Artist>({} as Artist); 
-	const [image, setImage] = useState<ArtistImage>({} as ArtistImage);
+	const [artist, setArtist] = useState<ArtistCard>({} as ArtistCard); 
 	const [isError, setIsError] = useState<boolean>(false);
 
 	useEffect(() => {
     axios
-			.get(`${apiUrl}/artist/${artistId}`)
+			.get(`${apiUrl}/artist/card/${artistId}`)
       .then(response => { setArtist(camelcaseKeys(response.data, { deep: true }))})
       .catch(() => { setIsError(true)})
 
-    axios
-			.get(`${apiUrl}/artist/image/${artistId}`)
-      .then(response => { setImage(camelcaseKeys(response.data, { deep: true }))})
-      .catch(() => { setIsError(true)})
-		
 	}, [artistId]);
 	
   return (
@@ -35,8 +29,8 @@ const CardArtist: React.FC<Props> = ({ artistId }) => {
 				<CardBase
 					topLeft={`${artist.city}, ${artist.country}`}
 					title={artist.title}
-					bottom={artist.artistId}
-					imgUrl={image.imageId}
+					bottom={`${artist.upcomingEvents} Upcoming Events`}
+					imgUrl={artist.imageUrl || ""}
 				>
 				</CardBase>
 			</Link>
