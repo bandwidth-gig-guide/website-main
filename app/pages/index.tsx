@@ -23,11 +23,18 @@ const routes = [
 
 const Home = () => {
   const [artistIds, setArtistIds] = useState<uuid[]>([]);
+  const [venueIds, setVenueIds] = useState<uuid[]>([]);
 
   useEffect(() => {
     axios.get(`${apiUrl}/artist/ids`)
          .then(response => { setArtistIds(camelcaseKeys(response.data, { deep: true }))})
          .catch(error => { console.error(error); });
+
+    axios.get(`${apiUrl}/venue`)
+         .then(response => { setVenueIds(camelcaseKeys(response.data, { deep: true }))})
+         .catch(error => { console.error(error); });
+
+
   }, []);
 
   return (
@@ -40,6 +47,11 @@ const Home = () => {
       <div style={{ marginBottom: 60 }}>
         <SectionHeader title="Artists" route="/artist" />
         <CardGrid artistIds={artistIds} cardGridType={CardGridType.Grid} limit={8} />
+      </div>
+
+      <div style={{ marginBottom: 60 }}>
+        <SectionHeader title="Venues" route="/venue" />
+        <CardGrid venueIds={venueIds} cardGridType={CardGridType.Grid} limit={8} />
       </div>
 
      
