@@ -1,4 +1,11 @@
 .wrapper {
     padding: var(--spacing-06) 0;
-    
+
+    .embedContainer {
+        overflow: scroll;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        scroll-snap-type: x mandatory;
+    }
 }

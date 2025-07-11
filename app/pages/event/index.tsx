@@ -9,7 +9,6 @@ import camelcaseKeys from "camelcase-keys";
 // Custom
 import apiUrl from "../../api.config"
 import { Event as EventType } from "../../types/Event"
-import Card from "../../components/Card/Card"
 import SectionHeader from "../../components/SectionHeader/SectionHeader";
 
 const Event = () => {
@@ -17,8 +16,8 @@ const Event = () => {
 
   useEffect(() => {
     axios.get(`${apiUrl}/event/`)
-      .then(response => { setEvents(camelcaseKeys(response.data, { deep: true }))})
-      .catch(error => { console.error(error); });
+         .then(response => { setEvents(camelcaseKeys(response.data, { deep: true }))})
+         .catch(error => { console.error(error); });
   }, []);
 
   return (
@@ -27,14 +26,12 @@ const Event = () => {
         <title>Bandwidth | Events</title>
         <meta name="description" content="" />
       </Head>
+      
       <div>
         <SectionHeader title="Events" />
-        {events.map(event => (
-            <Card 
-              key={event.eventId}
-              eventId={event.eventId} 
-            />
-        ))}
+        <pre style={{ whiteSpace: "pre-wrap", wordBreak: "break-word", padding: "1em", borderRadius: "4px" }}>
+          {JSON.stringify(events, null, 2)}
+        </pre>
       </div>
     </>
   );

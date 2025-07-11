@@ -8,18 +8,17 @@ import camelcaseKeys from "camelcase-keys";
 
 // Custom
 import apiUrl from "../../api.config"
-import { Artist as ArtistType } from "../../types/Artist"
-import Card from "../../components/Card/Card"
 import SectionHeader from "../../components/SectionHeader/SectionHeader";
-import CardArtist from "../../components/CardTemp/CardArtist/CardArtist";
+import CardGrid from "../../components/CardGrid/CardGrid";
+import { CardGridType } from "../../types/enums/CardGridType";
 
 const Artist = () => {
-  const [artists, setArtists] = useState<ArtistType[]>([]);
+  const [artistIds, setArtistIds] = useState<uuid[]>([]);
 
   useEffect(() => {
     axios
-      .get(`${apiUrl}/artist/`)
-      .then(response => { setArtists(camelcaseKeys(response.data, { deep: true }))})
+      .get(`${apiUrl}/artist/ids`)
+      .then(response => { setArtistIds(camelcaseKeys(response.data, { deep: true }))})
       .catch(error => { console.error(error); });
   }, []);
 
@@ -29,14 +28,10 @@ const Artist = () => {
         <title>Bandwidth | Artists</title>
         <meta name="description" content="" />
       </Head>
+      
       <div>
         <SectionHeader title="Artists" />
-        {artists.map(artist => (
-            <CardArtist 
-              key={artist.artistId}
-              artistId={artist.artistId} 
-            />
-        ))}
+        <CardGrid artistIds={artistIds} cardGridType={CardGridType.Grid}/>
       </div>
     </>
    
