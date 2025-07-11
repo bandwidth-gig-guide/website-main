@@ -1,5 +1,4 @@
-type Social = {
-//  specializedId: uuid
+export type Social = {
     socialPlatform: string;
     handle: string;
     url: string;

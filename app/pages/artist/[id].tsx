@@ -7,31 +7,29 @@ import { useRouter } from "next/router";
 import axios from "axios"
 import camelcaseKeys from "camelcase-keys";
 
-// Custom
+// Config
 import apiUrl from "../../api.config"
-import { Artist } from "../../types/Artist"
-import { ArtistSocial } from "../../types/Social"
-import { FeaturedCheck } from "../../types/FeaturedCheck";
-import Carousel from "../../components/Carousel/Carousel"
-import PageHeader from "../../components/PageHeader/PageHeader";
+
+// Types
+import { ArtistComplete } from "../../types/ArtistComplete";
 import { PageType } from "../../types/enums/PageType"
-import Description from "../../components/Description/Description"
-import FeatureHighlight from "../../components/FeatureHighlight/FeatureHighlight";
-import UpcomingEvents from "../../components/UpcomingEvents/UpcomingEvents";
-import Socials from "../../components/Socials/Socials";
-import Embeds from "../../components/Embeds/Embeds";
-import Comments from "../../components/Comments/Comments";
+
+// Components
+import Carousel from "../../components/Carousel/Carousel"
 import Chips from "../../components/Chips/Chips";
+import Comments from "../../components/Comments/Comments";
+import Description from "../../components/Description/Description"
+import Embeds from "../../components/Embeds/Embeds";
+import FeatureHighlight from "../../components/FeatureHighlight/FeatureHighlight";
+import PageHeader from "../../components/PageHeader/PageHeader";
+import Socials from "../../components/Socials/Socials";
+import UpcomingEvents from "../../components/UpcomingEvents/UpcomingEvents";
 
 
 const ArtistDetail = () => {
 
   // State
-  const [artist, setArtist] = useState<Artist>({} as Artist); 
-  const [tags, setTags] = useState<string[]>([]);
-  const [types, setTypes] = useState<string[]>([]);
-  const [socials, setSocials] = useState<ArtistSocial[]>([]);
-  const [isFeatured, setIsFeatured] = useState<FeaturedCheck>({} as FeaturedCheck);
+  const [artist, setArtist] = useState<ArtistComplete>({} as ArtistComplete)
   const [isError, setIsError] = useState<boolean>(false);
 
   // Router
@@ -42,29 +40,11 @@ const ArtistDetail = () => {
   useEffect(() => {
     if (!id) return;
 
-    axios.get(`${apiUrl}/artist/${id}`)
-      .then(response => { setArtist(camelcaseKeys(response.data, { deep: true }))})
-      .catch(() => { setIsError(true)})
-
-    axios.get(`${apiUrl}/artist/tag/${id}`)
-      .then(response => { setTags(response.data) })
-      .catch(() => { setIsError(true)})
-
-    axios.get(`${apiUrl}/artist/type/${id}`)
-      .then(response => { setTypes(response.data) })
-      .catch(() => { setIsError(true)})
-
-    axios.get(`${apiUrl}/artist/social/${id}`)
-      .then(response => { setSocials(camelcaseKeys(response.data, { deep: true }))})
-      .catch(() => { setIsError(true)})
-
-    axios.get(`${apiUrl}/artist/featured/${id}`)
-      .then(response => { setIsFeatured(response.data) })
-      .catch(() => { setIsError(true)})
+    axios.get(`${apiUrl}/artist/complete/${id}`)
+         .then(response => { setArtist(camelcaseKeys(response.data, { deep: true }))})
+         .catch(() => { setIsError(true)})
 
     }, [id]);
-
-    
 
   // Handle Error
   useEffect(() => {
@@ -75,8 +55,8 @@ const ArtistDetail = () => {
   }, [isError]);
 
   const items = [
-    `${artist.city}${artist.country ? `, ${artist.country}` : ""}`, // E.g., Melbourne, Australia
-    artist.yearFounded ? `Founded ${artist.yearFounded}` : "" // E.g., Founded 2019
+    `${artist.city}${artist.country ? `, ${artist.country}` : ""}`,
+    artist.yearFounded ? `Founded ${artist.yearFounded}` : ""
   ].filter(Boolean);
   
   // Return
@@ -86,16 +66,18 @@ const ArtistDetail = () => {
         <title>Bandwidth | {artist.title}</title>
         <meta name="description" content="" />
       </Head>
+
       <div>
         <Carousel />
-        <PageHeader title={artist.title} pageType={PageType.Artist} isFeatured={isFeatured.isFeatured}/>
+        <PageHeader title={artist.title} pageType={PageType.Artist} isFeatured={artist.isFeatured}/>
         <FeatureHighlight items={items} />
         <Description text={artist.description} />
-        <Chips tags={tags} types={types} />
+        <Chips tags={artist.tags} types={artist.types} />
         <UpcomingEvents artistId={artist.artistId} />
-        <Socials socials={socials} />
-        <Embeds artistId={artist.artistId} />
+        <Socials socials={artist.socials?.map(social => ({ ...social, artistId: artist.artistId }))} />
+        <Embeds spotifyEmbedUrl={artist.spotifyEmbedUrl} youtubeEmbedUrl={artist.youtubeEmbedUrl} />
         <Comments artistId={artist.artistId} />
+        {JSON.stringify(artist)}
       </div>
     </>
   );

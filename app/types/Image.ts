@@ -1,7 +1,7 @@
 type Image = {
 //  specializedId: uuid
     imageId: uuid;
-    displayOrder: Int16Array;
+    displayOrder: number;
 };
 
 export type ArtistImage = {

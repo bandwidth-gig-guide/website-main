@@ -9,7 +9,6 @@ import camelcaseKeys from "camelcase-keys";
 // Custom
 import apiUrl from "../../api.config"
 import { Venue as VenueType } from "../../types/Venue"
-import Card from "../../components/Card/Card"
 import SectionHeader from "../../components/SectionHeader/SectionHeader";
 
 const Venue = () => {
@@ -27,14 +26,12 @@ const Venue = () => {
         <title>Bandwidth | Venues</title>
         <meta name="description" content="" />
       </Head>
+      
       <div>
         <SectionHeader title="Venues" />
-        {venues.map(venue => (
-          <Card
-            key={venue.venueId}
-            venueId={venue.venueId}
-          />
-        ))}
+        <pre style={{ whiteSpace: "pre-wrap", wordBreak: "break-word", padding: "1em", borderRadius: "4px" }}>
+          {JSON.stringify(venues, null, 2)}
+        </pre>
       </div>
     </>
   );

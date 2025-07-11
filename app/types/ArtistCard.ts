@@ -1,13 +1,9 @@
-import { StateCode } from "./enums/StateCode";
-
-export type Artist = {
+export type ArtistCard = {
   artistId: uuid;
   title: string;
   country: string;
   city: string;
-  stateCode: StateCode;
-  yearFounded: string;
-  description: string;
-  spotifyEmbedUrl?: string;
-  youtubeEmbedUrl?: string;
+	isFeatured: boolean;
+	imageUrl?: string;
+	upcomingEvents: number;
 };
