@@ -11,6 +11,9 @@ import camelcaseKeys from "camelcase-keys";
 import apiUrl from "../../api.config"
 import { Venue } from "../../types/Venue"
 
+// Styling
+import styles from "../../styles/page.module.css"
+
 
 const VenueDetail = () => {
 
@@ -44,7 +47,8 @@ const VenueDetail = () => {
         <title>Bandwidth | {venue.title}</title>
         <meta name="description" content="" />
       </Head>
-      <div>
+
+      <div className={styles.pageWrapper}>
         <h1>{venue.title}</h1>
         <p>{JSON.stringify(venue)}</p>
       </div>

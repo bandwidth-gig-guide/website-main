@@ -11,6 +11,8 @@ import camelcaseKeys from "camelcase-keys";
 import apiUrl from "../../api.config"
 import { Event } from "../../types/Event"
 
+// Styling
+import styles from "../../styles/page.module.css"
 
 const EventDetail = () => {
 
@@ -44,7 +46,8 @@ const EventDetail = () => {
         <title>Bandwidth | {event.title}</title>
         <meta name="description" content="" />
       </Head>
-      <div>
+
+      <div className={styles.pageWrapper}>
         <h1>{event.title}</h1>
         <p>{JSON.stringify(event)}</p>
       </div>

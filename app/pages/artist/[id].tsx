@@ -14,6 +14,9 @@ import apiUrl from "../../api.config"
 import { ArtistComplete } from "../../types/ArtistComplete";
 import { PageType } from "../../types/enums/PageType"
 
+// Styling
+import styles from "../../styles/page.module.css"
+
 // Components
 import Carousel from "../../components/Carousel/Carousel"
 import Chips from "../../components/Chips/Chips";
@@ -67,7 +70,7 @@ const ArtistDetail = () => {
         <meta name="description" content="" />
       </Head>
 
-      <div>
+      <div className={styles.pageWrapper}>
         <Carousel />
         <PageHeader title={artist.title} pageType={PageType.Artist} isFeatured={artist.isFeatured}/>
         <FeatureHighlight items={items} />
