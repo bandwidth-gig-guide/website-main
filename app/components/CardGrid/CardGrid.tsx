@@ -2,6 +2,7 @@ import React from 'react'
 import styles from './CardGrid.module.css'
 import { CardGridType } from '../../types/enums/CardGridType'
 import CardArtist from '../Card/CardArtist/CardArtist'
+import CardVenue from '../Card/CardVenue/CardVenue'
 interface Props {
   eventIds?: uuid[],
   artistIds?: uuid[],
@@ -27,6 +28,10 @@ const CardGrid: React.FC<Props> = ({
         {artistIds.slice(0, limit).map((artistId, index) => (
           <CardArtist key={index} artistId={artistId} />
         ))}
+        {venueIds.slice(0, limit).map((venueId, index) => (
+          <CardVenue key={index} venueId={venueId} />
+        ))}
+
       </div>
     </div>
   )
