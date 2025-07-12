@@ -49,7 +49,6 @@ const EventDetail = () => {
 
       <div className={styles.pageWrapper}>
         <h1>{event.title}</h1>
-        <p>{JSON.stringify(event)}</p>
       </div>
     </>
   );

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { ArtistCard } from '../../../types/ArtistCard'
+import { ArtistBrief } from '../../../types/models/ArtistBrief'
 import axios from 'axios'
 import camelcaseKeys from 'camelcase-keys'
 import apiUrl from '../../../api.config'
@@ -12,7 +12,7 @@ interface Props {
 }
 
 const CardArtist: React.FC<Props> = ({ artistId }) => {
-	const [artist, setArtist] = useState<ArtistCard>({} as ArtistCard)
+	const [artist, setArtist] = useState<ArtistBrief>({} as ArtistBrief)
 	const [isLoading, setIsLoading] = useState(true)
 	const [isError, setIsError] = useState(false)
 	const [hasImage, setHasImage] = useState(true)
@@ -20,7 +20,7 @@ const CardArtist: React.FC<Props> = ({ artistId }) => {
 	useEffect(() => {
 		const fetchArtist = async () => {
 			try {
-				const response = await axios.get(`${apiUrl}/artist/card/${artistId}`)
+				const response = await axios.get(`${apiUrl}/artist/brief/${artistId}`)
 				const artistData = camelcaseKeys(response.data, { deep: true })
 				setArtist(artistData)
 

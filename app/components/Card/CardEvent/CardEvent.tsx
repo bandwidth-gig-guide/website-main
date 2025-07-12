@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
-
-import { VenueCard } from '../../../types/VenueCard'
+import { EventBrief } from '../../../types/models/EventBrief'
 import axios from 'axios'
 import camelcaseKeys from 'camelcase-keys'
 import apiUrl from '../../../api.config'
@@ -9,25 +8,25 @@ import CardBase from '../CardBase/CardBase'
 import CardLoading from '../CardLoading/CardLoading'
 
 interface Props {
-	venueId: uuid
+	eventId: uuid
 }
 
-const CardVenue: React.FC<Props> = ({ venueId }) => {
-	const [venue, setVenue] = useState<VenueCard>({} as VenueCard)
+const CardEvent: React.FC<Props> = ({ eventId }) => {
+	const [event, setEvent] = useState<EventBrief>({} as EventBrief)
 	const [isLoading, setIsLoading] = useState(true)
 	const [isError, setIsError] = useState(false)
 	const [hasImage, setHasImage] = useState(true)
 
 	useEffect(() => {
-		const fetchVenue = async () => {
+		const fetchEvent = async () => {
 			try {
-				const response = await axios.get(`${apiUrl}/venue/brief/${venueId}`)
-				const venueData = camelcaseKeys(response.data, { deep: true })
-				setVenue(venueData)
+				const response = await axios.get(`${apiUrl}/event/brief/${eventId}`)
+				const eventData = camelcaseKeys(response.data, { deep: true })
+				setEvent(eventData)
 
-				if (venueData.imageUrl) {
+				if (eventData.imageUrl) {
 					const img = new Image()
-					img.src = venueData.imageUrl
+					img.src = eventData.imageUrl
 					img.onload = () => setIsLoading(false)
 					img.onerror = () => setHasImage(false)
 				} else {
@@ -40,24 +39,25 @@ const CardVenue: React.FC<Props> = ({ venueId }) => {
 			}
 		}
 
-		fetchVenue()
-	}, [venueId])
+		fetchEvent()
+	}, [eventId])
 
 	if (isLoading) return <CardLoading />
-	if (isError) return <div>Error loading venue.</div>
+	if (isError) return <div>Error loading event.</div>
 
 	return (
 		<div>
-			<Link href={`/venue/${venueId}`}>
+			<Link href={`/event/${eventId}`}>
 				<CardBase
-					topLeft={`${venue.streetAddress}, ${venue.city} ${venue.stateCode} ${venue.postCode}`}
-					title={venue.title}
-					bottom={`${venue.upcomingEventCount} Upcoming Events`}
-					imgUrl={hasImage && venue.imageUrl ? venue.imageUrl : ''}
+					topLeft={event.venueTitle}
+					topRight={`${event.startDateTime}`}
+					title={event.title}
+					bottom={`${event.artistTitles}`}
+					imgUrl={hasImage && event.imageUrl ? event.imageUrl : ''}
 				/>
 			</Link>
 		</div>
 	)
 }
 
-export default CardVenue
+export default CardEvent

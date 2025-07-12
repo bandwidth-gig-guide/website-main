@@ -5,5 +5,5 @@ export type ArtistBrief = {
     city: string;
     isFeatured: boolean;
     imageUrl?: url;
-    upcomingEventCount: number;
+    upcomingEvents: number;
 }

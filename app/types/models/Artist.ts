@@ -11,9 +11,9 @@ export type Artist = {
     spotifyEmbedUrl?: url;
     youtubeEmbedUrl?: url;
     isFeatured: boolean;
-    imageUrls?: url[];
-    socials?: Social[];
-    types?: string[];
-    tags?: string[];
+    imageUrls: url[];
+    socials: Social[];
+    types: string[];
+    tags: string[];
     upcomingEventIds: uuid[];
 }

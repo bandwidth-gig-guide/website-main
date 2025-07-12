@@ -8,15 +8,16 @@ import camelcaseKeys from "camelcase-keys";
 
 // Custom
 import apiUrl from "../../api.config"
-import { Event as EventType } from "../../types/Event"
 import SectionHeader from "../../components/SectionHeader/SectionHeader";
+import CardGrid from "../../components/CardGrid/CardGrid";
+import { CardGridType } from "../../types/enums/CardGridType";
 
 const Event = () => {
-  const [events, setEvents] = useState<EventType[]>([]);
+  const [eventIds, setEventIds] = useState<uuid[]>([]);
 
   useEffect(() => {
     axios.get(`${apiUrl}/event/`)
-         .then(response => { setEvents(camelcaseKeys(response.data, { deep: true }))})
+         .then(response => { setEventIds(camelcaseKeys(response.data, { deep: true }))})
          .catch(error => { console.error(error); });
   }, []);
 
@@ -29,9 +30,8 @@ const Event = () => {
       
       <div>
         <SectionHeader title="Events" />
-        <pre style={{ whiteSpace: "pre-wrap", wordBreak: "break-word", padding: "1em", borderRadius: "4px" }}>
-          {JSON.stringify(events, null, 2)}
-        </pre>
+        <CardGrid eventIds={eventIds} cardGridType={CardGridType.Grid} />
+
       </div>
     </>
   );

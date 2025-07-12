@@ -11,7 +11,7 @@ import camelcaseKeys from "camelcase-keys";
 import apiUrl from "../../api.config"
 
 // Types
-import { ArtistComplete } from "../../types/ArtistComplete";
+import { Artist } from "../../types/models/Artist"
 import { PageType } from "../../types/enums/PageType"
 
 // Styling
@@ -32,7 +32,7 @@ import UpcomingEvents from "../../components/UpcomingEvents/UpcomingEvents";
 const ArtistDetail = () => {
 
   // State
-  const [artist, setArtist] = useState<ArtistComplete>({} as ArtistComplete)
+  const [artist, setArtist] = useState<Artist>({} as Artist)
   const [isError, setIsError] = useState<boolean>(false);
 
   // Router
@@ -43,7 +43,7 @@ const ArtistDetail = () => {
   useEffect(() => {
     if (!id) return;
 
-    axios.get(`${apiUrl}/artist/complete/${id}`)
+    axios.get(`${apiUrl}/artist/${id}`)
          .then(response => { setArtist(camelcaseKeys(response.data, { deep: true }))})
          .catch(() => { setIsError(true)})
 
@@ -71,12 +71,12 @@ const ArtistDetail = () => {
       </Head>
 
       <div className={styles.pageWrapper}>
-        <Carousel />
+        <Carousel imageUrls={artist.imageUrls}/>
         <PageHeader title={artist.title} pageType={PageType.Artist} isFeatured={artist.isFeatured}/>
         <FeatureHighlight items={items} />
         <Description text={artist.description} />
-        <Chips tags={artist.tags} types={artist.types} />
-        <UpcomingEvents artistId={artist.artistId} />
+        <Chips tags={artist.tags || []} types={artist.types} />
+        <UpcomingEvents eventIds={artist.upcomingEventIds} />
         <Socials socials={artist.socials?.map(social => ({ ...social, artistId: artist.artistId }))} />
         <Embeds spotifyEmbedUrl={artist.spotifyEmbedUrl} youtubeEmbedUrl={artist.youtubeEmbedUrl} />
         <Comments artistId={artist.artistId} />

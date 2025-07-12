@@ -24,7 +24,7 @@
         flex-direction: row;
         flex-wrap: nowrap;
         gap: var(--spacing-gap);
-        justify-content: space-between;
+        justify-content: left;
     }
 
 }

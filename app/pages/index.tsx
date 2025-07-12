@@ -26,7 +26,7 @@ const Home = () => {
   const [venueIds, setVenueIds] = useState<uuid[]>([]);
 
   useEffect(() => {
-    axios.get(`${apiUrl}/artist/ids`)
+    axios.get(`${apiUrl}/artist`)
          .then(response => { setArtistIds(camelcaseKeys(response.data, { deep: true }))})
          .catch(error => { console.error(error); });
 
@@ -43,19 +43,6 @@ const Home = () => {
         <title>Bandwidth</title>
         <meta name="description" content="Welcome to my website" />
       </Head>
-
-      <div style={{ marginBottom: 60 }}>
-        <SectionHeader title="Artists" route="/artist" />
-        <CardGrid artistIds={artistIds} cardGridType={CardGridType.Grid} limit={8} />
-      </div>
-
-      <div style={{ marginBottom: 60 }}>
-        <SectionHeader title="Venues" route="/venue" />
-        <CardGrid venueIds={venueIds} cardGridType={CardGridType.Grid} limit={8} />
-      </div>
-
-     
-
 
       {routes.map(route => (
         <SectionHeader title={route.title} route={route.route || undefined} />
