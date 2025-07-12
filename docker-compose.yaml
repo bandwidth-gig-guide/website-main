@@ -5,27 +5,9 @@ services:
     networks:
       - network-bandwidth
 
-  service-event:
-    image: ghcr.io/bandwidth-gig-guide/service-event:latest
-    container_name: service-event
-    networks:
-      - network-bandwidth
-
-  service-artist:
-    image: ghcr.io/bandwidth-gig-guide/service-artist:latest
-    container_name: service-artist
-    networks:
-      - network-bandwidth
-
-  service-venue:
-    image: ghcr.io/bandwidth-gig-guide/service-venue:latest
-    container_name: service-venue
-    networks:
-      - network-bandwidth
-
-  service-account:
-    image: ghcr.io/bandwidth-gig-guide/service-account:latest
-    container_name: service-account
+  service-public:
+    image: ghcr.io/bandwidth-gig-guide/service-public:latest
+    container_name: service-public
     networks:
       - network-bandwidth
 
@@ -33,10 +15,7 @@ services:
     image: ghcr.io/bandwidth-gig-guide/api-gateway:latest
     container_name: api-gateway
     depends_on:
-      - service-event
-      - service-artist
-      - service-venue
-      - service-account
+      - service-public
     ports:
       - "80:80"
     networks:
