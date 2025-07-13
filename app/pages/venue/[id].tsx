@@ -64,7 +64,7 @@ const VenueDetail = () => {
       </Head>
 
       <div className={styles.pageWrapper}>
-        <Carousel imageUrls={venue.imageUrls} />
+        <Carousel imageUrls={venue.imageUrls} title={venue.title}/>
         <PageHeader 
           title={venue.title} 
           pageType={PageType.Venue} 
@@ -80,6 +80,7 @@ const VenueDetail = () => {
         />
         <UpcomingEvents eventIds={venue.upcomingEventIds} />
         <Socials socials={venue.socials} />
+        {JSON.stringify(venue)}
       </div>
     </>
   );

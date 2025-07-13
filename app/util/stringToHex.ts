@@ -1,7 +1,11 @@
 /**
  * Converts a string to a hex color that contrasts with white text.
  */
-export function stringToHex(str: string): string {
+export function stringToHex(str: string | undefined | null): string {
+
+    // Fallback
+    if (!str) return '#f8f8f8'
+
     // Simple hash function (djb2)
     let hash = 5381;
     for (let i = 0; i < str.length; i++) {

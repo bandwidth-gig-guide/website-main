@@ -19,7 +19,6 @@ import styles from "../../styles/page.module.css"
 
 // Components
 import Carousel from "../../components/Carousel/Carousel"
-import Chips from "../../components/Chips/Chips";
 import Comments from "../../components/Comments/Comments";
 import Description from "../../components/Description/Description"
 import Embeds from "../../components/Embeds/Embeds";
@@ -69,12 +68,12 @@ const ArtistDetail = () => {
       </Head>
 
       <div className={styles.pageWrapper}>
-        <Carousel imageUrls={artist.imageUrls}/>
+        <Carousel imageUrls={artist.imageUrls} title={artist.title}/>
         <PageHeader title={artist.title} pageType={PageType.Artist} isFeatured={artist.isFeatured}/>
         <FeatureHighlight items={items} />
         <Description text={artist.description} types={artist.types} tags={artist.tags} />
         <UpcomingEvents eventIds={artist.upcomingEventIds} />
-        <Socials socials={artist.socials?.map(social => ({ ...social, artistId: artist.artistId }))} />
+        <Socials socials={artist.socials} />
         <Embeds spotifyEmbedUrl={artist.spotifyEmbedUrl} youtubeEmbedUrl={artist.youtubeEmbedUrl} />
         <Comments artistId={artist.artistId} />
         {JSON.stringify(artist)}
