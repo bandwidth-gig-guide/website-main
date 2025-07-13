@@ -1,7 +1,6 @@
 .wrapper {
     height: 560px;
     overflow: hidden;
-    border-radius: 12px;
 
     .imgWrapper {
         position: relative;
