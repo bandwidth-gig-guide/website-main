@@ -7,12 +7,27 @@ import { useRouter } from "next/router";
 import axios from "axios"
 import camelcaseKeys from "camelcase-keys";
 
-// Custom
+// Config
 import apiUrl from "../../api.config"
-import { Venue } from "../../types/Venue"
+
+// Custom
+import { Venue } from "../../types/models/Venue"
+import { PageType } from "../../types/enums/PageType"
 
 // Styling
 import styles from "../../styles/page.module.css"
+
+// Components
+import Carousel from "../../components/Carousel/Carousel"
+import Comments from "../../components/Comments/Comments";
+import Description from "../../components/Description/Description"
+import Embeds from "../../components/Embeds/Embeds";
+import FeatureHighlight from "../../components/FeatureHighlight/FeatureHighlight";
+import PageHeader from "../../components/PageHeader/PageHeader";
+import Socials from "../../components/Socials/Socials";
+import UpcomingEvents from "../../components/UpcomingEvents/UpcomingEvents";
+import VenueLocation from "../../components/VenueLocation/VenueLocation";
+import { formatLocation } from "@/util/formatLocation";
 
 
 const VenueDetail = () => {
@@ -49,8 +64,22 @@ const VenueDetail = () => {
       </Head>
 
       <div className={styles.pageWrapper}>
-        <h1>{venue.title}</h1>
-        <p>{JSON.stringify(venue)}</p>
+        <Carousel imageUrls={venue.imageUrls} />
+        <PageHeader 
+          title={venue.title} 
+          pageType={PageType.Venue} 
+          isFeatured={venue.isFeatured}
+          subtitle={`${venue.streetAddress}, ${venue.city} ${venue.stateCode} ${venue.postCode}`}
+        />
+        <Description text={venue.description} types={venue.types} tags={venue.tags} />
+        <VenueLocation
+          location={formatLocation(venue.streetAddress, venue.city, venue.stateCode, venue.postCode)}
+          websiteUrl={venue.websiteUrl}
+          phoneNumber={venue.phoneNumber}
+          openingHours={venue.openingHours}
+        />
+        <UpcomingEvents eventIds={venue.upcomingEventIds} />
+        <Socials socials={venue.socials} />
       </div>
     </>
   );

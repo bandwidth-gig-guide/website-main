@@ -13,10 +13,10 @@ export type Venue = {
     phoneNumber: string;
     googleMapsEmbedUrl?: url;
     isFeatured: boolean;
-    imageUrls?: url[];
-    socials?: Social[];
-    types?: string[];
-    tags?: string[];
+    imageUrls: url[];
+    socials: Social[];
+    types: string[];
+    tags: string[];
     openingHours?: OpeningHours;
-    upcomingEventIds?: url[];
+    upcomingEventIds: url[];
 }

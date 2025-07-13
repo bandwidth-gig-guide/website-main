@@ -1,0 +1,86 @@
+.wrapper {
+    padding: var(--spacing-06) 0;
+    border-bottom: 1px solid var(--color-muted);
+    display: flex;
+    flex-direction: row;
+    gap: var(--spacing-07);
+
+    .mapWrapper {
+        flex: 1;
+    }
+
+    .infoWrapper {
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: var(--spacing-gap);
+
+        .info {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+            gap: var(--spacing-gap);
+
+        }
+
+        .hoursWrapper {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 100%;
+            padding-top: 3px;
+
+            .hours {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                position: relative;
+                overflow: hidden;
+
+                span {
+                    background-color: var(--color-background);
+                    z-index: 2;
+                }
+
+                .ellipse {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    display: inline-block;
+                    content: 'Ffffffff';
+                    z-index: 1;
+                    }
+                    .ellipse::after {
+                        content: '...............................................................................................................................';
+                        letter-spacing: 2px;
+                        user-select: none;
+                        z-index: 1;
+
+                }
+            }
+
+            .hours span:first-child {
+                padding-right: 10px;
+            }
+
+            .hours span:last-child {
+                padding-left: 10px;
+            }
+        }
+    }
+
+    img {
+        height: var(--font-size-03);
+
+    }
+
+    .selfAlignStart {
+        justify-self: flex-start;
+        align-self: flex-start;
+    }
+}
+

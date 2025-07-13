@@ -41,8 +41,6 @@ const ArtistDetail = () => {
 
   // Get Artist Details
   useEffect(() => {
-    if (!id) return;
-
     axios.get(`${apiUrl}/artist/${id}`)
          .then(response => { setArtist(camelcaseKeys(response.data, { deep: true }))})
          .catch(() => { setIsError(true)})
@@ -74,8 +72,7 @@ const ArtistDetail = () => {
         <Carousel imageUrls={artist.imageUrls}/>
         <PageHeader title={artist.title} pageType={PageType.Artist} isFeatured={artist.isFeatured}/>
         <FeatureHighlight items={items} />
-        <Description text={artist.description} />
-        <Chips tags={artist.tags || []} types={artist.types} />
+        <Description text={artist.description} types={artist.types} tags={artist.tags} />
         <UpcomingEvents eventIds={artist.upcomingEventIds} />
         <Socials socials={artist.socials?.map(social => ({ ...social, artistId: artist.artistId }))} />
         <Embeds spotifyEmbedUrl={artist.spotifyEmbedUrl} youtubeEmbedUrl={artist.youtubeEmbedUrl} />

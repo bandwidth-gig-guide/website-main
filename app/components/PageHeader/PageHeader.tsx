@@ -1,6 +1,12 @@
 import styles from './PageHeader.module.css'
-import { Props } from './Props'
+import { PageType } from '../../types/enums/PageType'
 
+interface Props {
+	title: string;
+	pageType: PageType;
+	isFeatured?: boolean;
+	subtitle?: string;
+};
 
 const PageHeader: React.FC<Props> = ({ title, pageType, isFeatured, subtitle }) => {
 
