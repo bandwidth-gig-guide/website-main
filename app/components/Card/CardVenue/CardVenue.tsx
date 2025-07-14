@@ -50,7 +50,7 @@ const CardVenue: React.FC<Props> = ({ venueId }) => {
 		<div>
 			<Link href={`/venue/${venueId}`}>
 				<CardBase
-					topLeft={`${venue.streetAddress}, ${venue.city} ${venue.stateCode} ${venue.postCode}`}
+					topLeft={`${venue.streetAddress}, ${venue.city} ${venue.stateCode} ${venue.postcode}`}
 					title={venue.title}
 					bottom={`${venue.upcomingEventCount} Upcoming Events`}
 					imgUrl={hasImage && venue.imageUrl ? venue.imageUrl : ''}
