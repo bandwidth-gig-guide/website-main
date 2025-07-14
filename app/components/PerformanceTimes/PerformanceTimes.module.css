@@ -1,0 +1,24 @@
+.wrapper {
+    padding: var(--spacing-06) 0;
+    border-bottom: 1px solid var(--color-muted);
+    display: flex;
+    flex-direction: row;
+    gap: var(--spacing-gap); 
+    overflow: scroll;
+    height: max-content;
+
+    .artistChip {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: var(--spacing-gap);
+    }
+
+    .spacer {
+        width: 1px;
+        height: 50%;
+        background-color: var(--color-muted);
+    }
+}
+

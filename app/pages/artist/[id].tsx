@@ -11,7 +11,7 @@ import camelcaseKeys from "camelcase-keys";
 import apiUrl from "../../api.config"
 
 // Types
-import { ArtistComplete } from "../../types/ArtistComplete";
+import { Artist } from "../../types/models/Artist"
 import { PageType } from "../../types/enums/PageType"
 
 // Styling
@@ -19,7 +19,6 @@ import styles from "../../styles/page.module.css"
 
 // Components
 import Carousel from "../../components/Carousel/Carousel"
-import Chips from "../../components/Chips/Chips";
 import Comments from "../../components/Comments/Comments";
 import Description from "../../components/Description/Description"
 import Embeds from "../../components/Embeds/Embeds";
@@ -32,7 +31,7 @@ import UpcomingEvents from "../../components/UpcomingEvents/UpcomingEvents";
 const ArtistDetail = () => {
 
   // State
-  const [artist, setArtist] = useState<ArtistComplete>({} as ArtistComplete)
+  const [artist, setArtist] = useState<Artist>({} as Artist)
   const [isError, setIsError] = useState<boolean>(false);
 
   // Router
@@ -41,9 +40,7 @@ const ArtistDetail = () => {
 
   // Get Artist Details
   useEffect(() => {
-    if (!id) return;
-
-    axios.get(`${apiUrl}/artist/complete/${id}`)
+    axios.get(`${apiUrl}/artist/${id}`)
          .then(response => { setArtist(camelcaseKeys(response.data, { deep: true }))})
          .catch(() => { setIsError(true)})
 
@@ -71,16 +68,14 @@ const ArtistDetail = () => {
       </Head>
 
       <div className={styles.pageWrapper}>
-        <Carousel />
+        <Carousel imageUrls={artist.imageUrls} title={artist.title}/>
         <PageHeader title={artist.title} pageType={PageType.Artist} isFeatured={artist.isFeatured}/>
         <FeatureHighlight items={items} />
-        <Description text={artist.description} />
-        <Chips tags={artist.tags} types={artist.types} />
-        <UpcomingEvents artistId={artist.artistId} />
-        <Socials socials={artist.socials?.map(social => ({ ...social, artistId: artist.artistId }))} />
+        <Description text={artist.description} types={artist.types} tags={artist.tags} />
+        <UpcomingEvents eventIds={artist.upcomingEventIds} />
+        <Socials socials={artist.socials} />
         <Embeds spotifyEmbedUrl={artist.spotifyEmbedUrl} youtubeEmbedUrl={artist.youtubeEmbedUrl} />
         <Comments artistId={artist.artistId} />
-        {JSON.stringify(artist)}
       </div>
     </>
   );

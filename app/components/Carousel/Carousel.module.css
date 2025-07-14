@@ -1,7 +1,46 @@
 .wrapper {
-    background-color:burlywood;
     height: 560px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    overflow: hidden;
+
+    .imgWrapper {
+        position: relative;
+        width: 100%;
+        height: 100%;
+
+        .imgBackground {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            z-index: 1;
+            transform: scale(1.25);
+            filter: blur(10px);
+        }
+
+        .imgFocus {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            object-fit: contain;
+            z-index: 2;
+        }
+    }
+
+    .titleWrapper {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        p {
+            color: var(--color-background);
+            font-weight: 500;
+            font-size: var(--font-size-05);
+        }
+    }
 }

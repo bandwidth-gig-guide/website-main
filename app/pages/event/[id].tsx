@@ -7,17 +7,30 @@ import { useRouter } from "next/router";
 import axios from "axios"
 import camelcaseKeys from "camelcase-keys";
 
-// Custom
+// Config
 import apiUrl from "../../api.config"
-import { Event } from "../../types/Event"
+
+// Types
+import { Event } from "../../types/models/Event"
+import { PageType } from "../../types/enums/PageType"
 
 // Styling
 import styles from "../../styles/page.module.css"
 
+// Components
+import Carousel from "../../components/Carousel/Carousel"
+import Comments from "../../components/Comments/Comments";
+import Description from "../../components/Description/Description"
+import FeatureHighlight from "../../components/FeatureHighlight/FeatureHighlight";
+import PageHeader from "../../components/PageHeader/PageHeader";
+import Socials from "../../components/Socials/Socials";
+import PerformanceTimes from "../../components/PerformanceTimes/PerformanceTimes";
+import Tickets from "../../components/Tickets/Tickets";
+
 const EventDetail = () => {
 
   // State
-  const [event, setEvent] = useState<Event>({} as Event); 
+  const [event, setEvent] = useState<Event | null>(null);
   const [isError, setIsError] = useState<boolean>(false);
 
   // Router
@@ -38,7 +51,14 @@ const EventDetail = () => {
       router.push('/event');
     }
   }, [isError]);
+
+  if (!event) return null;
   
+  const items = [
+    `${event.startDateTime}`,
+    `${event.venue}`
+  ].filter(Boolean);
+
   // Return
   return (
     <>
@@ -48,8 +68,22 @@ const EventDetail = () => {
       </Head>
 
       <div className={styles.pageWrapper}>
-        <h1>{event.title}</h1>
-        <p>{JSON.stringify(event)}</p>
+        <Carousel imageUrls={event.imageUrls} title={event.title}/>
+        <PageHeader title={event.title} pageType={PageType.Event} isFeatured={event.isFeatured}/>
+        <FeatureHighlight items={items} />
+        <Description text={event.description} types={event.types} tags={event.tags} />
+        <PerformanceTimes 
+          eventPerformances={event.performances} 
+          eventVenue={event.venue} 
+          doorsTime={event.startDateTime} 
+        />
+        <Tickets
+          prices={event.prices}
+          ticketSaleUrl={event.ticketSaleUrl}
+          originalPostUrl={event.originalPostUrl} 
+        />
+        <Socials socials={event.socials} />
+        <Comments eventId={event.eventId} />
       </div>
     </>
   );

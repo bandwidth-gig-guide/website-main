@@ -21,7 +21,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             <div className='app-wrapper'>
                 <Header location={location} />
                 <main><Component {...pageProps} /></main>
-                <Footer />
+                {/* <Footer /> */}
             </div>
         </>
     );

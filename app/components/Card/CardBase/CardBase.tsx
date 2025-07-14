@@ -1,5 +1,6 @@
 import React from 'react'
 import styles from './CardBase.module.css'
+import { stringToHex } from '../../../util/stringToHex'
 
 interface Props {
 	topLeft: string,
@@ -12,8 +13,9 @@ interface Props {
 const CardBase: React.FC<Props> = ({ topLeft, topRight, title, bottom, imgUrl }) => {
 	return (
 		<div className={styles.wrapper}>
-			<div className={styles.imgWrapper}>
-				<img src={imgUrl} alt={title} />
+			<div className={styles.imgWrapper} style={{ backgroundColor: stringToHex(title) }}>
+				{!imgUrl && <p>{title}</p>}
+				{imgUrl && <img src={imgUrl} alt={title} />}
 			</div>
 			<p className={styles.top}>
 				<span>{topLeft}</span>

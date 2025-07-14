@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 
-import { VenueCard } from '../../../types/VenueCard'
+import { VenueBrief } from '../../../types/models/VenueBrief'
 import axios from 'axios'
 import camelcaseKeys from 'camelcase-keys'
 import apiUrl from '../../../api.config'
@@ -13,9 +13,7 @@ interface Props {
 }
 
 const CardVenue: React.FC<Props> = ({ venueId }) => {
-
-
-	const [venue, setVenue] = useState<VenueCard>({} as VenueCard)
+	const [venue, setVenue] = useState<VenueBrief>({} as VenueBrief)
 	const [isLoading, setIsLoading] = useState(true)
 	const [isError, setIsError] = useState(false)
 	const [hasImage, setHasImage] = useState(true)
@@ -23,7 +21,7 @@ const CardVenue: React.FC<Props> = ({ venueId }) => {
 	useEffect(() => {
 		const fetchVenue = async () => {
 			try {
-				const response = await axios.get(`${apiUrl}/venue/card/${venueId}`)
+				const response = await axios.get(`${apiUrl}/venue/brief/${venueId}`)
 				const venueData = camelcaseKeys(response.data, { deep: true })
 				setVenue(venueData)
 
@@ -52,7 +50,7 @@ const CardVenue: React.FC<Props> = ({ venueId }) => {
 		<div>
 			<Link href={`/venue/${venueId}`}>
 				<CardBase
-					topLeft={`${venue.streetAddress}, ${venue.city} ${venue.stateCode} ${venue.postCode}`}
+					topLeft={`${venue.streetAddress}, ${venue.city} ${venue.stateCode} ${venue.postcode}`}
 					title={venue.title}
 					bottom={`${venue.upcomingEventCount} Upcoming Events`}
 					imgUrl={hasImage && venue.imageUrl ? venue.imageUrl : ''}

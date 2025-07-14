@@ -1,14 +1,17 @@
 import React from 'react';
 import styles from './Socials.module.css';
 import SectionHeader from '../SectionHeader/SectionHeader';
-import { ArtistSocial } from '../../types/Social';
+import { Social } from '../../types/models/Social';
 import { icons } from './Icons';
 
 interface Props {
-  socials: ArtistSocial[];
+  socials: Social[];
 }
 
 const Socials: React.FC<Props> = ({ socials = [] }) => {
+
+  if (socials.length == 0) return
+
   return (
     <div className={styles.wrapper}>
       <SectionHeader title="Socials" />

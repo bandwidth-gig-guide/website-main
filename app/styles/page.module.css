@@ -1,4 +1,5 @@
 .pageWrapper {
-    width: var(--spacing-page-max);
+    width: 100%;
+    max-width: var(--spacing-page-max);
     margin: auto;
 }

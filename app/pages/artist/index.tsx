@@ -17,7 +17,7 @@ const Artist = () => {
 
   useEffect(() => {
     axios
-      .get(`${apiUrl}/artist/ids`)
+      .get(`${apiUrl}/artist`)
       .then(response => { setArtistIds(camelcaseKeys(response.data, { deep: true }))})
       .catch(error => { console.error(error); });
   }, []);

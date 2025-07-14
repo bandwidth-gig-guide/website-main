@@ -10,7 +10,7 @@
     --spacing-09: 80px; 
 
     --spacing-app-max: 1600px;
-    --spacing-page-max: 1200px;
+    --spacing-page-max: 1600px;
 
     /* From left & right of screen / container */
     --spacing-edge-desktop: var(--spacing-03);
@@ -21,7 +21,7 @@
     --spacing-inline: var(--spacing-04);
 
     /* Grid, Flex & and Row */
-    --spacing-gap: var(--spacing-02);
+    --spacing-gap: var(--spacing-04);
 
 
 }
