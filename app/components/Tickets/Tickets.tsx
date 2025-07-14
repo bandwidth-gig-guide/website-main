@@ -13,12 +13,11 @@ const Tickets: React.FC<Props> = ({ prices, ticketSaleUrl, originalPostUrl }) =>
     <div className={styles.wrapper}>
         <a className={styles.button} href={ticketSaleUrl} target='_blank'>Get Tickets</a>
         <div className={styles.spacer}></div>
-        {prices.map((ticket, index) => (
-            <React.Fragment key={index}>
-                <span className={styles.ticket}>{ticket.ticketType} | ${ticket.price}</span>
-                {index < prices.length - 1 && <span className={styles.dot}>&nbsp;&middot;&nbsp;</span>}
-            </React.Fragment>
-        ))}
+        <p className={styles.disclaimer}>
+          * This event may be 18+. Information presented on this page may be false or outdated. 
+          Always check with the <a href={originalPostUrl}>official listing</a> before purchasing 
+          tickets for any event.
+        </p>
     </div>
   )
 }

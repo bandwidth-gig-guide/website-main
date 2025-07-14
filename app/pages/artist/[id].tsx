@@ -76,7 +76,6 @@ const ArtistDetail = () => {
         <Socials socials={artist.socials} />
         <Embeds spotifyEmbedUrl={artist.spotifyEmbedUrl} youtubeEmbedUrl={artist.youtubeEmbedUrl} />
         <Comments artistId={artist.artistId} />
-        {JSON.stringify(artist)}
       </div>
     </>
   );

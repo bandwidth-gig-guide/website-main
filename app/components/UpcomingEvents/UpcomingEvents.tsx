@@ -11,7 +11,7 @@ interface Props {
 const UpcomingEvents: React.FC<Props> = ({ eventIds }) => {
   return (
     <div className={styles.wrapper}>
-      <SectionHeader title='Upcoming Events' />
+      <SectionHeader title='Upcoming Events' route='/event' />
       <CardGrid eventIds={eventIds} cardGridType={CardGridType.Row}/>
     </div>
   );

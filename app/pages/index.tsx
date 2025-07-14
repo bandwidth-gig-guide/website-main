@@ -1,16 +1,8 @@
 // React / Next
-import React, { useState, useEffect } from "react"
+import React from "react"
 import Head from 'next/head';
 
-// External
-import axios from "axios"
-import camelcaseKeys from "camelcase-keys";
-
-// Custom
-import apiUrl from "../api.config"
 import SectionHeader from "../components/SectionHeader/SectionHeader";
-import CardGrid from "../components/CardGrid/CardGrid";
-import { CardGridType } from "../types/enums/CardGridType";
 
 const routes = [
   { title: "Events", route: "/event" },
@@ -22,21 +14,6 @@ const routes = [
 ];
 
 const Home = () => {
-  const [artistIds, setArtistIds] = useState<uuid[]>([]);
-  const [venueIds, setVenueIds] = useState<uuid[]>([]);
-
-  useEffect(() => {
-    axios.get(`${apiUrl}/artist`)
-         .then(response => { setArtistIds(camelcaseKeys(response.data, { deep: true }))})
-         .catch(error => { console.error(error); });
-
-    axios.get(`${apiUrl}/venue`)
-         .then(response => { setVenueIds(camelcaseKeys(response.data, { deep: true }))})
-         .catch(error => { console.error(error); });
-
-
-  }, []);
-
   return (
     <>
       <Head>

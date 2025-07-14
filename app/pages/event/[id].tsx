@@ -21,7 +21,6 @@ import styles from "../../styles/page.module.css"
 import Carousel from "../../components/Carousel/Carousel"
 import Comments from "../../components/Comments/Comments";
 import Description from "../../components/Description/Description"
-import Embeds from "../../components/Embeds/Embeds";
 import FeatureHighlight from "../../components/FeatureHighlight/FeatureHighlight";
 import PageHeader from "../../components/PageHeader/PageHeader";
 import Socials from "../../components/Socials/Socials";
@@ -85,8 +84,6 @@ const EventDetail = () => {
         />
         <Socials socials={event.socials} />
         <Comments eventId={event.eventId} />
-
-        {JSON.stringify(event)}
       </div>
     </>
   );

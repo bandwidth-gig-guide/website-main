@@ -30,4 +30,13 @@
     .ticket {
         text-wrap: nowrap;
     }
+
+    .disclaimer {
+        color: var(--color-text-muted);
+
+        a {
+            color: var(--color-surface-dark);
+            text-decoration: underline;
+        }
+    }
 }
