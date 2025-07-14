@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 
-import { VenueCard } from '../../../types/VenueCard'
+import { VenueBrief } from '../../../types/models/VenueBrief'
 import axios from 'axios'
 import camelcaseKeys from 'camelcase-keys'
 import apiUrl from '../../../api.config'
@@ -13,7 +13,7 @@ interface Props {
 }
 
 const CardVenue: React.FC<Props> = ({ venueId }) => {
-	const [venue, setVenue] = useState<VenueCard>({} as VenueCard)
+	const [venue, setVenue] = useState<VenueBrief>({} as VenueBrief)
 	const [isLoading, setIsLoading] = useState(true)
 	const [isError, setIsError] = useState(false)
 	const [hasImage, setHasImage] = useState(true)
