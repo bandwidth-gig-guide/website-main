@@ -1,0 +1,87 @@
+.wrapper {
+    margin-bottom: var(--spacing-06);
+    padding: var(--spacing-06);
+    background-color: var(--color-surface);
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-02);
+
+    select {
+        border: none;
+        cursor: pointer;
+    }
+
+    input {
+        border: none;
+    }
+
+    select:disabled {
+        opacity: .5;
+        cursor: default;
+    }
+
+    .topRow {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: var(--spacing-gap);
+        padding: 0px 20px;
+        border-radius: 8px;
+        background-color: var(--color-background);
+        height: 60px;
+        border: 1px solid #ccc;
+    }
+
+    .topRow input {
+        flex: 1;
+    }
+
+    .reset {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        cursor: default;
+        gap: 4px;
+        opacity: .5;
+        transition: all 0.2 ease;
+    }
+
+    .reset img {
+        height: 20px;
+    }
+
+    .filterActive {
+        opacity: 1;
+        cursor: pointer;
+    }
+
+
+    .chipContainer {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow: scroll;
+        gap: 8px;
+        margin-top: 10px;
+    }
+
+    .chip {
+        border: 1px solid #ccc;
+        padding: 6px 12px;
+        border-radius: 16px;
+        background-color: #f0f0f0;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .active {
+        background-color: var(--color-accent);
+        color: white;
+        border-color: var(--color-accent-dark);
+    }
+
+}
+
