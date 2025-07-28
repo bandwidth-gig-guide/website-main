@@ -1,46 +1,123 @@
 .wrapper {
-    height: 560px;
-    overflow: hidden;
+  position: relative;
+  height: 560px;
+  width: 100%;
+  overflow: hidden;
+}
 
-    .imgWrapper {
-        position: relative;
-        width: 100%;
-        height: 100%;
+.slider {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  height: 100%;
+  width: 100%;
+}
 
-        .imgBackground {
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 100%;
-            object-fit: cover;
-            z-index: 1;
-            transform: scale(1.25);
-            filter: blur(10px);
-        }
+.container {
+  width: 100%;
+  height: 100%;
+  flex-shrink: 0;
+  overflow: hidden;
+}
 
-        .imgFocus {
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 100%;
-            object-fit: contain;
-            z-index: 2;
-        }
-    }
+.imgWrapper {
+  position: relative;
+  min-width: 100%;
+  height: 100%;
+}
 
-    .titleWrapper {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+.imgBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  z-index: 1;
+  transform: scale(1.25);
+  filter: blur(10px);
+}
 
-        p {
-            color: var(--color-background);
-            font-weight: 500;
-            font-size: var(--font-size-05);
-        }
-    }
+.imgFocus {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  z-index: 2;
+}
+
+.titleWrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.titleWrapper p {
+  color: var(--color-background);
+  font-weight: 500;
+  font-size: var(--font-size-05);
+}
+
+/* Arrows - hidden by default, show on hover */
+.control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2rem;
+  color: white;
+  background: rgba(0, 0, 0, 0.4);
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  z-index: 5;
+  user-select: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.control.left {
+  left: 16px;
+}
+
+.control.right {
+  right: 16px;
+}
+
+.wrapper:hover .control {
+  opacity: 1;
+}
+
+.control:hover {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+/* Pagination Dots */
+.dots {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 5;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.dot:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.dot.active {
+  background-color: white;
 }
