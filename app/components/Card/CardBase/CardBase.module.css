@@ -14,7 +14,7 @@
         justify-content: center;
         align-items: center;
         border-radius: 8px;
-        transition: all 0.2s ease-in-out;
+        transition: all 0.25s ease;
 
         p {
             color: var(--color-background);
@@ -26,6 +26,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: all 0.25s ease;
         }
     }
 
@@ -61,5 +62,11 @@
 
 .wrapper:hover,
 .wrapper:focus {
-    background-color: var(--color-surface);
+    img {
+        filter: brightness(1.05) saturate(1.05);
+    }
+
+    .imgWrapper {
+        box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.2);
+    }
 }
