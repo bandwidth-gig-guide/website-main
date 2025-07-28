@@ -76,6 +76,7 @@ const VenueDetail = () => {
           location={formatLocation(venue.streetAddress, venue.city, venue.stateCode, venue.postCode)}
           websiteUrl={venue.websiteUrl}
           phoneNumber={venue.phoneNumber}
+          googleMapsEmbedUrl={venue.googleMapsEmbedUrl}
           openingHours={venue.openingHours}
         />
         <UpcomingEvents eventIds={venue.upcomingEventIds} />
