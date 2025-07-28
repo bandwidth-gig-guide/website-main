@@ -17,6 +17,7 @@
   height: 100%;
   flex-shrink: 0;
   overflow: hidden;
+  background-color: var(--color-surface-medium);
 }
 
 .imgWrapper {
