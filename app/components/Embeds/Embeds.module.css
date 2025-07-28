@@ -1,11 +1,38 @@
 .wrapper {
-    padding: var(--spacing-06) 0;
+	padding: var(--spacing-06) 0;
+}
 
-    .embedContainer {
-        overflow: scroll;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: nowrap;
-        scroll-snap-type: x mandatory;
-    }
+.embedContainer {
+	overflow-x: auto;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	scroll-snap-type: x mandatory;
+	scroll-behavior: smooth;
+	gap: var(--spacing-04);
+}
+
+.embedItem {
+	flex: 0 0 100%;
+	scroll-snap-align: start;
+}
+
+.paginationDots {
+	display: flex;
+	justify-content: center;
+	margin-top: 12px;
+	gap: 8px;
+}
+
+.dot {
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background-color: var(--color-surface-medium);
+	transition: background-color 0.3s;
+	cursor: pointer;
+}
+
+.activeDot {
+	background-color: var(--color-surface-dark);
 }
