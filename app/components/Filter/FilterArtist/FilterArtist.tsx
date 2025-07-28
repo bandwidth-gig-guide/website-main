@@ -1,8 +1,19 @@
+// React
 import React, { useEffect, useState } from 'react';
+
+// Styling
 import styles from './FilterArtist.module.css'
+
+// External libraries
 import axios from 'axios';
 import camelcaseKeys from 'camelcase-keys';
+
+// Config
 import apiUrl from '../../../api.config';
+
+// Constants
+import { ARTIST_TYPES } from '../../../constants/artistTypes';
+import { TAGS } from '../../../constants/tags';
 import {
 	FILTER_TAGS_KEY,
 	FILTER_ARTIST_TYPE_KEY,
@@ -11,17 +22,17 @@ import {
 	FILTER_ARTIST_COUNTRY_KEY,
 	FILTER_ARTIST_UPCOMING_KEY
 } from '../../../constants/localstorage';
-import { ARTIST_TYPES } from '../../../constants/artistTypes';
-import { TAGS } from '../../../constants/tags';
 
+// TODO: Retrieve from db.
+const AVAILABLE_CITIES = ['Melbourne', 'Sydney', 'Brisbane'];
+const AVAILABLE_COUNTRIES = ['Australia', 'New Zealand'];
 interface FilterArtistProps {
 	setArtistIds: React.Dispatch<React.SetStateAction<uuid[]>>;
 }
 
-const AVAILABLE_CITIES = ['Melbourne', 'Sydney', 'Brisbane'];
-const AVAILABLE_COUNTRIES = ['Australia', 'New Zealand'];
-
 const FilterArtist: React.FC<FilterArtistProps> = ({ setArtistIds }) => {
+
+	// State
 	const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
 	const [selectedTags, setSelectedTags] = useState<string[]>([]);
 	const [name, setName] = useState('');
@@ -29,47 +40,63 @@ const FilterArtist: React.FC<FilterArtistProps> = ({ setArtistIds }) => {
 	const [country, setCountry] = useState('');
 	const [hasUpcomingEvent, setHasUpcomingEvent] = useState(false);
 	const [filtersActive, setFiltersActive] = useState(false);
+	const [filtersLoaded, setFiltersLoaded] = useState(false);
+
 
 	// Load filters from localStorage on mount
 	useEffect(() => {
-		setSelectedTypes(JSON.parse(localStorage.getItem(FILTER_ARTIST_TYPE_KEY) || '[]'));
-		setSelectedTypes(JSON.parse(localStorage.getItem(FILTER_TAGS_KEY) || '[]'));
 		setName(localStorage.getItem(FILTER_ARTIST_NAME_KEY) || '');
+		setHasUpcomingEvent(localStorage.getItem(FILTER_ARTIST_UPCOMING_KEY) === 'true');
 		setCity(localStorage.getItem(FILTER_ARTIST_CITY_KEY) || '');
 		setCountry(localStorage.getItem(FILTER_ARTIST_COUNTRY_KEY) || '');
-		setHasUpcomingEvent(localStorage.getItem(FILTER_ARTIST_UPCOMING_KEY) === 'true');
+		setSelectedTypes(JSON.parse(localStorage.getItem(FILTER_ARTIST_TYPE_KEY) || '[]'));
+		setSelectedTags(JSON.parse(localStorage.getItem(FILTER_TAGS_KEY) || '[]'));
+
+		setFiltersLoaded(true); 
 	}, []);
 
 	// Save and fetch on filter change
 	useEffect(() => {
+
+		// Async function to retrieve IDs
 		const fetchArtists = async () => {
+			if (!filtersLoaded) return;
+
 			try {
+				// Get params
 				const params = new URLSearchParams();
+
+				// Check params
 				if (name) params.append('name', name);
-				selectedTypes.forEach(type => params.append('types', type));
-				selectedTags.forEach(tag => params.append('tags', tag));
+				if (hasUpcomingEvent) params.append('hasUpcomingEvent', 'true');
 				if (city) params.append('city', city);
 				if (country) params.append('country', country);
-				if (hasUpcomingEvent) params.append('hasUpcomingEvent', 'true');
+				selectedTypes.forEach(type => params.append('types', type));
+				selectedTags.forEach(tag => params.append('tags', tag));
 
+				// Create Request
 				const url = `${apiUrl}/artist${params.toString() ? `/?${params.toString()}` : ''}`;
+
+				// Send Request
 				const response = await axios.get(url);
 				setArtistIds(camelcaseKeys(response.data, { deep: true }));
+
 			} catch (error) {
 				console.error('Error fetching artists:', error);
 			}
 		};
 
-		// Save filters
-		localStorage.setItem(FILTER_ARTIST_TYPE_KEY, JSON.stringify(selectedTypes));
-		localStorage.setItem(FILTER_TAGS_KEY, JSON.stringify(selectedTags));
+		// Save filters so that they persist
 		localStorage.setItem(FILTER_ARTIST_NAME_KEY, name);
+		localStorage.setItem(FILTER_ARTIST_UPCOMING_KEY, hasUpcomingEvent.toString());
 		localStorage.setItem(FILTER_ARTIST_CITY_KEY, city);
 		localStorage.setItem(FILTER_ARTIST_COUNTRY_KEY, country);
-		localStorage.setItem(FILTER_ARTIST_UPCOMING_KEY, hasUpcomingEvent.toString());
+		localStorage.setItem(FILTER_ARTIST_TYPE_KEY, JSON.stringify(selectedTypes));
+		localStorage.setItem(FILTER_TAGS_KEY, JSON.stringify(selectedTags));
 
 		fetchArtists();
-	}, [selectedTypes, selectedTags, name, city, country, hasUpcomingEvent]);
+
+	}, [name, hasUpcomingEvent, city, country, selectedTypes, selectedTags]);
 
 	// Check if filters are being applied
 	useEffect(() => {
@@ -81,29 +108,33 @@ const FilterArtist: React.FC<FilterArtistProps> = ({ setArtistIds }) => {
 			country !== '' ||
 			hasUpcomingEvent
 		);
-	}, [selectedTypes, selectedTags, name, city, country, hasUpcomingEvent]);
+	}, [name, hasUpcomingEvent, city, country, selectedTypes, selectedTags]);
 
+	// Clear all filters
 	const resetFilters = () => {
-		setSelectedTypes([]);
-		setSelectedTags([]);
 		setName('');
+		setHasUpcomingEvent(false);
 		setCity('');
 		setCountry('');
-		setHasUpcomingEvent(false);
+		setSelectedTypes([]);
+		setSelectedTags([]);
 
-		localStorage.removeItem(FILTER_ARTIST_TYPE_KEY);
 		localStorage.removeItem(FILTER_ARTIST_NAME_KEY);
+		localStorage.removeItem(FILTER_ARTIST_UPCOMING_KEY);
 		localStorage.removeItem(FILTER_ARTIST_CITY_KEY);
 		localStorage.removeItem(FILTER_ARTIST_COUNTRY_KEY);
-		localStorage.removeItem(FILTER_ARTIST_UPCOMING_KEY);
+		localStorage.removeItem(FILTER_ARTIST_TYPE_KEY);
+		localStorage.removeItem(FILTER_TAGS_KEY);
 	};
 
+	// Handles selection / deselection of type
 	const handleTypeChange = (type: string) => {
 		setSelectedTypes(prev =>
 			prev.includes(type) ? prev.filter(t => t !== type) : [...prev, type]
 		);
 	};
 
+	// Handles selection / deselection of tag
 	const handleTagChange = (tag: string) => {
 		setSelectedTags(prev =>
 			prev.includes(tag) ? prev.filter(t => t !== tag) : [...prev, tag]
@@ -161,7 +192,6 @@ const FilterArtist: React.FC<FilterArtistProps> = ({ setArtistIds }) => {
 					<img src="./circle-cross.svg" alt="reset filters" />
 					<span>Reset Filters</span>
 				</div>
-
 
 			</div>
 
