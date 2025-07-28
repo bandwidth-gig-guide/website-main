@@ -52,7 +52,7 @@ const CardEvent: React.FC<Props> = ({ eventId }) => {
 					topLeft={event.venueTitle}
 					topRight={`${event.startDateTime}`}
 					title={event.title}
-					bottom={`${event.artistTitles}`}
+					bottom={event.artistTitles.join(' · ')}
 					imgUrl={hasImage && event.imageUrl ? event.imageUrl : ''}
 				/>
 			</Link>
