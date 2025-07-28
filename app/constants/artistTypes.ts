@@ -1,6 +1,10 @@
 export const ARTIST_TYPES = [
-    "Band",
-    "Instrumentalist",
-    "DJ",
-    "Vocalist"
+    'Band',
+    'Choir',
+    'DJ',
+    'Instrumentalist',
+    'Orchestra',
+    'Singer-Songwriter',
+    'Solo Artist',
+    'Vocalist'
 ];
