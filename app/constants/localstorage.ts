@@ -15,3 +15,9 @@ export const FILTER_EVENT_CITY_KEY = "filterEventCity";
 export const FILTER_EVENT_MAX_PRICE_KEY = "filterEventMaxPrice";
 export const FILTER_EVENT_TYPE_KEY = "filterEventType";
 export const FILTER_EVENT_DATE_KEY = "filterEventDate";
+
+// Venue
+export const FILTER_VENUE_NAME_KEY = "FilterVenueName";
+export const FILTER_VENUE_STATECODE_KEY = "FilterVenueStateCode";
+export const FILTER_VENUE_CITY_KEY = "FilterVenueCity";
+export const FILTER_VENUE_TYPE_KEY = "FilterVenueType";

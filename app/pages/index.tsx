@@ -12,7 +12,7 @@ import CardGrid from "../components/CardGrid/CardGrid";
 
 // Config
 import apiUrl from '../api.config';
-import { CardGridType } from "@/types/enums/CardGridType";
+import { CardGridType } from "../types/enums/CardGridType";
 
 
 const Home = () => {
