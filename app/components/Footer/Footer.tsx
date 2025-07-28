@@ -32,10 +32,10 @@ const Footer = () => {
 				<div className={styles.bottom}>
 					<p>&copy; {new Date().getFullYear()} Matthew Cross. All rights reserved.</p>
 					<div className={styles.external}>
-						<img src="/github-white.svg" alt="GitHub"/>
-						<img src="/discord-white.svg" alt="Discord" />
 						<img src="/facebook-white.svg" alt="Facebook" />
 						<img src="/instagram-white.svg" alt="Instagram" />
+						<img src="/discord-white.svg" alt="Discord" />
+						<img src="/github-white.svg" alt="GitHub"/>
 					</div>
 				</div>
 			</footer>

@@ -62,7 +62,7 @@
         }
 
         .bottom {
-            padding: var(--spacing-04) var(--spacing-02);
+            padding: var(--spacing-06) var(--spacing-02);
             display: flex;
             flex-direction: row;
             justify-content: space-between;
@@ -74,11 +74,16 @@
             .external {
                 display: flex;
                 flex-direction: row;
-                gap: var(--spacing-02);
+                gap: var(--spacing-03);
 
                 img {
                     height: 20px;
                     cursor: pointer;
+                    opacity: .75;
+                }
+
+                img:hover {
+                    opacity: 1;
                 }
             }
         }
