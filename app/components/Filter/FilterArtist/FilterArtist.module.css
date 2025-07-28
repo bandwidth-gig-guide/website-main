@@ -63,9 +63,14 @@
     .chipContainer {
         display: flex;
         flex-wrap: nowrap;
-        overflow: scroll;
+        overflow-x: scroll;
         gap: 8px;
         margin-top: 10px;
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE and Edge */
+    }
+    .chipContainer::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Opera */
     }
 
     .chip {
@@ -75,6 +80,7 @@
         background-color: #f0f0f0;
         cursor: pointer;
         transition: all 0.2s ease;
+        text-wrap: nowrap;
     }
 
     .active {
