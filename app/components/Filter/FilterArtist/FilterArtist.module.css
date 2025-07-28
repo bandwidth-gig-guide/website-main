@@ -59,7 +59,6 @@
         cursor: pointer;
     }
 
-
     .chipContainer {
         display: flex;
         flex-wrap: nowrap;
@@ -69,6 +68,7 @@
         scrollbar-width: none;
         -ms-overflow-style: none;
     }
+
     .chipContainer::-webkit-scrollbar {
         display: none;
     }
@@ -88,6 +88,4 @@
         color: white;
         border-color: var(--color-accent-dark);
     }
-
 }
-
