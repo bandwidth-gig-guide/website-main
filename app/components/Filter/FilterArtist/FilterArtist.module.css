@@ -84,8 +84,8 @@
     }
 
     .active {
-        background-color: var(--color-accent);
+        background-color: #8d1717;
         color: white;
-        border-color: var(--color-accent-dark);
+        border-color: #791d1d;
     }
 }
