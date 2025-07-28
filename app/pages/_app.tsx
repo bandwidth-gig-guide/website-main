@@ -9,22 +9,21 @@ import Footer from '../components/Footer/Footer'
 import { LocationScope } from '../types/enums/LocationScope';
 
 function MyApp({ Component, pageProps }: AppProps) {
+	const [location, setLocation] = useState<LocationScope>(LocationScope.Melbourne);
 
-    const [location, setLocation] = useState<LocationScope>(LocationScope.Melbourne);
-
-    return (
-        <>
-            <Head>
-                <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <meta charSet="utf-8" />
-            </Head>
-            <div className='app-wrapper'>
-                <Header location={location} />
-                <main><Component {...pageProps} /></main>
-                {/* <Footer /> */}
-            </div>
-        </>
-    );
+	return (
+		<>
+			<Head>
+				<meta name="viewport" content="width=device-width, initial-scale=1" />
+				<meta charSet="utf-8" />
+			</Head>
+			<div className='app-wrapper'>
+				<Header location={location} />
+				<main><Component {...pageProps} /></main>
+				<Footer />
+			</div>
+		</>
+	);
 }
 
 export default MyApp;
