@@ -40,6 +40,10 @@
         font-size: var(--font-size-01);
     }
 
+    .featured {
+        color: var(--color-accent);
+    }
+
     .top {
         margin-top: var(--spacing-02);
         font-weight: 400;

@@ -50,6 +50,7 @@ const CardArtist: React.FC<Props> = ({ artistId }) => {
 			<Link href={`/artist/${artistId}`}>
 				<CardBase
 					topLeft={`${artist.city}, ${artist.country}`}
+					topRight={artist.isFeatured ? 'Featured' : ''}
 					title={artist.title}
 					bottom={`${artist.upcomingEvents} Upcoming Events`}
 					imgUrl={hasImage && artist.imageUrl ? artist.imageUrl : ''}
