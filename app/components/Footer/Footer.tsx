@@ -2,7 +2,6 @@ import styles from './Footer.module.css'
 import Link from "next/link";
 import { routes } from './Routes'
 
-
 const Footer = () => {
 	return (
 		<div className={styles.wrapper}>
@@ -11,6 +10,14 @@ const Footer = () => {
 
 					<div className={styles.siteMap}>
 						<h4>Site Map</h4>
+						<div className={styles.siteMapLinks}>
+							{routes.map((route, index) => (
+								<Link key={index} href={route.href} className={styles.link}>
+									{route.label}
+								</Link>
+							))}
+						</div>
+						
 					</div>
 
 					<div className={styles.faqs}>
@@ -23,12 +30,12 @@ const Footer = () => {
 
 				</div>
 				<div className={styles.bottom}>
-					<p>All right reserved</p>
+					<p>&copy; {new Date().getFullYear()} Matthew Cross. All rights reserved.</p>
 					<div className={styles.external}>
-						<img src="/date.svg" alt="GitHub" />
-						<img src="/date.svg" alt="Discord" />
-						<img src="/facebook.svg" alt="Facebook" />
-						<img src="/instagram.svg" alt="Instagram" />
+						<img src="/github-white.svg" alt="GitHub"/>
+						<img src="/discord-white.svg" alt="Discord" />
+						<img src="/facebook-white.svg" alt="Facebook" />
+						<img src="/instagram-white.svg" alt="Instagram" />
 					</div>
 				</div>
 			</footer>
