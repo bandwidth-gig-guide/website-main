@@ -58,7 +58,7 @@ const Embeds: React.FC<Props> = ({ spotifyEmbedUrl, youtubeEmbedUrl }) => {
         {embeds.map((embed, index) => (
           <div
             key={index}
-            ref={(el) => (embedRefs.current[index] = el)}
+            ref={(el) => { embedRefs.current[index] = el; }}
             className={styles.embedItem}
           >
             {embed}
