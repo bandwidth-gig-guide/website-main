@@ -20,23 +20,33 @@ const Embeds: React.FC<Props> = ({ spotifyEmbedUrl, youtubeEmbedUrl }) => {
   ];
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (!containerRef.current) return;
+    if (!containerRef.current) return;
 
-      const scrollLeft = containerRef.current.scrollLeft;
-      const containerWidth = containerRef.current.offsetWidth;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = embedRefs.current.findIndex((ref) => ref === entry.target);
+            if (index !== -1) {
+              setActiveIndex(index);
+            }
+          }
+        });
+      },
+      {
+        root: containerRef.current,
+        threshold: 0.6,
+      }
+    );
 
-      const index = Math.round(scrollLeft / containerWidth);
-      setActiveIndex(index);
-    };
-
-    const container = containerRef.current;
-    container?.addEventListener('scroll', handleScroll, { passive: true });
+    embedRefs.current.forEach((ref) => {
+      if (ref) observer.observe(ref);
+    });
 
     return () => {
-      container?.removeEventListener('scroll', handleScroll);
+      observer.disconnect();
     };
-  }, []);
+  }, [embeds.length]);
 
   const scrollToIndex = (index: number) => {
     const container = containerRef.current;
