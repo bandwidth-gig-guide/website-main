@@ -7,6 +7,7 @@ import SectionHeader from "../../components/SectionHeader/SectionHeader";
 import CardGrid from "../../components/CardGrid/CardGrid";
 import { CardGridType } from "../../types/enums/CardGridType";
 import FilterEvent from "../../components/Filter/FilterEvent/FilterEvent"
+import Hero from "../../components/Hero/Hero";
 
 const Event = () => {
   const [eventIds, setEventIds] = useState<uuid[]>([]);
@@ -19,6 +20,7 @@ const Event = () => {
       </Head>
       
       <div>
+        <Hero />
         <SectionHeader title="Events" />
         <FilterEvent setEventIds={setEventIds}/>
         <CardGrid eventIds={eventIds} cardGridType={CardGridType.Grid} />

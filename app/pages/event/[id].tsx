@@ -17,9 +17,11 @@ import { PageType } from "../../types/enums/PageType"
 // Styling
 import styles from "../../styles/page.module.css"
 
+// Utils
+import { formatDateLong } from "../../util/formatDateLong";
+
 // Components
 import Carousel from "../../components/Carousel/Carousel"
-import Comments from "../../components/Comments/Comments";
 import Description from "../../components/Description/Description"
 import FeatureHighlight from "../../components/FeatureHighlight/FeatureHighlight";
 import PageHeader from "../../components/PageHeader/PageHeader";
@@ -55,8 +57,8 @@ const EventDetail = () => {
   if (!event) return null;
   
   const items = [
-    `${event.startDateTime}`,
-    `${event.venue}`
+    `${formatDateLong(event.startDateTime)}`,
+    `${event.venue.title} · ${event.venue.stageTitle}`
   ].filter(Boolean);
 
   // Return
@@ -83,7 +85,6 @@ const EventDetail = () => {
           originalPostUrl={event.originalPostUrl} 
         />
         <Socials socials={event.socials} />
-        <Comments eventId={event.eventId} />
       </div>
     </>
   );

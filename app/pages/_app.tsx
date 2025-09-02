@@ -7,6 +7,7 @@ import type { AppProps } from 'next/app';
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer'
 import { LocationScope } from '../types/enums/LocationScope';
+import Banner from '../components/Banner/Banner';
 
 function MyApp({ Component, pageProps }: AppProps) {
 	const [location, setLocation] = useState<LocationScope>(LocationScope.Melbourne);
@@ -20,6 +21,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 			<div className='app-wrapper'>
 				<Header location={location} />
 				<main><Component {...pageProps} /></main>
+				<Banner />
 				<Footer />
 			</div>
 		</>

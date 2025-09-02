@@ -27,6 +27,11 @@
 
             .faqs {
                 flex: 1;
+
+                p {
+                    margin-top: var(--spacing-05);
+                    font-weight: 100;
+                }
             }
 
             .siteMap {
@@ -40,6 +45,12 @@
             .info {
                 min-width: 300px;
                 padding-right: var(--spacing-02);
+                flex: 0;
+
+                p {
+                    margin-top: var(--spacing-05);
+                    font-weight: 100;
+                }
             }
 
             .siteMapLinks {

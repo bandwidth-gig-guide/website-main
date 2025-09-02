@@ -6,6 +6,8 @@ import SectionHeader from "../../components/SectionHeader/SectionHeader";
 import CardGrid from "../../components/CardGrid/CardGrid";
 import { CardGridType } from "../../types/enums/CardGridType";
 import FilterVenue from "../../components/Filter/FilterVenue/FilterVenue";
+import Hero from "../../components/Hero/Hero";
+
 
 const Venue = () => {
   const [venueIds, setVenueIds] = useState<uuid[]>([]);
@@ -18,6 +20,7 @@ const Venue = () => {
       </Head>
       
       <div>
+        <Hero />
         <SectionHeader title="Venues" />
         <FilterVenue setVenueIds={setVenueIds} />
         <CardGrid venueIds={venueIds} cardGridType={CardGridType.Grid} />

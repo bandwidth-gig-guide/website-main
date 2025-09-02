@@ -1,0 +1,17 @@
+.wrapper {
+    width: var(--spacing-app-max);
+    padding: var(--spacing-edge-desktop);
+    margin: var(--spacing-03) auto var(--spacing-07);
+
+    .banner {
+        width: 90%;
+        aspect-ratio: 32/9;
+        margin: auto;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+    }
+
+}

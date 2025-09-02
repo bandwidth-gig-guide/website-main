@@ -5,6 +5,8 @@ import SectionHeader from "../../components/SectionHeader/SectionHeader";
 import CardGrid from "../../components/CardGrid/CardGrid";
 import { CardGridType } from "../../types/enums/CardGridType";
 import FilterArtist from "../../components/Filter/FilterArtist/FilterArtist";
+import Hero from "../../components/Hero/Hero";
+
 
 const Artist = () => {
   const [artistIds, setArtistIds] = useState<uuid[]>([]);
@@ -17,6 +19,7 @@ const Artist = () => {
       </Head>
 
       <div>
+        <Hero />
         <SectionHeader title="Artists" />
         <FilterArtist setArtistIds={setArtistIds}/>
         <CardGrid artistIds={artistIds} cardGridType={CardGridType.Grid} />

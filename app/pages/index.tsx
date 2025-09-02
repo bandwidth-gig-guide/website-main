@@ -9,6 +9,7 @@ import camelcaseKeys from 'camelcase-keys';
 // Components
 import SectionHeader from "../components/SectionHeader/SectionHeader";
 import CardGrid from "../components/CardGrid/CardGrid";
+import Hero from "../components/Hero/Hero"
 
 // Config
 import apiUrl from '../api.config';
@@ -53,6 +54,8 @@ const Home = () => {
         <title>Bandwidth</title>
         <meta name="description" content="Welcome to my website" />
       </Head>
+
+      <Hero />
 
       <div style={{ marginBottom: 60 }}>
         <SectionHeader title='Events' route='/event' />
