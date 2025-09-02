@@ -1,0 +1,15 @@
+.wrapper {
+    width: 100%;
+    margin-bottom: var(--spacing-05);
+
+    .hero {
+        width: 100%;
+        aspect-ratio: 21/7;
+        margin: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+    }
+
+}

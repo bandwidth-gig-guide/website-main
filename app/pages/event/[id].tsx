@@ -58,7 +58,7 @@ const EventDetail = () => {
   
   const items = [
     `${formatDateLong(event.startDateTime)}`,
-    `${event.venue}`
+    `${event.venue.title} · ${event.venue.stageTitle}`
   ].filter(Boolean);
 
   // Return
