@@ -22,10 +22,13 @@ const Footer = () => {
 
 					<div className={styles.faqs}>
 						<h4>FAQs</h4>
+						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis illum ullam cum dolore officiis odit vel, quisquam quaerat voluptatum at fugit, illo nihil magni inventore! Doloribus officia sit repellat!</p>
 					</div>
 
 					<div className={styles.info}>
 						<h4>Bandwidth</h4>
+						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+						<p>Nemo nisi provident atque odit. Quam ea rerum fugit, veniam maiores officiis velit consequuntur laboriosam ipsam.</p>
 					</div>
 
 				</div>
