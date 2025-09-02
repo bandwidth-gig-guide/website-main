@@ -19,7 +19,6 @@ import styles from "../../styles/page.module.css"
 
 // Components
 import Carousel from "../../components/Carousel/Carousel"
-import Comments from "../../components/Comments/Comments";
 import Description from "../../components/Description/Description"
 import Embeds from "../../components/Embeds/Embeds";
 import FeatureHighlight from "../../components/FeatureHighlight/FeatureHighlight";
@@ -75,7 +74,6 @@ const ArtistDetail = () => {
         <UpcomingEvents eventIds={artist.upcomingEventIds} />
         <Socials socials={artist.socials} />
         <Embeds spotifyEmbedUrl={artist.spotifyEmbedUrl} youtubeEmbedUrl={artist.youtubeEmbedUrl} />
-        <Comments artistId={artist.artistId} />
       </div>
     </>
   );

@@ -22,7 +22,6 @@ import { formatDateLong } from "../../util/formatDateLong";
 
 // Components
 import Carousel from "../../components/Carousel/Carousel"
-import Comments from "../../components/Comments/Comments";
 import Description from "../../components/Description/Description"
 import FeatureHighlight from "../../components/FeatureHighlight/FeatureHighlight";
 import PageHeader from "../../components/PageHeader/PageHeader";
@@ -86,7 +85,6 @@ const EventDetail = () => {
           originalPostUrl={event.originalPostUrl} 
         />
         <Socials socials={event.socials} />
-        <Comments eventId={event.eventId} />
       </div>
     </>
   );
