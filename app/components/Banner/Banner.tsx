@@ -15,11 +15,13 @@ const Banner = () => {
   const randomColor = getRandomColor()
   return (
     <div className={styles.wrapper}>
-      <Link href="/">
-        <div className={styles.banner} style={{ background: randomColor }}>
-          Banner :)
-        </div>
-      </Link>
+      <div className={styles.innerWrapper}>
+        <Link href="/">
+          <div className={styles.banner} style={{ background: randomColor }}>
+            Banner
+          </div>
+        </Link>
+      </div>
     </div>
   )
 }

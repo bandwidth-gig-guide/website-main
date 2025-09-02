@@ -1,17 +1,25 @@
 .wrapper {
-    width: var(--spacing-app-max);
-    padding: var(--spacing-edge-desktop);
-    margin: var(--spacing-03) auto var(--spacing-07);
+    width: 100%;
+    padding: var(--spacing-08) 0;
+    background-color: var(--color-surface);
 
-    .banner {
-        width: 90%;
+    .innerWrapper {
+        max-width: var(--spacing-page-max);
+        width: 100%;
         aspect-ratio: 32/9;
         margin: auto;
-        cursor: pointer;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: white;
+
+        .banner {
+            color: white;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+        }
     }
+
+
 
 }
