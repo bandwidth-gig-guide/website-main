@@ -17,6 +17,9 @@ import { PageType } from "../../types/enums/PageType"
 // Styling
 import styles from "../../styles/page.module.css"
 
+// Utils
+import { formatDateLong } from "../../util/formatDateLong";
+
 // Components
 import Carousel from "../../components/Carousel/Carousel"
 import Comments from "../../components/Comments/Comments";
@@ -55,7 +58,7 @@ const EventDetail = () => {
   if (!event) return null;
   
   const items = [
-    `${event.startDateTime}`,
+    `${formatDateLong(event.startDateTime)}`,
     `${event.venue}`
   ].filter(Boolean);
 

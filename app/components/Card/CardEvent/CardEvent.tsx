@@ -6,6 +6,7 @@ import camelcaseKeys from 'camelcase-keys'
 import apiUrl from '../../../api.config'
 import CardBase from '../CardBase/CardBase'
 import CardLoading from '../CardLoading/CardLoading'
+import { formatDateShort } from '../../../util/formatDateShort'
 
 interface Props {
 	eventId: uuid
@@ -50,7 +51,7 @@ const CardEvent: React.FC<Props> = ({ eventId }) => {
 			<Link href={`/event/${eventId}`}>
 				<CardBase
 					topLeft={event.venueTitle}
-					topRight={`${event.startDateTime}`}
+					topRight={formatDateShort(event.startDateTime)}
 					title={event.title}
 					bottom={event.artistTitles.join(' · ')}
 					imgUrl={hasImage && event.imageUrl ? event.imageUrl : ''}

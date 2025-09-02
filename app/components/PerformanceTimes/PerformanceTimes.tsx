@@ -4,6 +4,7 @@ import { EventVenue } from '../../types/models/EventVenue';
 import Chip from "../Chip/Chip"
 import styles from './PerformanceTimes.module.css'
 import { PageType } from '../../types/enums/PageType';
+import { formatDateToTime } from '../../util/formatDateToTime';
 
 interface Props {
     eventPerformances: EventPerformance[];
@@ -12,15 +13,20 @@ interface Props {
 }
 
 const PerformanceTimes: React.FC<Props> = ({ eventPerformances = [], eventVenue, doorsTime}) => {
+
+  const sortedPerformances = [...eventPerformances].sort(
+    (a, b) => new Date(b.startDateTime).getTime() - new Date(a.startDateTime).getTime()
+  );
+
   return (
     <div className={styles.wrapper}>
 
-      {eventPerformances.map((performer, index) => (
+      {sortedPerformances.map((performer, index) => (
         <div className={styles.artistChip}>
           <Chip
             key={index}
             title={performer.title}
-            subtitle={`${index === 0 ? 'Headliner' : 'Support'} | ${performer.startDateTime}`}
+            subtitle={`${index === 0 ? 'Headliner' : 'Support'} | ${formatDateToTime(performer.startDateTime)}`}
             imageUrl={performer.imageUrl}
             pageType={PageType.Artist}
             id={performer.artistId}
@@ -32,7 +38,7 @@ const PerformanceTimes: React.FC<Props> = ({ eventPerformances = [], eventVenue,
       <div className={styles.venueChip}>
         <Chip
           title={eventVenue.title}
-          subtitle={`Venue | Doors at ${doorsTime}`}
+          subtitle={`Venue | Doors at ${formatDateToTime(doorsTime)}`}
           imageUrl={eventVenue.imageUrl}
           pageType={PageType.Venue}
           id={eventVenue.venueID}
