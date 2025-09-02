@@ -24,7 +24,10 @@ const Description: React.FC<Props> = ({ text = '', tags = [], types = [] }) => {
       {chips.length > 0 && 
         <div className={styles.chipsWrapper}>
           {chips.map((chip, index) => (
-            <span key={index} className={styles.chip}>{chip}</span>
+            <React.Fragment key={index}>
+              <span className={styles.chip}>{chip}</span>
+              {index < chips.length - 1 && <span className={styles.hyphen}> · </span>}
+            </React.Fragment>
           ))}
         </div>
       }
