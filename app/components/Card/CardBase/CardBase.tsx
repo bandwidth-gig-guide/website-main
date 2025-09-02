@@ -19,7 +19,7 @@ const CardBase: React.FC<Props> = ({ topLeft, topRight, title, bottom, imgUrl })
 			</div>
 			<p className={styles.top}>
 				<span>{topLeft}</span>
-				<span className={topRight == 'Featured' ? styles.featured : ''}>{topRight}</span>
+				<span>{topRight}</span>
 			</p>
 			<h4>{title}</h4>
 			<p className={styles.bottom}>{bottom}</p>
