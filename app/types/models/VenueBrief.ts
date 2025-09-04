@@ -4,7 +4,7 @@ export type VenueBrief = {
     city: string;
     streetAddress: string;
     stateCode: statecode;
-    postcode: number;
+    postCode: number;
     isFeatured: boolean;
     imageUrl?: url;
     upcomingEventCount: number;
