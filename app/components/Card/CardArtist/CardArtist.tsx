@@ -45,13 +45,23 @@ const CardArtist: React.FC<Props> = ({ artistId }) => {
 	if (isLoading) return <CardLoading />
 	if (isError) return <div>Error loading artist.</div>
 
+	let upcomingEventsString = ""
+	switch (artist.upcomingEvents) {
+		case 1:
+			upcomingEventsString = "1 Upcoming Event"
+			break
+		default:
+			upcomingEventsString = `${artist.upcomingEvents} Upcoming Events`
+			break
+	}
+
 	return (
 		<div>
 			<Link href={`/artist/${artistId}`}>
 				<CardBase
 					topLeft={`${artist.city}, ${artist.country}`}
 					title={artist.title}
-					bottom={`${artist.upcomingEvents} Upcoming Events`}
+					bottom={upcomingEventsString}
 					imgUrl={hasImage && artist.imageUrl ? artist.imageUrl : ''}
 				/>
 			</Link>
