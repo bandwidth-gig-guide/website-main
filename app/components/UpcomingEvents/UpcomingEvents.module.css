@@ -2,9 +2,9 @@
     padding: var(--spacing-06) 0;
 
     .disclaimerWrapper {
-
         border-left: 3px solid var(--color-accent);
         padding-left: var(--spacing-03);
+        margin-top: var(--spacing-05);
 
         p {
             color: var(--color-text-muted);
