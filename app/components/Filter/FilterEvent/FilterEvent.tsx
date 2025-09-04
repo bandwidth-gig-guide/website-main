@@ -30,10 +30,11 @@ const AVAILABLE_STATES= ['VIC', 'NSW'];
 
 
 interface FilterEventProps {
-	setEventIds: React.Dispatch<React.SetStateAction<uuid[]>>;
+	setEventIds?: React.Dispatch<React.SetStateAction<uuid[]>>;
+	setEventIdsByDate?: React.Dispatch<React.SetStateAction<Record<string, uuid[]>>>;
 }
 
-const FilterEvent: React.FC<FilterEventProps> = ({ setEventIds }) => {
+const FilterEvent: React.FC<FilterEventProps> = ({ setEventIds, setEventIdsByDate }) => {
 
 	// State
 	const [name, setName] = useState('');
@@ -80,12 +81,17 @@ const FilterEvent: React.FC<FilterEventProps> = ({ setEventIds }) => {
 				selectedDates.forEach(date => params.append('dates', date.toString()));
 				selectedTags.forEach(tag => params.append('tags', tag));
 
-				// Create Request
-				const url = `${apiUrl}/event${params.toString() ? `/?${params.toString()}` : ''}`;
+				if (setEventIds) {
+					const url = `${apiUrl}/event${params.toString() ? `/?${params.toString()}` : ''}`;
+					const response = await axios.get(url);
+					setEventIds(camelcaseKeys(response.data, { deep: true }));
+				}
 
-				// Send Request
-				const response = await axios.get(url);
-				setEventIds(camelcaseKeys(response.data, { deep: true }));
+				if (setEventIdsByDate) {
+					const url = `${apiUrl}/event/by-date${params.toString() ? `/?${params.toString()}` : ''}`;
+					const response = await axios.get(url);
+					setEventIdsByDate(camelcaseKeys(response.data, { deep: true }));
+				}
 
 			} catch (error) {
 				console.error('Error fetching Events:', error);
