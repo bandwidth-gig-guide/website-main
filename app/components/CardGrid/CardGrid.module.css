@@ -1,32 +1,62 @@
 .wrapper {
-    width: 100%;
-    margin: auto;
-    overflow-x: scroll;
-
-    .grid {
-        width: 100%;
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-        gap: var(--spacing-gap);
-    }
-
-    .flex {
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: var(--spacing-gap);
-    }
-
-    .row {
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: nowrap;
-        gap: var(--spacing-gap);
-        justify-content: left;
-    }
-
+  width: 100%;
+  margin: auto;
+  overflow: hidden;
+  position: relative;
 }
 
+.slider {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
 
+  scrollbar-width: none;
+}
+.slider::-webkit-scrollbar {
+  display: none;
+}
+
+.page {
+  width: 100%;
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: var(--spacing-gap);
+
+  margin-right: var(--spacing-gap);
+}
+.page:last-child {
+  margin-right: 0;
+}
+
+.dots {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 5;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  background-color: var(--color-surface-medium);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.dot:hover {
+background-color: color-mix(in srgb, var(--color-surface-medium) 90%, black 10%);
+}
+
+.dot.active {
+  background-color: var(--color-surface-dark);
+}
