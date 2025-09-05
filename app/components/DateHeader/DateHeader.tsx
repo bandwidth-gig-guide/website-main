@@ -6,6 +6,7 @@ const SectionHeader: React.FC<Props> = ({ date }) => {
 	return (
 			<div className={styles.wrapper}>
 				<div className={styles.titleWrapper}>
+						{/* <div className={styles.icon}></div> */}
 						<h2>{date}</h2>
 				</div>
 			</div>

@@ -6,12 +6,20 @@
     overflow: hidden;
 
     .titleWrapper {
-        padding-right: var(--spacing-06);
+        padding-right: var(--spacing-inline);
         display: flex;
         justify-content: center;
         align-items: center;
         z-index: 3;
         position: relative;
+
+        /* .icon {
+            width: 6px;
+            height: 6px;
+            background-color: var(--color-surface-medium);
+            border-radius: 2px;
+            margin-right: var(--spacing-03);
+        } */
 
         h2 {
             font-weight: 400;
