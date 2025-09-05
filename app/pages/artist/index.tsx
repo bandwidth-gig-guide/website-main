@@ -22,7 +22,7 @@ const Artist = () => {
         <Hero />
         <SectionHeader title="Artists" />
         <FilterArtist setArtistIds={setArtistIds}/>
-        <CardGrid artistIds={artistIds} cardGridType={CardGridType.Grid} />
+        <CardGrid artistIds={artistIds} cardGridType={CardGridType.Grid} isPaginated={true} limit={5}/>
       </div>
     </>
   );
