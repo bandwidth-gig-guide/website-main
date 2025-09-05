@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import styles from './Carousel.module.css';
 import { stringToHex } from '../../util/stringToHex';
 
@@ -8,57 +8,38 @@ interface Props {
 }
 
 const Carousel: React.FC<Props> = ({ imageUrls = [], title }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-  const next = () => {
-    setCurrentIndex((prev) => (prev + 1) % imageUrls.length);
-  };
+  // Track scroll position to update currentIndex
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
 
-  const prev = () => {
-    setCurrentIndex((prev) =>
-      prev === 0 ? imageUrls.length - 1 : prev - 1
-    );
-  };
+    const handleScroll = () => {
+      const newIndex = Math.round(
+        container.scrollLeft / container.offsetWidth
+      );
+      setCurrentIndex(newIndex);
+    };
 
-  // Swipe Detection
-  let startX = 0;
+    container.addEventListener('scroll', handleScroll, { passive: true });
+    return () => container.removeEventListener('scroll', handleScroll);
+  }, []);
 
-  const handleTouchStart = (e: React.TouchEvent) => {
-    startX = e.touches[0].clientX;
-  };
-
-  const handleTouchEnd = (e: React.TouchEvent) => {
-    const endX = e.changedTouches[0].clientX;
-    if (startX - endX > 50) next();
-    if (endX - startX > 50) prev();
-  };
-
-  const handleMouseDown = (e: React.MouseEvent) => {
-    startX = e.clientX;
-  };
-
-  const handleMouseUp = (e: React.MouseEvent) => {
-    const endX = e.clientX;
-    if (startX - endX > 50) next();
-    if (endX - startX > 50) prev();
+  const scrollToIndex = (index: number) => {
+    if (!containerRef.current) return;
+    containerRef.current.scrollTo({
+      left: index * containerRef.current.offsetWidth,
+      behavior: 'smooth',
+    });
   };
 
   return (
-    <div
-      className={styles.wrapper}
-      onTouchStart={handleTouchStart}
-      onTouchEnd={handleTouchEnd}
-      onMouseDown={handleMouseDown}
-      onMouseUp={handleMouseUp}
-    >
+    <div className={styles.wrapper}>
       {imageUrls.length > 0 ? (
         <>
-          <div
-            className={styles.slider}
-            style={{transform: `translateX(-${currentIndex * 100}%)`,}}
-            ref={containerRef}
-          >
+          <div className={styles.slider} ref={containerRef}>
             {imageUrls.map((url, index) => (
               <div key={index} className={styles.container}>
                 <div className={styles.imgWrapper}>
@@ -69,32 +50,18 @@ const Carousel: React.FC<Props> = ({ imageUrls = [], title }) => {
             ))}
           </div>
 
-            {/* If >1 image */}
-            {imageUrls.length > 1 && (
-              <>
-                {/* Nav Buttons */}
-                <button className={`${styles.control} ${styles.left}`} onClick={prev}>
-                  ‹
-                </button>
-                <button className={`${styles.control} ${styles.right}`} onClick={next}>
-                  ›
-                </button>
-
-                {/* Pagination Dots */}
-                <div className={styles.dots}>
-                  {imageUrls.map((_, index) => (
-                    <span
-                      key={index}
-                      className={`${styles.dot} ${currentIndex === index ? styles.active : ''}`}
-                      onClick={() => setCurrentIndex(index)}
-                    />
-                  ))}
-                </div>
-              </>
-            )}
+          {imageUrls.length > 1 && (
+            <div className={styles.dots}>
+              {imageUrls.map((_, index) => (
+                <span
+                  key={index}
+                  className={`${styles.dot} ${currentIndex === index ? styles.active : ''}`}
+                  onClick={() => scrollToIndex(index)}
+                />
+              ))}
+            </div>
+          )}
         </>
-
-      // If Not Images
       ) : (
         <div className={styles.container}>
           <div
