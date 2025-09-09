@@ -17,18 +17,43 @@ const Footer = () => {
 								</Link>
 							))}
 						</div>
-						
+
 					</div>
 
 					<div className={styles.faqs}>
 						<h4>FAQs</h4>
-						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis illum ullam cum dolore officiis odit vel, quisquam quaerat voluptatum at fugit, illo nihil magni inventore! Doloribus officia sit repellat!</p>
+						<div className={styles.accordion}>
+							<details>
+								<summary>What is Bandwidth?</summary>
+								<p>
+									Bandwidth is the definitive Melbourne Gig Guide website that let's you search for
+									upcoming events, local venues, and your favorite artists.
+								</p>
+							</details>
+							<details>
+								<summary>How do we decide which artists to include?</summary>
+								<p>
+									Artists are added to our database when they are first identified as performing a
+									gig at a venue in Melbourne. If your favorite artist isn't on the site yet, tell
+									them to start playing some gigs in Melbourne!
+								</p>
+							</details>
+							<details>
+								<summary>Why can't I see my favorite venue on here?</summary>
+								<p>
+									Gathering information takes time! The more venues we track, the long it takes each
+									week. We're growing slowly, and making sure to only add more venues when we're
+									confident that we can handle the load.
+								</p>
+							</details>
+						</div>
 					</div>
 
 					<div className={styles.info}>
 						<h4>Bandwidth</h4>
-						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-						<p>Nemo nisi provident atque odit. Quam ea rerum fugit, veniam maiores officiis velit consequuntur laboriosam ipsam.</p>
+						<p>
+							It's not janky, it's punk. If something doesn't work, it's a feature, not a bug.
+						</p>
 					</div>
 
 				</div>
@@ -38,7 +63,7 @@ const Footer = () => {
 						<img src="/facebook-white.svg" alt="Facebook" />
 						<img src="/instagram-white.svg" alt="Instagram" />
 						<img src="/discord-white.svg" alt="Discord" />
-						<img src="/github-white.svg" alt="GitHub"/>
+						<img src="/github-white.svg" alt="GitHub" />
 					</div>
 				</div>
 			</footer>

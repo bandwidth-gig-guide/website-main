@@ -10,7 +10,7 @@
 
     h4 {
         color: var(--color-text-light);
-        font-weight: 400;
+        font-weight: 300;
     }
 
     footer {
@@ -29,8 +29,45 @@
                 flex: 1;
 
                 p {
+                    font-weight: 200;
+                }
+
+                .accordion {
                     margin-top: var(--spacing-05);
-                    font-weight: 100;
+
+                    details {
+                        background: transparent;
+                        border-radius: 4px;
+                        margin-bottom: var(--spacing-02);
+                        border: none;
+                        overflow: hidden;
+                        transition: background 0.2s;
+                    }
+
+                    summary {
+                        cursor: pointer;
+                        padding: var(--spacing-02);
+                        font-weight: 200;
+                        opacity: .9;
+                        color: var(--color-text-light);
+                        outline: none;
+                        user-select: none;
+                        background: transparent;
+                        border-radius: 4px;
+                    }
+
+                    summary:hover, summary:focus {
+                        background-color: rgba(255,255,255,0.1);
+                    }
+
+                    p {
+                        padding: var(--spacing-02);
+                        color: var(--color-text-light);
+                        margin: 0;
+                        font-weight: 200;
+                        opacity: .6;
+                        background: transparent;
+                    }
                 }
             }
 
@@ -49,7 +86,8 @@
 
                 p {
                     margin-top: var(--spacing-05);
-                    font-weight: 100;
+                    font-weight: 200;
+                    opacity: .9;
                 }
             }
 
@@ -61,7 +99,8 @@
 
                 .link {
                     color: white;
-                    font-weight: 100;
+                    font-weight: 200;
+                    opacity: .9;
                     padding: var(--spacing-02);
                     border-radius: 4px;
                 }
