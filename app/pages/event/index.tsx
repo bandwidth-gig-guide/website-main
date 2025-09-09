@@ -7,7 +7,6 @@ import DateHeader from "../../components/DateHeader/DateHeader"
 import CardGrid from "../../components/CardGrid/CardGrid"
 import { CardGridType } from "../../types/enums/CardGridType"
 import FilterEvent from "../../components/Filter/FilterEvent/FilterEvent"
-import Hero from "../../components/Hero/Hero"
 import Button from "../../components/Button/Button"
 
 const DAYS_LOADED = 10;
@@ -50,7 +49,6 @@ const Event = () => {
       </Head>
 
       <div>
-        <Hero />
         <SectionHeader title="Events" />
         <FilterEvent setEventIdsByDate={setEventIdsByDate} />
 
