@@ -57,7 +57,7 @@ const Event = () => {
         {visibleDates.map(([date, ids]) => (
           <div key={date} style={{ marginBottom: "var(--spacing-05)" }}>
             <DateHeader date={formatDate(date)} />
-            <CardGrid eventIds={ids} cardGridType={CardGridType.Grid} />
+            <CardGrid eventIds={ids} cardGridType={CardGridType.Grid} limit={24} />
           </div>
         ))}
 

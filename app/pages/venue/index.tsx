@@ -23,7 +23,7 @@ const Venue = () => {
         <Hero />
         <SectionHeader title="Venues" />
         <FilterVenue setVenueIds={setVenueIds} />
-        <CardGrid venueIds={venueIds} cardGridType={CardGridType.Grid} isPaginated={true} limit={1}/>
+        <CardGrid venueIds={venueIds} cardGridType={CardGridType.Grid} isPaginated={true} limit={24}/>
       </div>
     </>
   );
