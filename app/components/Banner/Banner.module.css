@@ -8,6 +8,7 @@
         width: 100%;
         aspect-ratio: 32/9;
         margin: auto;
+        padding-inline: var(--spacing-edge-desktop);
 
         .banner {
             color: white;
