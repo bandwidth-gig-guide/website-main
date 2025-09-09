@@ -10,7 +10,7 @@ import FilterEvent from "../../components/Filter/FilterEvent/FilterEvent"
 import Hero from "../../components/Hero/Hero"
 import Button from "../../components/Button/Button"
 
-const DAYS_LOADED = 3;
+const DAYS_LOADED = 10;
 
 function formatDate(date: string): string {
   // date: "YYYYMMDD" (e.g. "20251002")
