@@ -52,7 +52,7 @@ const Footer = () => {
 					<div className={styles.info}>
 						<h4>Bandwidth</h4>
 						<p>
-							It's not janky, it's punk. If something doesn't work, it's a feature, not a bug.
+							It's not janky, it's punk.
 						</p>
 					</div>
 
