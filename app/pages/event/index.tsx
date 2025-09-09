@@ -7,10 +7,9 @@ import DateHeader from "../../components/DateHeader/DateHeader"
 import CardGrid from "../../components/CardGrid/CardGrid"
 import { CardGridType } from "../../types/enums/CardGridType"
 import FilterEvent from "../../components/Filter/FilterEvent/FilterEvent"
-import Hero from "../../components/Hero/Hero"
 import Button from "../../components/Button/Button"
 
-const DAYS_LOADED = 3;
+const DAYS_LOADED = 10;
 
 function formatDate(date: string): string {
   // date: "YYYYMMDD" (e.g. "20251002")
@@ -50,14 +49,13 @@ const Event = () => {
       </Head>
 
       <div>
-        <Hero />
         <SectionHeader title="Events" />
         <FilterEvent setEventIdsByDate={setEventIdsByDate} />
 
         {visibleDates.map(([date, ids]) => (
           <div key={date} style={{ marginBottom: "var(--spacing-05)" }}>
             <DateHeader date={formatDate(date)} />
-            <CardGrid eventIds={ids} cardGridType={CardGridType.Grid} />
+            <CardGrid eventIds={ids} cardGridType={CardGridType.Grid} limit={24} />
           </div>
         ))}
 

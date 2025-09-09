@@ -5,7 +5,6 @@ import SectionHeader from "../../components/SectionHeader/SectionHeader";
 import CardGrid from "../../components/CardGrid/CardGrid";
 import { CardGridType } from "../../types/enums/CardGridType";
 import FilterArtist from "../../components/Filter/FilterArtist/FilterArtist";
-import Hero from "../../components/Hero/Hero";
 
 
 const Artist = () => {
@@ -19,10 +18,9 @@ const Artist = () => {
       </Head>
 
       <div>
-        <Hero />
         <SectionHeader title="Artists" />
         <FilterArtist setArtistIds={setArtistIds}/>
-        <CardGrid artistIds={artistIds} cardGridType={CardGridType.Grid} isPaginated={true} limit={5}/>
+        <CardGrid artistIds={artistIds} cardGridType={CardGridType.Grid} isPaginated={true} limit={24}/>
       </div>
     </>
   );
