@@ -41,7 +41,7 @@ const PerformanceTimes: React.FC<Props> = ({ eventPerformances = [], eventVenue,
           subtitle={`Venue | Doors at ${formatDateToTime(doorsTime)}`}
           imageUrl={eventVenue.imageUrl}
           pageType={PageType.Venue}
-          id={eventVenue.venueID}
+          id={eventVenue.venueId}
         />
       </div>
     </div>
