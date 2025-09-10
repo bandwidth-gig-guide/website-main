@@ -10,6 +10,7 @@ import camelcaseKeys from 'camelcase-keys';
 import SectionHeader from "../components/SectionHeader/SectionHeader";
 import CardGrid from "../components/CardGrid/CardGrid";
 import Hero from "../components/Hero/Hero"
+import CardRow from "../components/CardRow/CardRow";
 
 // Config
 import apiUrl from '../api.config';
@@ -59,17 +60,17 @@ const Home = () => {
 
       <div style={{ marginBottom: 60 }}>
         <SectionHeader title='Events' route='/event' />
-        <CardGrid eventIds={events} cardGridType={CardGridType.Grid}/>
+        <CardRow eventIds={events} />
       </div>
       
       <div style={{ marginBottom: 60 }}>
         <SectionHeader title='Artists' route='/artist' />
-        <CardGrid  artistIds={artists} cardGridType={CardGridType.Grid}/>
+        <CardRow artistIds={artists} />
       </div>
 
       <div style={{ marginBottom: 60 }}>
         <SectionHeader title='Venues' route='/venue' />
-        <CardGrid  venueIds={venues} cardGridType={CardGridType.Grid}/>
+        <CardRow venueIds={venues} />
       </div>
       
     </>
