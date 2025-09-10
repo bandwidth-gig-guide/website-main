@@ -42,6 +42,8 @@ const VenueDetail = () => {
 
   // Get Venue Details
   useEffect(() => {
+    if (id === undefined) return;
+
     axios.get(`${apiUrl}/venue/${id}`)
       .then(response => { setVenue(camelcaseKeys(response.data, { deep: true }))})
       .catch(() => { setIsError(true)})
@@ -51,7 +53,7 @@ const VenueDetail = () => {
   useEffect(() => {
     if (isError) {
       // Display a snackbar.
-      router.push('/venue');
+      // router.push('/venue');
     }
   }, [isError]);
   

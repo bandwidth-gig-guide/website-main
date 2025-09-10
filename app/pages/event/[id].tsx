@@ -42,6 +42,8 @@ const EventDetail = () => {
 
   // Get Event Details
   useEffect(() => {
+    if (id === undefined) return;
+
     axios.get(`${apiUrl}/event/${id}`)
       .then(response => { setEvent(camelcaseKeys(response.data, { deep: true }))})
       .catch(() => { setIsError(true)})
@@ -51,7 +53,7 @@ const EventDetail = () => {
   useEffect(() => {
     if (isError) {
       // Display a snackbar.
-      router.push('/event');
+      // router.push('/event');
     }
   }, [isError]);
 

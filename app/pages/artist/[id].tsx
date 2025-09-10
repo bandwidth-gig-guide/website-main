@@ -40,6 +40,8 @@ const ArtistDetail = () => {
 
   // Get Artist Details
   useEffect(() => {
+    if (id === undefined) return;
+
     axios.get(`${apiUrl}/artist/${id}`)
          .then(response => { setArtist(camelcaseKeys(response.data, { deep: true }))})
          .catch(() => { setIsError(true)})
@@ -50,7 +52,7 @@ const ArtistDetail = () => {
   useEffect(() => {
     if (isError) {
       // Display a snackbar.
-      router.push('/Artist');
+      // router.push('/Artist');
     }
   }, [isError]);
 
