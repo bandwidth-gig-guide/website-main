@@ -1,0 +1,11 @@
+.wrapper {
+  width: 100%;
+  overflow-x: scroll;
+  padding-bottom: var(--spacing-04);
+}
+
+.internalWrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: var(--spacing-gap);
+}
