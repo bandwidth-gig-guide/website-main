@@ -13,7 +13,7 @@ interface Props {
 }
 
 const PerformanceTimes: React.FC<Props> = ({ title, subtitle, imageUrl, pageType, id }) => {
-  const route = pageType === PageType.Artist ? `/artist/${id}` : `/venue/${id}`;
+  const route = `/${pageType}/${id}`
 
   return (
       <Link href={route}>
