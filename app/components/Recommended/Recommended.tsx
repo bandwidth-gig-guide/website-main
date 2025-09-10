@@ -20,6 +20,8 @@ const Recommended: React.FC<Props> = ({ id, pageType }) => {
   const [ids, setIds] = useState<uuid[]>([]);
 
   useEffect(() => {
+    if (id === undefined || pageType === undefined) return;
+
     axios.get(`${apiUrl}/${pageType}/recommended/${id}`)
       .then(response => {setIds(response.data)})
   }, [id, pageType])
