@@ -28,6 +28,7 @@ import PageHeader from "../../components/PageHeader/PageHeader";
 import Socials from "../../components/Socials/Socials";
 import PerformanceTimes from "../../components/PerformanceTimes/PerformanceTimes";
 import Tickets from "../../components/Tickets/Tickets";
+import Recommended from "../../components/Recommended/Recommended";
 
 const EventDetail = () => {
 
@@ -74,17 +75,10 @@ const EventDetail = () => {
         <PageHeader title={event.title} pageType={PageType.Event} isFeatured={event.isFeatured}/>
         <FeatureHighlight items={items} />
         <Description text={event.description} types={event.types} tags={event.tags} />
-        <PerformanceTimes 
-          eventPerformances={event.performances} 
-          eventVenue={event.venue} 
-          doorsTime={event.startDateTime} 
-        />
-        <Tickets
-          prices={event.prices}
-          ticketSaleUrl={event.ticketSaleUrl}
-          originalPostUrl={event.originalPostUrl} 
-        />
+        <PerformanceTimes eventPerformances={event.performances} eventVenue={event.venue} doorsTime={event.startDateTime} />
+        <Tickets prices={event.prices} ticketSaleUrl={event.ticketSaleUrl} originalPostUrl={event.originalPostUrl} />
         <Socials socials={event.socials} />
+        <Recommended id={event.eventId} pageType={PageType.Event} />
       </div>
     </>
   );

@@ -27,6 +27,7 @@ import Socials from "../../components/Socials/Socials";
 import UpcomingEvents from "../../components/UpcomingEvents/UpcomingEvents";
 import VenueLocation from "../../components/VenueLocation/VenueLocation";
 import { formatLocation } from "../../util/formatLocation";
+import Recommended from "../../components/Recommended/Recommended";
 
 
 const VenueDetail = () => {
@@ -80,6 +81,8 @@ const VenueDetail = () => {
         />
         <UpcomingEvents eventIds={venue.upcomingEventIds} />
         <Socials socials={venue.socials} />
+        <Recommended id={venue.venueId} pageType={PageType.Venue} />
+
       </div>
     </>
   );

@@ -25,6 +25,7 @@ import FeatureHighlight from "../../components/FeatureHighlight/FeatureHighlight
 import PageHeader from "../../components/PageHeader/PageHeader";
 import Socials from "../../components/Socials/Socials";
 import UpcomingEvents from "../../components/UpcomingEvents/UpcomingEvents";
+import Recommended from "../../components/Recommended/Recommended";
 
 
 const ArtistDetail = () => {
@@ -74,6 +75,7 @@ const ArtistDetail = () => {
         <UpcomingEvents eventIds={artist.upcomingEventIds} />
         <Socials socials={artist.socials} />
         <Embeds spotifyEmbedUrl={artist.spotifyEmbedUrl} youtubeEmbedUrl={artist.youtubeEmbedUrl} />
+        <Recommended id={artist.artistId} pageType={PageType.Artist} />
       </div>
     </>
   );
