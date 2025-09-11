@@ -18,7 +18,7 @@ export function formatOpeningHours(opening: string, closing: string): string {
     };
 
     const openingFormatted = formatTime(opening);
-    let closingFormatted = closing === '23:59:59' ? 'late' : formatTime(closing);
+    let closingFormatted = closing === '23:59:00' ? 'late' : formatTime(closing);
 
     return `${openingFormatted} - ${closingFormatted}`;
 }
