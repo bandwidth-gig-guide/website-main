@@ -24,7 +24,7 @@
         gap: var(--spacing-03);
     }
 
-    .isFeatured {
+    .accentColor {
         color: var(--color-accent);
     }
 }
