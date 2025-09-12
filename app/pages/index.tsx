@@ -11,6 +11,7 @@ import SectionHeader from "../components/SectionHeader/SectionHeader";
 import CardGrid from "../components/CardGrid/CardGrid";
 import Hero from "../components/Hero/Hero"
 import CardRow from "../components/CardRow/CardRow";
+import EmbedsLocalScene from "../components/Embeds/EmbedsLocalScene";
 
 // Config
 import apiUrl from '../api.config';
@@ -72,6 +73,8 @@ const Home = () => {
         <SectionHeader title='Venues' route='/venue' />
         <CardRow venueIds={venues} />
       </div>
+
+      <EmbedsLocalScene />
       
     </>
   );
