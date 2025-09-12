@@ -27,7 +27,7 @@ const Hero = () => {
         Hero
       </div>
       <a className={styles.artist} href={artwork.artistCompanyUrl} target='_blank'>
-        <p><strong>{artwork.artistName}</strong></p>
+        <p><strong>Artwork by {artwork.artistName}</strong></p>
         <p><em>{artwork.artistCompany}, {artwork.artistLocation}</em></p>
       </a>
     </div>
