@@ -59,17 +59,17 @@ const Home = () => {
 
       <Hero />
 
-      <div style={{ marginBottom: 60 }}>
+      <div style={{ marginBottom: 20, marginTop: 40 }}>
         <SectionHeader title='Events' route='/event' />
         <CardRow eventIds={events} />
       </div>
       
-      <div style={{ marginBottom: 60 }}>
+      <div style={{ marginBottom: 20 }}>
         <SectionHeader title='Artists' route='/artist' />
         <CardRow artistIds={artists} />
       </div>
 
-      <div style={{ marginBottom: 60 }}>
+      <div>
         <SectionHeader title='Venues' route='/venue' />
         <CardRow venueIds={venues} />
       </div>
