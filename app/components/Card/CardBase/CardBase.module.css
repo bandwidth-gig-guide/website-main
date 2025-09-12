@@ -21,6 +21,7 @@
             font-size: var(--font-size-02);
             font-weight: 600;
             margin: 16px;
+            text-align: center;
         }
 
         img {
