@@ -17,6 +17,8 @@
         width: 100%;
         height: 100%;
         max-width: var(--spacing-app-max);
+        padding: 0 var(--spacing-edge-desktop);
+
 
         .top {
             display: flex;
