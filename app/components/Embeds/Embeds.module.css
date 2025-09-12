@@ -42,3 +42,31 @@
 .activeDot {
 	background-color: var(--color-surface-dark);
 }
+
+.creator {
+	display: block;
+	flex-direction: column;
+	align-items: right;
+	justify-content: right;
+	width: fit-content;
+	margin-left: auto;
+	margin-top: 8px;
+
+	p {
+		text-align: right;
+		display: flex;
+		flex-direction: column;
+		gap: 0px;
+
+		strong {
+			font-weight: 600;
+			font-size: 14px;
+		}
+
+		em {
+			font-style: italic;
+			color: var(--color-text-muted);
+			font-size: 12px;
+		}
+	}
+}
