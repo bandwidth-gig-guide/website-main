@@ -10,13 +10,26 @@ function getRandomColor() {
   return color
 }
 
+const artwork = {
+  artwork_21_7: "",
+  artwork_24_36: "", 
+  artistName: "Marilyn Monroe",
+  artistCompany: "Freelance Graphic Designer",
+  artistCompanyUrl: "https://google.com",
+  artistLocation: "Melbourne"
+};
+
 const Hero = () => {
   const randomColor = getRandomColor()
   return (
     <div className={styles.wrapper}>
-        <div className={styles.hero} style={{ background: randomColor }}>
-          Hero
-        </div>
+      <div className={styles.artwork} style={{ background: randomColor }}>
+        Hero
+      </div>
+      <a className={styles.artist} href={artwork.artistCompanyUrl} target='_blank'>
+        <p><strong>{artwork.artistName}</strong></p>
+        <p><em>{artwork.artistCompany}, {artwork.artistLocation}</em></p>
+      </a>
     </div>
   )
 }
