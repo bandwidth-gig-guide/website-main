@@ -10,12 +10,15 @@
 	scroll-snap-type: x mandatory;
 	scroll-behavior: smooth;
 	gap: var(--spacing-04);
-	scrollbar-width: none; /* Firefox */
-	-ms-overflow-style: none;  /* IE and Edge */
+	scrollbar-width: none;
+	/* Firefox */
+	-ms-overflow-style: none;
+	/* IE and Edge */
 }
 
 .embedContainer::-webkit-scrollbar {
-	display: none; /* Chrome, Safari, Opera */
+	display: none;
+	/* Chrome, Safari, Opera */
 }
 
 .embedItem {
@@ -51,6 +54,8 @@
 	width: fit-content;
 	margin-left: auto;
 	margin-top: 8px;
+	padding-right: 8px;
+	border-right: 2px solid var(--color-muted);
 
 	p {
 		text-align: right;
