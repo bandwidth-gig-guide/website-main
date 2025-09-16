@@ -33,9 +33,9 @@ const Home = () => {
         const response = await axios.get(url);
 
         switch (type) {
-          case 'event': setEvents(camelcaseKeys(response.data, { deep: true })); break;
-          case 'artist': setArtists(camelcaseKeys(response.data, { deep: true })); break;
-          case 'venue': setVenues(camelcaseKeys(response.data, { deep: true })); break;
+            case 'event': setEvents(camelcaseKeys(response.data, { deep: true }).slice(0, 24)); break;
+            case 'artist': setArtists(camelcaseKeys(response.data, { deep: true }).slice(0, 24)); break;
+            case 'venue': setVenues(camelcaseKeys(response.data, { deep: true }).slice(0, 24)); break;
           default: break;
         }
       } catch (error) {
@@ -61,17 +61,17 @@ const Home = () => {
 
       <div style={{ marginBottom: 20, marginTop: 40 }}>
         <SectionHeader title='Events' route='/event' />
-        <CardRow eventIds={events} />
+        <CardGrid eventIds={events} limit={8} isPaginated={true}/>
       </div>
       
       <div style={{ marginBottom: 20 }}>
         <SectionHeader title='Artists' route='/artist' />
-        <CardRow artistIds={artists} />
+        <CardGrid artistIds={artists} limit={8} isPaginated={true}/>
       </div>
 
       <div>
         <SectionHeader title='Venues' route='/venue' />
-        <CardRow venueIds={venues} />
+        <CardGrid venueIds={venues} limit={8} isPaginated={true}/>
       </div>
 
       <EmbedsLocalScene />
