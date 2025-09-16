@@ -58,9 +58,16 @@ const EventDetail = () => {
   }, [isError]);
 
   if (!event) return null;
-  
+
+  const prices = event.prices?.map(price => `${price.ticketType} $${price.price}`).join(" · ") || "";
+  const dateTimeLocation = `${formatDateLong(event.startDateTime)} · ${event.venue.title}`;
+
+  const minPrice = event.prices && event.prices.length > 0
+    ? Math.min(...event.prices.map(price => price.price))
+    : null;
+
   const items = [
-    `${formatDateLong(event.startDateTime)}`,
+    prices,
     `${event.venue.title} · ${event.venue.stageTitle}`
   ].filter(Boolean);
 
@@ -74,11 +81,9 @@ const EventDetail = () => {
 
       <div className={styles.pageWrapper}>
         <Carousel imageUrls={event.imageUrls} title={event.title}/>
-        <PageHeader title={event.title} pageType={PageType.Event} isFeatured={event.isFeatured}/>
-        <FeatureHighlight items={items} />
-        <Description text={event.description} types={event.types} tags={event.tags} />
+        <PageHeader title={event.title} subtitle={dateTimeLocation} pageType={PageType.Event} isFeatured={event.isFeatured} getTicketsUrl={event.ticketSaleUrl} minTicketPrice={minPrice}/>
         <PerformanceTimes eventPerformances={event.performances} eventVenue={event.venue} doorsTime={event.startDateTime} />
-        <Tickets prices={event.prices} ticketSaleUrl={event.ticketSaleUrl} originalPostUrl={event.originalPostUrl} />
+        <Description text={event.description} types={event.types} tags={event.tags} />
         <Socials socials={event.socials} />
         <Recommended id={event.eventId} pageType={PageType.Event} />
       </div>
