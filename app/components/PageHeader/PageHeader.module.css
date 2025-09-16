@@ -10,18 +10,47 @@
 
     p {
         font-weight: 400;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
     }
 
     img {
         height: 20px;
         object-fit: contain;
+        margin-right: var(--spacing-03);
+
+    }
+
+    .middleRow {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: var(--spacing-06);
+
+        button {
+            padding: 12px;
+            margin-top: 4px;
+            min-width: 280px;
+            background-color: var(--color-accent);
+            color: #fff;
+            border-radius: 80px;
+            border: none;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+
+            &:hover {
+                background-color: var(--color-accent-dark);
+            }
+        }
     }
 
     .bottomRow {
         display: flex;
         flex-direction: row;
         align-items: center;
-        gap: var(--spacing-03);
     }
 
     .accentColor {
