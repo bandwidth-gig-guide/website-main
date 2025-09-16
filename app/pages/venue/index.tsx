@@ -7,6 +7,8 @@ import CardGrid from "../../components/CardGrid/CardGrid";
 import { CardGridType } from "../../types/enums/CardGridType";
 import FilterVenue from "../../components/Filter/FilterVenue/FilterVenue";
 import CityMap from "../../components/CityMap/CityMap";
+import Hero from "../../components/Hero/Hero"
+
 
 
 const Venue = () => {
@@ -20,7 +22,8 @@ const Venue = () => {
       </Head>
       
       <div>
-        <SectionHeader title="Venues" />
+        <Hero />
+        <SectionHeader title="Search Venues" />
         <FilterVenue setVenueIds={setVenueIds} />
         <CardGrid venueIds={venueIds} cardGridType={CardGridType.Grid} isPaginated={true} limit={24}/>
         <CityMap />

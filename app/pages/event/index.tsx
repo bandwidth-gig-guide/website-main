@@ -8,6 +8,7 @@ import CardGrid from "../../components/CardGrid/CardGrid"
 import { CardGridType } from "../../types/enums/CardGridType"
 import FilterEvent from "../../components/Filter/FilterEvent/FilterEvent"
 import Button from "../../components/Button/Button"
+import Hero from "../../components/Hero/Hero"
 
 const DAYS_LOADED = 10;
 
@@ -49,13 +50,14 @@ const Event = () => {
       </Head>
 
       <div>
-        <SectionHeader title="Events" />
+        <Hero />
+        <SectionHeader title="Search Events" />
         <FilterEvent setEventIdsByDate={setEventIdsByDate} />
 
         {visibleDates.map(([date, ids]) => (
           <div key={date} style={{ marginBottom: "var(--spacing-05)" }}>
             <DateHeader date={formatDate(date)} />
-            <CardGrid eventIds={ids} cardGridType={CardGridType.Grid} limit={24} />
+            <CardGrid eventIds={ids} cardGridType={CardGridType.Grid} limit={8} isPaginated={true}/>
           </div>
         ))}
 
