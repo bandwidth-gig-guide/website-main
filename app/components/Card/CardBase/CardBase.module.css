@@ -1,7 +1,7 @@
 .wrapper {
     width: 100%;
     min-width: 320px;
-    max-width: 320px;
+    max-width: 360px;
     flex: 1;
     border-radius: 8px;
 
