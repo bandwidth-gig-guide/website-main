@@ -25,17 +25,17 @@ const Tickets: React.FC<Props> = ({ prices, ticketSaleUrl, originalPostUrl }) =>
                 <p className={styles.ticketType}>{price.ticketType}</p>
                 <p className={styles.price}>{formatTicketPrice(price)}</p>
               </li>
-              <div className={styles.spacer} />
+              {/* <div className={styles.spacer} /> */}
             </>
           ))}
         </ul>
-             <p className={styles.disclaimer}>
+        {/* <p className={styles.disclaimer}>
         * This event may be 18+. Information presented on this page may be false or outdated.
         Always check with the <a href={originalPostUrl}>official listing</a> before purchasing
         tickets for any event.
-      </p>
+      </p> */}
       </div>
- 
+
     </div>
   )
 }
