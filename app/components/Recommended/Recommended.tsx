@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Recommended.module.css'
 import SectionHeader from '../SectionHeader/SectionHeader';
-import CardRow from "../CardRow/CardRow";
+import CardGrid from "../CardGrid/CardGrid";
 import { PageType } from '../../types/enums/PageType';
 
 // External
@@ -28,9 +28,9 @@ const Recommended: React.FC<Props> = ({ id, pageType }) => {
   return (
     <div className={styles.wrapper}>
       <SectionHeader title='You May Also Like' />
-      {pageType == PageType.Artist && <CardRow artistIds={ids} />}
-      {pageType == PageType.Event && <CardRow eventIds={ids} />}
-      {pageType == PageType.Venue && <CardRow venueIds={ids} />}
+      {pageType == PageType.Artist && <CardGrid artistIds={ids} limit={8}/>}
+      {pageType == PageType.Event && <CardGrid eventIds={ids} limit={8}/>}
+      {pageType == PageType.Venue && <CardGrid venueIds={ids} limit={8}/>}
       
     </div>
   );
