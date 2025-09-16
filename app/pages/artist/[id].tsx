@@ -56,6 +56,8 @@ const ArtistDetail = () => {
     }
   }, [isError]);
 
+  const subtitle = `${artist.city}${artist.country ? `, ${artist.country}` : ""} · ${artist.yearFounded ? `Founded ${artist.yearFounded}` : ""}` 
+
   const items = [
     `${artist.city}${artist.country ? `, ${artist.country}` : ""}`,
     artist.yearFounded ? `Founded ${artist.yearFounded}` : ""
@@ -71,12 +73,12 @@ const ArtistDetail = () => {
 
       <div className={styles.pageWrapper}>
         <Carousel imageUrls={artist.imageUrls} title={artist.title}/>
-        <PageHeader title={artist.title} pageType={PageType.Artist} isFeatured={artist.isFeatured}/>
+        <PageHeader title={artist.title} subtitle={subtitle} pageType={PageType.Artist} isFeatured={artist.isFeatured}/>
         <FeatureHighlight items={items} />
         <Description text={artist.description} types={artist.types} tags={artist.tags} />
+        <Embeds spotifyEmbedUrl={artist.spotifyEmbedUrl} youtubeEmbedUrl={artist.youtubeEmbedUrl} />
         <UpcomingEvents eventIds={artist.upcomingEventIds} />
         <Socials socials={artist.socials} />
-        <Embeds spotifyEmbedUrl={artist.spotifyEmbedUrl} youtubeEmbedUrl={artist.youtubeEmbedUrl} />
         <Recommended id={artist.artistId} pageType={PageType.Artist} />
       </div>
     </>
