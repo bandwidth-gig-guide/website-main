@@ -25,9 +25,10 @@
   scroll-snap-align: start;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  min-height: 0;
   gap: var(--spacing-gap);
-
   margin-right: var(--spacing-gap);
+  margin-bottom: var(--spacing-gap);
 }
 .page:last-child {
   margin-right: 0;
