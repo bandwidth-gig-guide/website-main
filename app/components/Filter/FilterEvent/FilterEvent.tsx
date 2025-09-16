@@ -12,7 +12,6 @@ import camelcaseKeys from 'camelcase-keys';
 import apiUrl from '../../../api.config';
 
 // Constants
-import { EVENT_TYPES } from '../../../constants/eventTypes';
 import { TAGS } from '../../../constants/tags';
 import {
 	FILTER_TAGS_KEY,
@@ -26,8 +25,6 @@ import {
 
 // TODO: Retrieve from db.
 const AVAILABLE_CITIES = ['Melbourne', 'Collingwood', 'Brisbane'];
-const AVAILABLE_STATES= ['VIC', 'NSW'];
-
 
 interface FilterEventProps {
 	setEventIds?: React.Dispatch<React.SetStateAction<uuid[]>>;
@@ -143,20 +140,6 @@ const FilterEvent: React.FC<FilterEventProps> = ({ setEventIds, setEventIdsByDat
 		localStorage.removeItem(FILTER_TAGS_KEY);
 	};
 
-	// Handles selection / deselection of type
-	const handleTypeChange = (type: string) => {
-		setSelectedTypes(prev =>
-			prev.includes(type) ? prev.filter(t => t !== type) : [...prev, type]
-		);
-	};
-	
-	// Handles selection / deselection of tag
-	const handleCityChange = (city: string) => {
-		setSelectedCities(prev =>
-			prev.includes(city) ? prev.filter(c => c !== city) : [...prev, city]
-		);
-	};
-
 	// Handles selection / deselection of tag
 	const handleTagChange = (tag: string) => {
 		setSelectedTags(prev =>
@@ -164,6 +147,12 @@ const FilterEvent: React.FC<FilterEventProps> = ({ setEventIds, setEventIdsByDat
 		);
 	};
 
+	// Handles selection / deselection of tag
+	const handleCityChange = (city: string) => {
+		setSelectedCities(prev =>
+			prev.includes(city) ? prev.filter(c => c !== city) : [...prev, city]
+		);
+	};
 
 	return (
 		<div className={styles.wrapper}>
@@ -176,14 +165,6 @@ const FilterEvent: React.FC<FilterEventProps> = ({ setEventIds, setEventIdsByDat
 					value={name}
 					onChange={e => setName(e.target.value)}
 				/>
-
-				{/* State Code */}
-				<select value={stateCode} onChange={e => setStateCode(e.target.value)}>
-					<option value="">Australia Wide</option>
-					{AVAILABLE_STATES.map(c => (
-						<option key={c} value={c}>{c}</option>
-					))}
-				</select>
 
 				{/* Reset */}
 				<div
@@ -218,19 +199,6 @@ const FilterEvent: React.FC<FilterEventProps> = ({ setEventIds, setEventIdsByDat
 						className={`${styles.chip} ${selectedCities.includes(city) ? styles.active : ''}`}
 					>
 						{city}
-					</button>
-				))}
-			</div>
-
-			{/* Types */}
-			<div className={styles.chipContainer}>
-				{EVENT_TYPES.map(type => (
-					<button
-						key={type}
-						onClick={() => handleTypeChange(type)}
-						className={`${styles.chip} ${selectedTypes.includes(type) ? styles.active : ''}`}
-					>
-						{type}
 					</button>
 				))}
 			</div>

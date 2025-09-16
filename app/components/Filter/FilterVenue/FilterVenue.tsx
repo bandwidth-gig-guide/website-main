@@ -12,19 +12,13 @@ import camelcaseKeys from 'camelcase-keys';
 import apiUrl from '../../../api.config';
 
 // Constants
-import { VENUE_TYPES } from '../../../constants/venueTypes';
-import { TAGS } from '../../../constants/tags';
 import {
-	FILTER_TAGS_KEY,
 	FILTER_VENUE_NAME_KEY,
-	FILTER_VENUE_STATECODE_KEY,
 	FILTER_VENUE_CITY_KEY,
-	FILTER_VENUE_TYPE_KEY,
 } from '../../../constants/localstorage';
 
 // TODO: Retrieve from db.
-const AVAILABLE_CITIES = ['Melbourne', 'Collingwood', 'Brisbane'];
-const AVAILABLE_STATES= ['VIC', 'NSW'];
+const AVAILABLE_CITIES = ['Melbourne', 'Collingwood', 'butt', 'Brisbane'];
 
 
 interface FilterVenueProps {
@@ -35,10 +29,8 @@ const FilterVenue: React.FC<FilterVenueProps> = ({ setVenueIds }) => {
 
 	// State
 	const [name, setName] = useState('');
-	const [stateCode, setStateCode] = useState('');
 	const [selectedCities, setSelectedCities] = useState<string[]>([]);
-	const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
-	const [selectedTags, setSelectedTags] = useState<string[]>([]);
+	const [hasUpcomingEvent, setHasUpcomingEvent] = useState<boolean>(false);
 	const [filtersActive, setFiltersActive] = useState(false);
 	const [filtersLoaded, setFiltersLoaded] = useState(false);
 
@@ -46,10 +38,7 @@ const FilterVenue: React.FC<FilterVenueProps> = ({ setVenueIds }) => {
 	// Load filters from localStorage on mount
 	useEffect(() => {
 		setName(localStorage.getItem(FILTER_VENUE_NAME_KEY) || '');
-		setStateCode(localStorage.getItem(FILTER_VENUE_STATECODE_KEY) || '');
 		setSelectedCities(JSON.parse(localStorage.getItem(FILTER_VENUE_CITY_KEY) || '[]'));
-		setSelectedTypes(JSON.parse(localStorage.getItem(FILTER_VENUE_TYPE_KEY) || '[]'));
-		setSelectedTags(JSON.parse(localStorage.getItem(FILTER_TAGS_KEY) || '[]'));
 
 		setFiltersLoaded(true); 
 	}, []);
@@ -67,10 +56,7 @@ const FilterVenue: React.FC<FilterVenueProps> = ({ setVenueIds }) => {
 
 				// Check params
 				if (name) params.append('name', name);
-				if (stateCode) params.append('stateCode', stateCode);
 				selectedCities.forEach(city => params.append('city', city));
-				selectedTypes.forEach(type => params.append('types', type));
-				selectedTags.forEach(tag => params.append('tags', tag));
 
 				// Create Request
 				const url = `${apiUrl}/venue${params.toString() ? `/?${params.toString()}` : ''}`;
@@ -86,62 +72,35 @@ const FilterVenue: React.FC<FilterVenueProps> = ({ setVenueIds }) => {
 
 		// Save filters so that they persist
 		localStorage.setItem(FILTER_VENUE_NAME_KEY, name);
-		localStorage.setItem(FILTER_VENUE_STATECODE_KEY, stateCode);
 		localStorage.setItem(FILTER_VENUE_CITY_KEY, JSON.stringify(selectedCities));
-		localStorage.setItem(FILTER_VENUE_TYPE_KEY, JSON.stringify(selectedTypes));
-		localStorage.setItem(FILTER_TAGS_KEY, JSON.stringify(selectedTags));
 
 		fetchVenues();
 
-	}, [name, stateCode, selectedCities, selectedTypes, selectedTags]);
+	}, [name, selectedCities]);
 
 	// Check if filters are being applied
 	useEffect(() => {
 		setFiltersActive(
 			name !== '' ||
-			stateCode !== '' ||
-			selectedCities.length > 0 ||
-			selectedTypes.length > 0 ||
-			selectedTags.length > 0
+			selectedCities.length > 0
 		);
-	}, [name, stateCode, selectedCities, selectedTypes, selectedTags]);
+	}, [name, selectedCities]);
 
 	// Clear all filters
 	const resetFilters = () => {
 		setName('');
-		setStateCode('');
 		setSelectedCities([]);
-		setSelectedTypes([]);
-		setSelectedTags([]);
 
 		localStorage.removeItem(FILTER_VENUE_NAME_KEY);
-		localStorage.removeItem(FILTER_VENUE_STATECODE_KEY);
 		localStorage.removeItem(FILTER_VENUE_CITY_KEY);
-		localStorage.removeItem(FILTER_VENUE_TYPE_KEY);
-		localStorage.removeItem(FILTER_TAGS_KEY);
 	};
 
-	// Handles selection / deselection of type
-	const handleTypeChange = (type: string) => {
-		setSelectedTypes(prev =>
-			prev.includes(type) ? prev.filter(t => t !== type) : [...prev, type]
-		);
-	};
-	
 	// Handles selection / deselection of tag
 	const handleCityChange = (city: string) => {
 		setSelectedCities(prev =>
 			prev.includes(city) ? prev.filter(c => c !== city) : [...prev, city]
 		);
 	};
-
-	// Handles selection / deselection of tag
-	const handleTagChange = (tag: string) => {
-		setSelectedTags(prev =>
-			prev.includes(tag) ? prev.filter(t => t !== tag) : [...prev, tag]
-		);
-	};
-
 
 	return (
 		<div className={styles.wrapper}>
@@ -155,13 +114,14 @@ const FilterVenue: React.FC<FilterVenueProps> = ({ setVenueIds }) => {
 					onChange={e => setName(e.target.value)}
 				/>
 
-				{/* State Code */}
-				<select value={stateCode} onChange={e => setStateCode(e.target.value)}>
-					<option value="">Australia Wide</option>
-					{AVAILABLE_STATES.map(c => (
-						<option key={c} value={c}>{c}</option>
-					))}
-				</select>
+				{/* Monitored by Bandwidth */}
+				<button
+					type="button"
+					className={`${styles.chip} ${hasUpcomingEvent ? styles.active : ''}`}
+					onClick={() => setHasUpcomingEvent(prev => !prev)}
+				>
+					Monitored by Bandwidth
+				</button>
 
 				{/* Reset */}
 				<div
@@ -174,19 +134,6 @@ const FilterVenue: React.FC<FilterVenueProps> = ({ setVenueIds }) => {
 
 			</div>
 
-			{/* Tags */}
-			<div className={styles.chipContainer}>
-				{TAGS.map(tag => (
-					<button
-						key={tag}
-						onClick={() => handleTagChange(tag)}
-						className={`${styles.chip} ${selectedTags.includes(tag) ? styles.active : ''}`}
-					>
-						{tag}
-					</button>
-				))}
-			</div>
-
 			{/* Cities */}
 			<div className={styles.chipContainer}>
 				{AVAILABLE_CITIES.map(city => (
@@ -196,19 +143,6 @@ const FilterVenue: React.FC<FilterVenueProps> = ({ setVenueIds }) => {
 						className={`${styles.chip} ${selectedCities.includes(city) ? styles.active : ''}`}
 					>
 						{city}
-					</button>
-				))}
-			</div>
-
-			{/* Types */}
-			<div className={styles.chipContainer}>
-				{VENUE_TYPES.map(type => (
-					<button
-						key={type}
-						onClick={() => handleTypeChange(type)}
-						className={`${styles.chip} ${selectedTypes.includes(type) ? styles.active : ''}`}
-					>
-						{type}
 					</button>
 				))}
 			</div>
