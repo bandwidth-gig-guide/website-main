@@ -52,6 +52,7 @@ const CardVenue: React.FC<Props> = ({ venueId }) => {
 	switch (venue.upcomingEventCount) {
 		case 0:
 			upcomingEventsString = ""
+			break
 		case 1:
 			upcomingEventsString = "1 Upcoming Event"
 			break
