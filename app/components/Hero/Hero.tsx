@@ -2,10 +2,10 @@ import React from 'react';
 import styles from "./Hero.module.css";
 
 const artwork = {
-  artwork_21_7: "./heros/0001-21-7.svg",
+  artwork_21_7: "./heros/0001-21x7.png",
   artwork_24_36: "", 
   artistName: "Matthew Cross",
-  artistCompany: "Bandwidth",
+  artistCompany: "Freelance Graphic Designer",
   artistCompanyUrl: "http://localhost/about",
   artistLocation: "Melbourne"
 };
