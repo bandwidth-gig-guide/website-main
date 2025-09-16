@@ -17,10 +17,6 @@ import {
 	FILTER_VENUE_CITY_KEY,
 } from '../../../constants/localstorage';
 
-// TODO: Retrieve from db.
-const AVAILABLE_CITIES = ['Melbourne', 'Collingwood', 'butt', 'Brisbane'];
-
-
 interface FilterVenueProps {
 	setVenueIds: React.Dispatch<React.SetStateAction<uuid[]>>;
 }
@@ -29,6 +25,7 @@ const FilterVenue: React.FC<FilterVenueProps> = ({ setVenueIds }) => {
 
 	// State
 	const [name, setName] = useState('');
+	const [selectableCities, setSelectableCities] = useState<string[]>([]);
 	const [selectedCities, setSelectedCities] = useState<string[]>([]);
 	const [hasUpcomingEvent, setHasUpcomingEvent] = useState<boolean>(false);
 	const [filtersActive, setFiltersActive] = useState(false);
@@ -41,6 +38,21 @@ const FilterVenue: React.FC<FilterVenueProps> = ({ setVenueIds }) => {
 		setSelectedCities(JSON.parse(localStorage.getItem(FILTER_VENUE_CITY_KEY) || '[]'));
 
 		setFiltersLoaded(true); 
+	}, []);
+
+	// Load selectable cities on mount
+	useEffect(() => {
+		const fetchCities = async () => {
+			try {
+				const url = `${apiUrl}/venue/cities`;
+				const response = await axios.get(url);
+				setSelectableCities(response.data);
+			} catch (error) {
+				console.error('Error fetching cities:', error);
+			}
+		};
+
+		fetchCities();
 	}, []);
 
 	// Save and fetch on filter change
@@ -136,7 +148,7 @@ const FilterVenue: React.FC<FilterVenueProps> = ({ setVenueIds }) => {
 
 			{/* Cities */}
 			<div className={styles.chipContainer}>
-				{AVAILABLE_CITIES.map(city => (
+				{selectableCities.map(city => (
 					<button
 						key={city}
 						onClick={() => handleCityChange(city)}
