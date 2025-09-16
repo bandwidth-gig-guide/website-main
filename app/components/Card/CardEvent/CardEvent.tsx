@@ -44,7 +44,7 @@ const CardEvent: React.FC<Props> = ({ eventId }) => {
 	}, [eventId])
 
 	if (isLoading) return <CardLoading />
-	if (isError) return <div>Error loading event.</div>
+	if (isError) return
 
 	return (
 		<div>

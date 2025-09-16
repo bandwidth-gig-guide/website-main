@@ -43,7 +43,7 @@ const CardArtist: React.FC<Props> = ({ artistId }) => {
 	}, [artistId])
 
 	if (isLoading) return <CardLoading />
-	if (isError) return <div>Error loading artist.</div>
+	if (isError) return
 
 	let upcomingEventsString = ""
 	switch (artist.upcomingEvents) {

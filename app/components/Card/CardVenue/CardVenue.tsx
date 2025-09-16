@@ -44,12 +44,14 @@ const CardVenue: React.FC<Props> = ({ venueId }) => {
 	}, [venueId])
 
 	if (isLoading) return <CardLoading />
-	if (isError) return <div>Error loading venue.</div>
+	if (isError) return
 
 	let addressString = `${venue.streetAddress ?? ''}${venue.streetAddress ? ',' : ''} ${venue.city ?? ''} ${venue.stateCode ?? ''} ${venue.postCode ?? ''}`
 
 	let upcomingEventsString = ""
 	switch (venue.upcomingEventCount) {
+		case 0:
+			upcomingEventsString = ""
 		case 1:
 			upcomingEventsString = "1 Upcoming Event"
 			break
