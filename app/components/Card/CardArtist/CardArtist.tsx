@@ -47,6 +47,9 @@ const CardArtist: React.FC<Props> = ({ artistId }) => {
 
 	let upcomingEventsString = ""
 	switch (artist.upcomingEvents) {
+		case 0:
+			upcomingEventsString = ""
+			break
 		case 1:
 			upcomingEventsString = "1 Upcoming Event"
 			break
