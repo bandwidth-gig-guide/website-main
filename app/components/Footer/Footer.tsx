@@ -50,10 +50,10 @@ const Footer = () => {
 					</div>
 
 					<div className={styles.info}>
-						<h4>Bandwidth</h4>
-						<p>
-							It's not janky, it's punk.
-						</p>
+						<h4 className={styles.title}>Bandwidth</h4>
+						<p className={styles.tagline}>Melbourne Gig Guide</p>
+						<p><strong>SITE UNDER DEVELOPMENT</strong></p>
+						<p><em>It's not shitty, it's DIY</em></p>
 					</div>
 
 				</div>

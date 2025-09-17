@@ -58,8 +58,9 @@
                         border-radius: 4px;
                     }
 
-                    summary:hover, summary:focus {
-                        background-color: rgba(255,255,255,0.1);
+                    summary:hover,
+                    summary:focus {
+                        background-color: rgba(255, 255, 255, 0.1);
                     }
 
                     p {
@@ -86,10 +87,34 @@
                 padding-right: var(--spacing-02);
                 flex: 0;
 
+                .title {
+                    font-size: var(--font-size-04);
+                    font-weight: 700;
+                }
+
+                .tagline {
+                    transform: translate(1px, -4px);
+                    font-size: var(--font-size-01);
+                }
+
                 p {
-                    margin-top: var(--spacing-05);
                     font-weight: 200;
                     opacity: .9;
+
+                    em {
+                        color: var(--color-text-light);
+                        opacity: .7;
+                    }
+
+                    strong {
+                        display: inline-block;
+                        width: 100%;
+                        margin-top: var(--spacing-05);
+                        border-top: 1px solid rgba(255, 255, 255, 0.5);
+                        padding-top: var(--spacing-05);
+                        color: var(--color-text-light);
+                        font-weight: 600;
+                    }
                 }
             }
 
@@ -108,7 +133,7 @@
                 }
 
                 .link:hover {
-                    background-color: rgba(255,255,255,0.1);
+                    background-color: rgba(255, 255, 255, 0.1);
                 }
             }
         }
