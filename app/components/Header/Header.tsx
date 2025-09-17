@@ -13,7 +13,7 @@ const Header: React.FC<Props> = ({ location }) => {
 			<header>
 				<Link href="/" className={styles.siteName}>
 					<h1>Bandwidth</h1>
-					<p>{location} Gig Guide</p>
+					<p>Melbourne Gig Guide</p>
 				</Link>
 				<nav>
 					<ul>
