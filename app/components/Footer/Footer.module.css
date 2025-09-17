@@ -90,16 +90,19 @@
                 .title {
                     font-size: var(--font-size-04);
                     font-weight: 700;
+                    text-align: right;
                 }
 
                 .tagline {
                     transform: translate(1px, -4px);
                     font-size: var(--font-size-01);
+                    text-align: right;
                 }
 
                 p {
                     font-weight: 200;
                     opacity: .9;
+                    text-align: right;
 
                     em {
                         color: var(--color-text-light);
