@@ -27,7 +27,7 @@ const Description: React.FC<Props> = ({ text = '', tags = [], types = [] }) => {
           {chips.map((chip, index) => (
             <React.Fragment key={index}>
               <span className={styles.chip}>{chip}</span>
-              {index < chips.length - 1 && <span className={styles.hyphen}>,&nbsp;</span>}
+              {index < chips.length - 1 && <span className={styles.hyphen}>&nbsp;·&nbsp;</span>}
             </React.Fragment>
           ))}
         </div>
