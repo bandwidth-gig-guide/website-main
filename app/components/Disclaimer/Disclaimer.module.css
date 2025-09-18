@@ -63,12 +63,14 @@
             bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
-            background: #333;
-            color: #fff;
+            background: var(--color-accent-dark);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            color: var(--color-text-light);
             padding: 12px 20px;
             border-radius: 8px;
             font-size: 14px;
             animation: fadeInOut 2.5s ease forwards;
+            z-index: 999;
         }
 
         @keyframes fadeInOut {
