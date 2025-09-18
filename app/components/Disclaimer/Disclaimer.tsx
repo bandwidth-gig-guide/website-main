@@ -21,7 +21,7 @@ const Disclaimer = () => {
         <div className={styles.innerWrapper}>
           <h3>Bandwidth is a grassroots project, and we get a lot of stuff wrong!</h3>
           <p>We keep our records as accurate as possible, but we're not always up-to-date, and we don't track every venue in Melbourne <em>(yet).</em></p>
-          <p>You're support is what allows us to keep this going! If you notice anything that needs updating, <em>please</em> reach out on any of the following pipes, and we'll get right on it!</p>
+          <p>Your support is what allows us to keep this going! If you notice anything that needs updating, <em>please</em> reach out on any of the following pipes, and we'll get right on it!</p>
           
           <div className={styles.pipes}>
             {pipes.map((pipe) => (
