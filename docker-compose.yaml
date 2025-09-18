@@ -83,6 +83,13 @@ services:
     networks:
       - network-bandwidth
 
+  service-monitor:
+    image: ghcr.io/bandwidth-gig-guide/service-monitor:latest
+    container_name: service-monitor
+    restart: unless-stopped
+    networks:
+      - network-bandwidth
+
 volumes:
   db-main-data:
   db-auth-data:
