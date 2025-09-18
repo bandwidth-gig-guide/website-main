@@ -8,7 +8,7 @@ const Disclaimer = () => {
   const handleCopy = async (text: string) => {
     try {
       await navigator.clipboard.writeText(text)
-      setSnackbar(`Email address copied to clipboard: '${text}'`)
+      setSnackbar(`Email address copied: ${text}`)
       setTimeout(() => setSnackbar(null), 5000)
     } catch (err) {
       console.error("Failed to copy: ", err)
