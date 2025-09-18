@@ -23,7 +23,6 @@ const Description: React.FC<Props> = ({ text = '', tags = [], types = [] }) => {
       <p>{formattedText}</p>
       {chips.length > 0 && 
         <div className={styles.chipsWrapper}>
-          <p><strong>Tags:&nbsp;</strong></p>
           {chips.map((chip, index) => (
             <React.Fragment key={index}>
               <span className={styles.chip}>{chip}</span>
