@@ -27,7 +27,15 @@ const CardArtist: React.FC<Props> = ({ artistId }) => {
 				if (artistData.imageUrl) {
 					const img = new Image()
 					img.src = artistData.imageUrl
-					img.onload = () => setIsLoading(false)
+					let timeoutId: NodeJS.Timeout
+					img.onload = () => {
+						clearTimeout(timeoutId)
+						setIsLoading(false)
+					}
+					timeoutId = setTimeout(() => {
+						setHasImage(false)
+						setIsLoading(false)
+					}, 5000)
 					img.onerror = () => setHasImage(false)
 				} else {
 					setIsLoading(false)

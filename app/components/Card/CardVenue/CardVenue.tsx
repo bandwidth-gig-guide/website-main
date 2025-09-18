@@ -28,7 +28,15 @@ const CardVenue: React.FC<Props> = ({ venueId }) => {
 				if (venueData.imageUrl) {
 					const img = new Image()
 					img.src = venueData.imageUrl
-					img.onload = () => setIsLoading(false)
+					let timeoutId: NodeJS.Timeout
+					img.onload = () => {
+						clearTimeout(timeoutId)
+						setIsLoading(false)
+					}
+					timeoutId = setTimeout(() => {
+						setHasImage(false)
+						setIsLoading(false)
+					}, 5000)
 					img.onerror = () => setHasImage(false)
 				} else {
 					setIsLoading(false)

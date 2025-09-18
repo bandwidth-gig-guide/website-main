@@ -28,7 +28,15 @@ const CardEvent: React.FC<Props> = ({ eventId }) => {
 				if (eventData.imageUrl) {
 					const img = new Image()
 					img.src = eventData.imageUrl
-					img.onload = () => setIsLoading(false)
+					let timeoutId: NodeJS.Timeout
+					img.onload = () => {
+						clearTimeout(timeoutId)
+						setIsLoading(false)
+					}
+					timeoutId = setTimeout(() => {
+						setHasImage(false)
+						setIsLoading(false)
+					}, 5000)
 					img.onerror = () => setHasImage(false)
 				} else {
 					setIsLoading(false)
