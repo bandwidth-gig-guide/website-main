@@ -10,8 +10,8 @@ interface Props {
 const Carousel: React.FC<Props> = ({ imageUrls = [], title }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [failedIndexes, setFailedIndexes] = useState<Set<number>>(new Set());
 
-  // Track scroll position to update currentIndex
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
@@ -35,24 +35,42 @@ const Carousel: React.FC<Props> = ({ imageUrls = [], title }) => {
     });
   };
 
+  const validImages = imageUrls
+    .map((url, idx) => ({ url, idx }))
+    .filter(({ idx }) => !failedIndexes.has(idx));
+
   return (
     <div className={styles.wrapper}>
-      {imageUrls.length > 0 ? (
+      {validImages.length > 0 ? (
         <>
           <div className={styles.slider} ref={containerRef}>
-            {imageUrls.map((url, index) => (
-              <div key={index} className={styles.container}>
+            {validImages.map(({ url, idx }, index) => (
+              <div key={idx} className={styles.container}>
                 <div className={styles.imgWrapper}>
-                  <img src={url} className={styles.imgBackground} alt={title} />
-                  <img src={url} className={styles.imgFocus} alt={title} />
+                  <img
+                    src={url}
+                    className={styles.imgBackground}
+                    alt={title}
+                    onError={() =>
+                      setFailedIndexes(prev => new Set(prev).add(idx))
+                    }
+                  />
+                  <img
+                    src={url}
+                    className={styles.imgFocus}
+                    alt={title}
+                    onError={() =>
+                      setFailedIndexes(prev => new Set(prev).add(idx))
+                    }
+                  />
                 </div>
               </div>
             ))}
           </div>
 
-          {imageUrls.length > 1 && (
+          {validImages.length > 1 && (
             <div className={styles.dots}>
-              {imageUrls.map((_, index) => (
+              {validImages.map((_, index) => (
                 <span
                   key={index}
                   className={`${styles.dot} ${currentIndex === index ? styles.active : ''}`}
