@@ -9,6 +9,7 @@ import Footer from '../components/Footer/Footer'
 import { LocationScope } from '../types/enums/LocationScope';
 import Banner from '../components/Banner/Banner';
 import Disclaimer from '../components/Disclaimer/Disclaimer';
+import SubHeaderMessage from '../components/SubHeaderMessage/SubHeaderMessage';
 
 function MyApp({ Component, pageProps }: AppProps) {
 	const [location, setLocation] = useState<LocationScope>(LocationScope.Melbourne);
@@ -21,6 +22,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 			</Head>
 			<div className='app-wrapper'>
 				<Header location={location} />
+				<SubHeaderMessage />
 				<main><Component {...pageProps} /></main>
 				<Banner />
 				<Disclaimer />
