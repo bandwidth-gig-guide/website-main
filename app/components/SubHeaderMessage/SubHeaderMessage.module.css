@@ -1,0 +1,11 @@
+.wrapper {
+  background-color: var(--color-accent);
+
+  .innerWrapper {
+    margin: auto;
+    width: var(--spacing-page-max);
+    padding: 4px var(--spacing-edge-desktop);
+    text-align: center;
+    color: white;
+  }
+}
