@@ -1,10 +1,10 @@
 .wrapper {
-  background-color: var(--color-accent);
+  background-color: var(--color-accent-dark);
 
   .innerWrapper {
     margin: auto;
     width: var(--spacing-page-max);
-    padding: 4px var(--spacing-edge-desktop);
+    padding: 6px var(--spacing-edge-desktop);
     text-align: center;
     color: white;
   }
