@@ -29,7 +29,7 @@ const Home = () => {
   useEffect(() => {
     const fetch = async (type: string) => {
       try {
-        const url = `${apiUrl}/${type}`
+        const url = `public/${type}`
         const response = await axios.get(url);
 
         switch (type) {
