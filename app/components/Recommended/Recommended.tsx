@@ -8,7 +8,7 @@ import { PageType } from '../../types/enums/PageType';
 import axios from "axios"
 
 // Config
-import getConfig from "next/config";
+import { getServicePublicApiUrl } from "../../util/runtime_vars/getServicePublicApiUrl";
 
 interface Props {
   id: uuid;
@@ -18,13 +18,20 @@ interface Props {
 const Recommended: React.FC<Props> = ({ id, pageType }) => {
   const [ids, setIds] = useState<uuid[]>([]);
 
-  const api = getConfig().publicRuntimeConfig.SERVICE_PUBLIC_API_URL
-
   useEffect(() => {
     if (id === undefined || pageType === undefined) return;
 
-    axios.get(`${api}/${pageType}/recommended/${id}`)
-      .then(response => {setIds(response.data)})
+    const fetchRecommended = async () => {
+      try {
+        const api = await getServicePublicApiUrl();
+        const response = await axios.get(`${api}/${pageType}/recommended/${id}`);
+        setIds(response.data);
+      } catch {
+        
+      }
+    }
+
+    fetchRecommended();
   }, [id, pageType])
 
   return (

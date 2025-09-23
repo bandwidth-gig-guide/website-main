@@ -9,7 +9,7 @@ import axios from 'axios';
 import camelcaseKeys from 'camelcase-keys';
 
 // Config
-import getConfig from "next/config";
+import { getServicePublicApiUrl } from "../../../util/runtime_vars/getServicePublicApiUrl";
 
 // Constants
 import { TAGS } from '../../../constants/tags';
@@ -42,8 +42,6 @@ const FilterEvent: React.FC<FilterEventProps> = ({ setEventIds, setEventIdsByDat
 	const [filtersActive, setFiltersActive] = useState(false);
 	const [filtersLoaded, setFiltersLoaded] = useState(false);
 
-  const api = getConfig().publicRuntimeConfig.SERVICE_PUBLIC_API_URL
-
 	// Load filters from localStorage on mount
 	useEffect(() => {
 		setName(localStorage.getItem(FILTER_EVENT_NAME_KEY) || '');
@@ -61,6 +59,7 @@ const FilterEvent: React.FC<FilterEventProps> = ({ setEventIds, setEventIdsByDat
 	useEffect(() => {
 		const fetchCities = async () => {
 			try {
+				const api = await getServicePublicApiUrl();
 				const url = `${api}/venue/cities`;
 				const response = await axios.get(url);
 				setSelectableCities(response.data);
@@ -93,12 +92,14 @@ const FilterEvent: React.FC<FilterEventProps> = ({ setEventIds, setEventIdsByDat
 				selectedTags.forEach(tag => params.append('tags', tag));
 
 				if (setEventIds) {
+					const api = await getServicePublicApiUrl();				
 					const url = `${api}/event${params.toString() ? `/?${params.toString()}` : ''}`;
 					const response = await axios.get(url);
 					setEventIds(camelcaseKeys(response.data, { deep: true }));
 				}
 
 				if (setEventIdsByDate) {
+					const api = await getServicePublicApiUrl();
 					const url = `${api}/event/by-date${params.toString() ? `/?${params.toString()}` : ''}`;
 					const response = await axios.get(url);
 					setEventIdsByDate(camelcaseKeys(response.data, { deep: true }));

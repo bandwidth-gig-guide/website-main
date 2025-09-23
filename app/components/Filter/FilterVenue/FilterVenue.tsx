@@ -9,7 +9,7 @@ import axios from 'axios';
 import camelcaseKeys from 'camelcase-keys';
 
 // Config
-import getConfig from "next/config";
+import { getServicePublicApiUrl } from "../../../util/runtime_vars/getServicePublicApiUrl";
 
 // Constants
 import {
@@ -30,8 +30,6 @@ const FilterVenue: React.FC<FilterVenueProps> = ({ setVenueIds }) => {
 	const [hasUpcomingEvent, setHasUpcomingEvent] = useState<boolean>(false);
 	const [filtersActive, setFiltersActive] = useState(false);
 	const [filtersLoaded, setFiltersLoaded] = useState(false);
-
-  const api = getConfig().publicRuntimeConfig.SERVICE_PUBLIC_API_URL
 
 	// Load filters from localStorage on mount
 	useEffect(() => {
@@ -72,6 +70,7 @@ const FilterVenue: React.FC<FilterVenueProps> = ({ setVenueIds }) => {
 				selectedCities.forEach(city => params.append('city', city));
 
 				// Create Request
+				const api = await getServicePublicApiUrl();
 				const url = `${api}/venue${params.toString() ? `/?${params.toString()}` : ''}`;
 
 				// Send Request

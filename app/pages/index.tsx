@@ -14,7 +14,7 @@ import CardRow from "../components/CardRow/CardRow";
 import EmbedsLocalScene from "../components/Embeds/EmbedsLocalScene";
 
 // Config
-import getConfig from "next/config";
+import { getServicePublicApiUrl } from "../util/runtime_vars/getServicePublicApiUrl";
 import { CardGridType } from "../types/enums/CardGridType";
 
 
@@ -25,12 +25,11 @@ const Home = () => {
   const [artists, setArtists] = useState<uuid[]>([]);
   const [venues, setVenues] = useState<uuid[]>([]);
 
-  const api = getConfig().publicRuntimeConfig.SERVICE_PUBLIC_API_URL
-
   // Fetch IDs
   useEffect(() => {
     const fetch = async (type: string) => {
       try {
+        const api = await getServicePublicApiUrl();
         const url = `${api}/${type}`
         const response = await axios.get(url);
 

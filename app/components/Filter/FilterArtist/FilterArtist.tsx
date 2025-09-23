@@ -9,7 +9,7 @@ import axios from 'axios';
 import camelcaseKeys from 'camelcase-keys';
 
 // Config
-import getConfig from "next/config";
+import { getServicePublicApiUrl } from "../../../util/runtime_vars/getServicePublicApiUrl";
 
 // Constants
 import { TAGS } from '../../../constants/tags';
@@ -33,8 +33,6 @@ const FilterArtist: React.FC<FilterArtistProps> = ({ setArtistIds }) => {
 	const [hasUpcomingEvent, setHasUpcomingEvent] = useState(false);
 	const [filtersActive, setFiltersActive] = useState(false);
 	const [filtersLoaded, setFiltersLoaded] = useState(false);
-
-  const api = getConfig().publicRuntimeConfig.SERVICE_PUBLIC_API_URL
 
 	// Load filters from localStorage on mount
 	useEffect(() => {
@@ -64,6 +62,7 @@ const FilterArtist: React.FC<FilterArtistProps> = ({ setArtistIds }) => {
 				selectedTags.forEach(tag => params.append('tags', tag));
 
 				// Create Request
+				const api = await getServicePublicApiUrl();
 				const url = `${api}/artist${params.toString() ? `/?${params.toString()}` : ''}`;
 
 				// Send Request
