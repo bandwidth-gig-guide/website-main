@@ -8,7 +8,7 @@ import axios from "axios"
 import camelcaseKeys from "camelcase-keys";
 
 // Config
-import apiUrl from "../../api.config"
+import getConfig from "next/config";
 
 // Types
 import { Artist } from "../../types/models/Artist"
@@ -34,6 +34,8 @@ const ArtistDetail = () => {
   const [artist, setArtist] = useState<Artist>({} as Artist)
   const [isError, setIsError] = useState<boolean>(false);
 
+  const api = getConfig().publicRuntimeConfig.SERVICE_PUBLIC_API_URL
+
   // Router
   const router = useRouter();
   const { id } = router.query;
@@ -42,7 +44,7 @@ const ArtistDetail = () => {
   useEffect(() => {
     if (id === undefined) return;
 
-    axios.get(`${apiUrl}/artist/${id}`)
+    axios.get(`${api}/artist/${id}`)
          .then(response => { setArtist(camelcaseKeys(response.data, { deep: true }))})
          .catch(() => { setIsError(true)})
 

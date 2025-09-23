@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { VenueBrief } from '../../../types/models/VenueBrief'
 import axios from 'axios'
 import camelcaseKeys from 'camelcase-keys'
-import apiUrl from '../../../api.config'
+import getConfig from "next/config";
 import CardBase from '../CardBase/CardBase'
 import CardLoading from '../CardLoading/CardLoading'
 
@@ -18,10 +18,12 @@ const CardVenue: React.FC<Props> = ({ venueId }) => {
 	const [isError, setIsError] = useState(false)
 	const [hasImage, setHasImage] = useState(true)
 
+  const api = getConfig().publicRuntimeConfig.SERVICE_PUBLIC_API_URL
+
 	useEffect(() => {
 		const fetchVenue = async () => {
 			try {
-				const response = await axios.get(`${apiUrl}/venue/brief/${venueId}`)
+				const response = await axios.get(`${api}/venue/brief/${venueId}`)
 				const venueData = camelcaseKeys(response.data, { deep: true })
 				setVenue(venueData)
 

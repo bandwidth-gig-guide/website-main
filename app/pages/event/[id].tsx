@@ -8,7 +8,7 @@ import axios from "axios"
 import camelcaseKeys from "camelcase-keys";
 
 // Config
-import apiUrl from "../../api.config"
+import getConfig from "next/config";
 
 // Types
 import { Event } from "../../types/models/Event"
@@ -36,6 +36,8 @@ const EventDetail = () => {
   const [event, setEvent] = useState<Event | null>(null);
   const [isError, setIsError] = useState<boolean>(false);
 
+  const api = getConfig().publicRuntimeConfig.SERVICE_PUBLIC_API_URL
+
   // Router
   const router = useRouter();
   const { id } = router.query;
@@ -44,7 +46,7 @@ const EventDetail = () => {
   useEffect(() => {
     if (id === undefined) return;
 
-    axios.get(`${apiUrl}/event/${id}`)
+    axios.get(`${api}/event/${id}`)
       .then(response => { setEvent(camelcaseKeys(response.data, { deep: true }))})
       .catch(() => { setIsError(true)})
     }, [id]);

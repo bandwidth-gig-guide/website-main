@@ -8,7 +8,7 @@ import axios from "axios"
 import camelcaseKeys from "camelcase-keys";
 
 // Config
-import apiUrl from "../../api.config"
+import getConfig from "next/config";
 
 // Custom
 import { Venue } from "../../types/models/Venue"
@@ -36,6 +36,8 @@ const VenueDetail = () => {
   const [venue, setVenue] = useState<Venue>({} as Venue); 
   const [isError, setIsError] = useState<boolean>(false);
 
+  const api = getConfig().publicRuntimeConfig.SERVICE_PUBLIC_API_URL
+
   // Router
   const router = useRouter();
   const { id } = router.query;
@@ -44,7 +46,7 @@ const VenueDetail = () => {
   useEffect(() => {
     if (id === undefined) return;
 
-    axios.get(`${apiUrl}/venue/${id}`)
+    axios.get(`${api}/venue/${id}`)
       .then(response => { setVenue(camelcaseKeys(response.data, { deep: true }))})
       .catch(() => { setIsError(true)})
     }, [id]);
