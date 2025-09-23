@@ -9,7 +9,7 @@ import axios from 'axios';
 import camelcaseKeys from 'camelcase-keys';
 
 // Config
-import apiUrl from '../../../api.config';
+import getConfig from "next/config";
 
 // Constants
 import {
@@ -31,6 +31,7 @@ const FilterVenue: React.FC<FilterVenueProps> = ({ setVenueIds }) => {
 	const [filtersActive, setFiltersActive] = useState(false);
 	const [filtersLoaded, setFiltersLoaded] = useState(false);
 
+  const api = getConfig().publicRuntimeConfig.SERVICE_PUBLIC_API_URL
 
 	// Load filters from localStorage on mount
 	useEffect(() => {
@@ -44,7 +45,7 @@ const FilterVenue: React.FC<FilterVenueProps> = ({ setVenueIds }) => {
 	useEffect(() => {
 		const fetchCities = async () => {
 			try {
-				const url = `${apiUrl}/venue/cities`;
+				const url = `${api}/venue/cities`;
 				const response = await axios.get(url);
 				setSelectableCities(response.data);
 			} catch (error) {
@@ -71,7 +72,7 @@ const FilterVenue: React.FC<FilterVenueProps> = ({ setVenueIds }) => {
 				selectedCities.forEach(city => params.append('city', city));
 
 				// Create Request
-				const url = `${apiUrl}/venue${params.toString() ? `/?${params.toString()}` : ''}`;
+				const url = `${api}/venue${params.toString() ? `/?${params.toString()}` : ''}`;
 
 				// Send Request
 				const response = await axios.get(url);

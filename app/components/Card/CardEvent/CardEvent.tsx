@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { EventBrief } from '../../../types/models/EventBrief'
 import axios from 'axios'
 import camelcaseKeys from 'camelcase-keys'
-import apiUrl from '../../../api.config'
+import getConfig from "next/config";
 import CardBase from '../CardBase/CardBase'
 import CardLoading from '../CardLoading/CardLoading'
 import { formatDateShort } from '../../../util/formatDateShort'
@@ -18,10 +18,13 @@ const CardEvent: React.FC<Props> = ({ eventId }) => {
 	const [isError, setIsError] = useState(false)
 	const [hasImage, setHasImage] = useState(true)
 
+	const api = getConfig().publicRuntimeConfig.SERVICE_PUBLIC_API_URL
+
+
 	useEffect(() => {
 		const fetchEvent = async () => {
 			try {
-				const response = await axios.get(`${apiUrl}/event/brief/${eventId}`)
+				const response = await axios.get(`${api}/event/brief/${eventId}`)
 				const eventData = camelcaseKeys(response.data, { deep: true })
 				setEvent(eventData)
 

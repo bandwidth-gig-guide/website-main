@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { ArtistBrief } from '../../../types/models/ArtistBrief'
 import axios from 'axios'
 import camelcaseKeys from 'camelcase-keys'
-import apiUrl from '../../../api.config'
+import getConfig from "next/config";
 import CardBase from '../CardBase/CardBase'
 import CardLoading from '../CardLoading/CardLoading'
 
@@ -17,10 +17,12 @@ const CardArtist: React.FC<Props> = ({ artistId }) => {
 	const [isError, setIsError] = useState(false)
 	const [hasImage, setHasImage] = useState(true)
 
+	const api = getConfig().publicRuntimeConfig.SERVICE_PUBLIC_API_URL
+
 	useEffect(() => {
 		const fetchArtist = async () => {
 			try {
-				const response = await axios.get(`${apiUrl}/artist/brief/${artistId}`)
+				const response = await axios.get(`${api}/artist/brief/${artistId}`)
 				const artistData = camelcaseKeys(response.data, { deep: true })
 				setArtist(artistData)
 
