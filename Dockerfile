@@ -14,7 +14,6 @@ COPY --from=dependencies /app/node_modules ./node_modules
 COPY app/ .
 RUN if [ "$BUILD_MODE" = "production" ]; then npm run build; fi
 
-
 FROM node:18-alpine AS runner
 WORKDIR /app
 ENV APP_MODE=${APP_MODE:-production}
@@ -24,5 +23,7 @@ COPY app/package.json app/package-lock.json ./
 RUN if [ "$APP_MODE" != "production" ]; then npm install; fi
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next ./.next
+COPY docker-entrypoint.sh /app/docker-entrypoint.sh
+RUN chmod +x /app/docker-entrypoint.sh
 EXPOSE 3000
-CMD if [ "$APP_MODE" = "production" ]; then npm start; else npm run dev; fi
+CMD ["/app/docker-entrypoint.sh"]
