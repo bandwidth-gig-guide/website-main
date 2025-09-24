@@ -99,7 +99,7 @@ const FilterEvent: React.FC<FilterEventProps> = ({ setEventIds, setEventIdsByDat
 				}
 
 				if (setEventIdsByDate) {
-					const url = `${api}/event/by-date/${params.toString() ? `?${params.toString()}` : ''}`;
+					const url = `${api}/event/by-date${params.toString() ? `?${params.toString()}` : ''}`;
 					const response = await axios.get(url);
 					setEventIdsByDate(camelcaseKeys(response.data, { deep: true }));
 				}
