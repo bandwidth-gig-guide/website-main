@@ -64,7 +64,7 @@ const FilterArtist: React.FC<FilterArtistProps> = ({ setArtistIds }) => {
 				selectedTags.forEach(tag => params.append('tags', tag));
 
 				// Create Request
-				const url = `${api}/artist${params.toString() ? `/?${params.toString()}` : ''}`;
+				const url = `${api}/artist/${params.toString() ? `?${params.toString()}` : ''}`;
 
 				// Send Request
 				const response = await axios.get(url);

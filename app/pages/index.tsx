@@ -31,7 +31,7 @@ const Home = () => {
   useEffect(() => {
     const fetch = async (type: string) => {
       try {
-        const url = `${api}/${type}`
+        const url = `${api}/${type}/`
         const response = await axios.get(url);
 
         switch (type) {

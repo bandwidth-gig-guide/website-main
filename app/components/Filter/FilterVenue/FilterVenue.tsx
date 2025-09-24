@@ -72,7 +72,7 @@ const FilterVenue: React.FC<FilterVenueProps> = ({ setVenueIds }) => {
 				selectedCities.forEach(city => params.append('city', city));
 
 				// Create Request
-				const url = `${api}/venue${params.toString() ? `/?${params.toString()}` : ''}`;
+				const url = `${api}/venue/${params.toString() ? `?${params.toString()}` : ''}`;
 
 				// Send Request
 				const response = await axios.get(url);

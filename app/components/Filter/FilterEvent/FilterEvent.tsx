@@ -93,13 +93,13 @@ const FilterEvent: React.FC<FilterEventProps> = ({ setEventIds, setEventIdsByDat
 				selectedTags.forEach(tag => params.append('tags', tag));
 
 				if (setEventIds) {
-					const url = `${api}/event${params.toString() ? `/?${params.toString()}` : ''}`;
+					const url = `${api}/event/${params.toString() ? `?${params.toString()}` : ''}`;
 					const response = await axios.get(url);
 					setEventIds(camelcaseKeys(response.data, { deep: true }));
 				}
 
 				if (setEventIdsByDate) {
-					const url = `${api}/event/by-date${params.toString() ? `/?${params.toString()}` : ''}`;
+					const url = `${api}/event/by-date/${params.toString() ? `?${params.toString()}` : ''}`;
 					const response = await axios.get(url);
 					setEventIdsByDate(camelcaseKeys(response.data, { deep: true }));
 				}
