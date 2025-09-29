@@ -3,7 +3,7 @@
 
   .innerWrapper {
     margin: auto;
-    width: var(--spacing-page-max);
+    max-width: var(--spacing-page-max);
     padding: 6px var(--spacing-edge-desktop);
     text-align: center;
     color: white;

@@ -23,6 +23,7 @@
         .top {
             display: flex;
             flex-direction: row;
+            flex-wrap: wrap;
             gap: var(--spacing-gap);
             border-bottom: 1px solid var(--color-background);
             padding: var(--spacing-07) 0;
