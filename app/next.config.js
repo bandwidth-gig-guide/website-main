@@ -1,5 +1,5 @@
 module.exports = {
   publicRuntimeConfig: {
-    SERVICE_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || "/public",
+    SERVICE_PUBLIC_API_URL: "/api",
   },
 };
