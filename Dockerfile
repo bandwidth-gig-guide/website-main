@@ -3,26 +3,19 @@ WORKDIR /app
 COPY app/package.json app/package-lock.json ./
 RUN npm ci
 
-
 FROM node:18-alpine AS builder
 WORKDIR /app
-ARG BUILD_MODE=production
-ENV BUILD_MODE=$BUILD_MODE
-ARG NEXT_PUBLIC_API_URL
-ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
 COPY --from=dependencies /app/node_modules ./node_modules
 COPY app/ .
-RUN if [ "$BUILD_MODE" = "production" ]; then npm run build; fi
-
+RUN npm run build
 
 FROM node:18-alpine AS runner
 WORKDIR /app
-ENV APP_MODE=${APP_MODE:-production}
+ENV NODE_ENV=production
 ENV PORT=3000
 COPY --from=dependencies /app/node_modules ./node_modules
 COPY app/package.json app/package-lock.json ./
-RUN if [ "$APP_MODE" != "production" ]; then npm install; fi
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next ./.next
 EXPOSE 3000
-CMD if [ "$APP_MODE" = "production" ]; then npm start; else npm run dev; fi
+CMD ["npm", "start"]
