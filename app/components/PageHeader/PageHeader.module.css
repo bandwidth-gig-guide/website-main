@@ -67,10 +67,10 @@
 @media (max-width: 671px) {
     .wrapper {
         padding: var(--spacing-edge);
-        position: sticky;
+        /* position: sticky;
         top: 0;
         background-color: var(--color-background);
-        z-index: 9999;
+        z-index: 9999; */
         border-bottom: 1px solid var(--color-surface-medium);
         width: 100vw;
         transform: translateX(calc(var(--spacing-edge) * -1));
