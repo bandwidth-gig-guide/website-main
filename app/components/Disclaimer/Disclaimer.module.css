@@ -4,11 +4,11 @@
     background-color: var(--color-surface);
 
     .middleWrapper {
-        width: 1200px;
+        max-width: 1200px;
         margin: auto;
 
         .innerWrapper {
-            margin-inline: var(--spacing-edge-desktop);
+            margin-inline: var(--spacing-edge);
             text-align: center;
             display: flex;
             flex-direction: column;
@@ -94,5 +94,34 @@
             }
         }
 
+    }
+}
+
+@media (max-width: 671px) {
+
+    .wrapper {
+
+        p,
+        em,
+        strong {
+            font-size: 14px;
+            font-style: italic;
+        }
+
+        .middleWrapper {
+
+            .innerWrapper {
+                .pipes {
+                    gap: var(--spacing-02);
+
+                    .pipe {
+                        img {
+                            width: 22px;
+                        }
+                    }
+                }
+            }
+
+        }
     }
 }

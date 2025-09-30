@@ -109,3 +109,12 @@
 .dot.active {
 	background-color: var(--color-surface-dark);
 }
+
+@media (max-width: 671px) {
+    .wrapper {
+		height: auto;
+        aspect-ratio: 16/9;
+		width: 100vw;
+		transform: translateX(calc(var(--spacing-edge) * -1));
+    }
+}

@@ -36,9 +36,14 @@ const PageHeader: React.FC<Props> = ({ title, pageType, isFeatured,  subtitle, g
 			</div>
 			{subtitle &&
 				<div className={styles.bottomRow}>
-					{icon && <img src={icon} />}{subtitle}
+					{icon && <img src={icon} />}
+					<span>{subtitle}</span>
 				</div>
 			}
+			{getTicketsUrl && 
+				<button className={styles.mobileButton} onClick={() => window.open(getTicketsUrl, '_blank')}>
+					{priceString}
+				</button>}
 		</div>
 	)
 };

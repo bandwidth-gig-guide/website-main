@@ -24,6 +24,11 @@ const Header: React.FC<Props> = ({ location }) => {
 						))}
 					</ul>
 				</nav>
+				<div className={styles.menuToggle}>
+					<span />
+					<span />
+					<span />
+				</div>
 			</header>
 		</div >
 	);
