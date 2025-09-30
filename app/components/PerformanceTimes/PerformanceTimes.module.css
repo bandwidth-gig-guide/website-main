@@ -3,15 +3,15 @@
     border-bottom: 1px solid var(--color-muted);
     display: flex;
     flex-direction: row;
-    gap: var(--spacing-gap); 
+    gap: var(--spacing-gap);
     overflow-x: scroll;
     height: max-content;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    }
-    .wrapper::-webkit-scrollbar {
-        display: none;
-    
+}
+
+.wrapper::-webkit-scrollbar {
+    display: none;
 
     .artistChip {
         display: flex;
@@ -28,3 +28,13 @@
     }
 }
 
+@media (max-width: 671px) {
+    .wrapper {
+        flex-direction: column;
+        width: 100vw;
+        gap: var(--spacing-01);
+        transform: translateX(calc(var(--spacing-edge) * -1));
+        padding: var(--spacing-04) 4px 0;
+        border-bottom: none;
+    }
+}

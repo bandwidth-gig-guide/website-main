@@ -51,7 +51,7 @@ const Event = () => {
 
       <div>
         <Hero />
-        <SectionHeader title="Search Events" />
+        <SectionHeader title="Events" scrollToTopOnClick={true}/>
         <FilterEvent setEventIdsByDate={setEventIdsByDate} />
 
         {visibleDates.map(([date, ids]) => (

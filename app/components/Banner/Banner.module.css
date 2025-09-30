@@ -8,7 +8,7 @@
         width: 100%;
         aspect-ratio: 32/9;
         margin: auto;
-        padding-inline: var(--spacing-edge-desktop);
+        padding-inline: var(--spacing-edge);
 
         .banner {
             color: white;
@@ -17,10 +17,29 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            
+
         }
     }
+}
 
+@media (max-width: 671px) {
 
+    .wrapper {
+        padding: var(--spacing-06) 0;
 
+        .innerWrapper {
+            overflow: hidden;
+            aspect-ratio: 5/4;
+
+            .banner {
+                height: 100%;
+
+                img {
+                    min-height: 100%;
+                    object-fit: cover;
+                    margin: auto;
+                }
+            }
+        }
+    }
 }

@@ -22,7 +22,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 			</Head>
 			<div className='app-wrapper'>
 				<Header location={location} />
-				<SubHeaderMessage />
+				{/* <SubHeaderMessage /> */}
 				<main><Component {...pageProps} /></main>
 				<Banner />
 				<Disclaimer />

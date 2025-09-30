@@ -45,3 +45,10 @@
 .wrapper:active {
     background-color: var(--color-surface);
 }
+
+@media (max-width: 671px) {
+    .wrapper {
+        width: 100%;
+        justify-content: left;
+    }
+}

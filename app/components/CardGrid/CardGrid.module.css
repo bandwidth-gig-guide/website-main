@@ -30,6 +30,7 @@
   margin-right: var(--spacing-gap);
   margin-bottom: var(--spacing-gap);
 }
+
 .page:last-child {
   margin-right: 0;
 }

@@ -53,7 +53,10 @@ const Footer = () => {
 						<h4 className={styles.title}>Bandwidth</h4>
 						<p className={styles.tagline}>Melbourne Gig Guide</p>
 						<p><strong>SITE UNDER DEVELOPMENT</strong></p>
-						<p><em>It's not shitty, it's DIY</em></p>
+						<p>Check back for the official release on:</p>
+						<p>Dec 01, 2025</p>
+						<br />
+						<p><em>"It's not poorly designed, it's punk"</em></p>
 					</div>
 
 				</div>
