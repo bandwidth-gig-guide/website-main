@@ -111,10 +111,22 @@
 }
 
 @media (max-width: 671px) {
-    .wrapper {
+	.wrapper {
 		height: auto;
-        aspect-ratio: 16/9;
+		aspect-ratio: 5/3;
 		width: 100vw;
 		transform: translateX(calc(var(--spacing-edge) * -1));
-    }
+	}
+
+	.dots {
+		background-color: transparent;
+		backdrop-filter: none;
+		border: none;
+		box-shadow: none;
+		bottom: 0;
+	}
+
+	.dot {
+		box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+	}
 }
