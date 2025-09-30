@@ -19,7 +19,7 @@ function formatDate(date: string): string {
   const day = date.slice(6, 8)
   const dateIso = new Date(`${year}-${month}-${day}`)
   const options: Intl.DateTimeFormatOptions = { month: "long", day: "numeric", weekday: "long" }
-  
+
   // formattedInitial: "Monday, October 20"
   const formattedInitial = dateIso.toLocaleDateString("en-US", options)
   const [weekday, rest] = formattedInitial.split(", ")
@@ -44,20 +44,15 @@ const Event = () => {
 
   return (
     <>
-      <Head>
-        <title>Bandwidth | Events</title>
-        <meta name="description" content="" />
-      </Head>
-
       <div>
         <Hero />
-        <SectionHeader title="Events" scrollToTopOnClick={true}/>
+        <SectionHeader title="Events" scrollToTopOnClick={true} />
         <FilterEvent setEventIdsByDate={setEventIdsByDate} />
 
         {visibleDates.map(([date, ids]) => (
           <div key={date} style={{ marginBottom: "var(--spacing-05)" }}>
             <DateHeader date={formatDate(date)} />
-            <CardGrid eventIds={ids} cardGridType={CardGridType.Grid} limit={8} isPaginated={true}/>
+            <CardGrid eventIds={ids} cardGridType={CardGridType.Grid} limit={8} isPaginated={true} />
           </div>
         ))}
 
@@ -65,6 +60,66 @@ const Event = () => {
           <Button text="Load More" onClick={handleLoadMore} />
         )}
       </div>
+
+      <Head>
+        {/* Title & Meta */}
+        <title>Bandwidth | Live Music Events in Melbourne</title>
+        <meta
+          name="description"
+          content="Find live music events, concerts, and gigs in Melbourne. Browse upcoming shows by date, venue, and genre — all in one place on Bandwidth."
+        />
+
+        {/* Open Graph */}
+        <meta property="og:site_name" content="Bandwidth Melbourne Gig Guide" />
+        <meta property="og:title" content="Bandwidth | Live Music Events in Melbourne" />
+        <meta
+          property="og:description"
+          content="Find live music events, concerts, and gigs in Melbourne. Browse upcoming shows by date, venue, and genre — all in one place on Bandwidth."
+        />
+        <meta property="og:image" content="/default-event.jpg" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://bandwidth.melbourne/event" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Bandwidth | Live Music Events in Melbourne" />
+        <meta
+          name="twitter:description"
+          content="Find live music events, concerts, and gigs in Melbourne. Browse upcoming shows by date, venue, and genre — all in one place on Bandwidth."
+        />
+        <meta name="twitter:image" content="/default-event.jpg" />
+        <meta name="twitter:site" content="@BandwidthMelb" />
+
+        {/* Canonical */}
+        <link rel="canonical" href="https://bandwidth.melbourne/event" />
+
+        {/* JSON-LD Structured Data (CollectionPage of MusicEvents) */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "CollectionPage",
+              name: "Melbourne Live Music Events",
+              description:
+                "Find live music events, concerts, and gigs in Melbourne. Browse upcoming shows by date, venue, and genre — all in one place on Bandwidth.",
+              url: "https://bandwidth.melbourne/event",
+              isPartOf: {
+                "@type": "WebSite",
+                name: "Bandwidth Melbourne Gig Guide",
+                url: "https://bandwidth.melbourne",
+              },
+              about: {
+                "@type": "MusicEvent",
+                name: "Live Music Events in Melbourne",
+              },
+            }),
+          }}
+        />
+      </Head>
+
     </>
   )
 }
