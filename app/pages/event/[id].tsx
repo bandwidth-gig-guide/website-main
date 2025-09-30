@@ -47,9 +47,9 @@ const EventDetail = () => {
     if (id === undefined) return;
 
     axios.get(`${api}/event/${id}`)
-      .then(response => { setEvent(camelcaseKeys(response.data, { deep: true }))})
-      .catch(() => { setIsError(true)})
-    }, [id]);
+      .then(response => { setEvent(camelcaseKeys(response.data, { deep: true })) })
+      .catch(() => { setIsError(true) })
+  }, [id]);
 
   // Handle Error
   useEffect(() => {
@@ -76,19 +76,120 @@ const EventDetail = () => {
   // Return
   return (
     <>
-      <Head>
-        <title>Bandwidth | {event.title}</title>
-        <meta name="description" content="" />
-      </Head>
-
       <div className={styles.pageWrapper}>
-        <Carousel imageUrls={event.imageUrls} title={event.title}/>
-        <PageHeader title={event.title} subtitle={dateTimeLocation} pageType={PageType.Event} isFeatured={event.isFeatured} getTicketsUrl={event.ticketSaleUrl} minTicketPrice={minPrice}/>
+        <Carousel imageUrls={event.imageUrls} title={event.title} />
+        <PageHeader title={event.title} subtitle={dateTimeLocation} pageType={PageType.Event} isFeatured={event.isFeatured} getTicketsUrl={event.ticketSaleUrl} minTicketPrice={minPrice} />
         <PerformanceTimes eventPerformances={event.performances} eventVenue={event.venue} doorsTime={event.startDateTime} />
         <Description text={event.description} types={event.types} tags={event.tags} />
         <Socials socials={event.socials} />
         <Recommended id={event.eventId} pageType={PageType.Event} />
       </div>
+
+      <Head>
+        {/* Title & Meta */}
+        <title>{event.title ? `Bandwidth | ${event.title}` : "Bandwidth Event"}</title>
+        <meta
+          name="description"
+          content={
+            event.description ||
+            `${event.title || "Event"} at ${event.venue?.title || "a Melbourne venue"} on ${formatDateLong(event.startDateTime)}. Discover gigs, music, and events on Bandwidth.`
+          }
+        />
+
+        {/* Open Graph */}
+        <meta property="og:site_name" content="Bandwidth Melbourne Gig Guide" />
+        <meta
+          property="og:title"
+          content={event.title ? `Bandwidth | ${event.title}` : "Bandwidth Event"}
+        />
+        <meta
+          property="og:description"
+          content={
+            event.description ||
+            `${event.title || "Event"} at ${event.venue?.title || "a Melbourne venue"} on ${formatDateLong(event.startDateTime)}. Discover gigs, music, and events on Bandwidth.`
+          }
+        />
+        <meta
+          property="og:image"
+          content={event.imageUrls?.[0] || "/default-event.jpg"}
+        />
+        <meta property="og:type" content="event" />
+        <meta
+          property="og:url"
+          content={`https://bandwidth.melbourne/event/${event.eventId || id}`}
+        />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content={event.title ? `Bandwidth | ${event.title}` : "Bandwidth Event"}
+        />
+        <meta
+          name="twitter:description"
+          content={
+            event.description ||
+            `${event.title || "Event"} at ${event.venue?.title || "a Melbourne venue"} on ${formatDateLong(event.startDateTime)}. Discover gigs, music, and events on Bandwidth.`
+          }
+        />
+        <meta
+          name="twitter:image"
+          content={event.imageUrls?.[0] || "/default-event.jpg"}
+        />
+        <meta name="twitter:site" content="@BandwidthMelb" />
+
+        {/* Canonical */}
+        <link
+          rel="canonical"
+          href={`https://bandwidth.melbourne/event/${event.eventId || id}`}
+        />
+
+        {/* JSON-LD Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Event",
+              name: event.title,
+              startDate: event.startDateTime,
+              eventStatus: "https://schema.org/EventScheduled",
+              eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+              location: {
+                "@type": "Place",
+                name: event.venue?.title,
+                address: {
+                  "@type": "PostalAddress",
+                  addressRegion: "VIC",
+                  addressCountry: "Australia",
+                },
+              },
+              image: event.imageUrls?.[0] || "/default-event.jpg",
+              description: event.description,
+              performer: event.performances?.map((p) => ({
+                "@type": "MusicGroup",
+                name: p.title,
+              })),
+              offers: event.prices?.map((price) => ({
+                "@type": "Offer",
+                url: event.ticketSaleUrl,
+                price: price.price,
+                priceCurrency: "AUD",
+                availability: "https://schema.org/InStock",
+                validFrom: event.startDateTime,
+              })),
+              organizer: {
+                "@type": "Organization",
+                name: "Bandwidth Melbourne",
+                url: "https://bandwidth.melbourne",
+              },
+            }),
+          }}
+        />
+      </Head>
+
     </>
   );
 };
