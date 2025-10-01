@@ -15,7 +15,7 @@ import EmbedsLocalScene from "../components/Embeds/EmbedsLocalScene";
 
 // Config
 import getConfig from "next/config";
-import { CardGridType } from "../types/enums/CardGridType";
+import { CardGridType } from "../enums/CardGridType";
 
 
 const Home = () => {

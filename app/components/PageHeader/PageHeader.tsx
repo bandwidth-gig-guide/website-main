@@ -1,5 +1,5 @@
 import styles from './PageHeader.module.css'
-import { PageType } from '../../types/enums/PageType'
+import { PageType } from '../../enums/PageType'
 
 interface Props {
 	title: string;

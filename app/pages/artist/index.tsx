@@ -3,7 +3,7 @@ import Head from "next/head";
 
 import SectionHeader from "../../components/SectionHeader/SectionHeader";
 import CardGrid from "../../components/CardGrid/CardGrid";
-import { CardGridType } from "../../types/enums/CardGridType";
+import { CardGridType } from "../../enums/CardGridType";
 import FilterArtist from "../../components/Filter/FilterArtist/FilterArtist";
 import Hero from "../../components/Hero/Hero"
 

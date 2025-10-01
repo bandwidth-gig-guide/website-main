@@ -12,7 +12,7 @@ import getConfig from "next/config";
 
 // Custom
 import { Venue } from "../../types/models/Venue"
-import { PageType } from "../../types/enums/PageType"
+import { PageType } from "../../enums/PageType"
 
 // Styling
 import styles from "../../styles/page.module.css"
