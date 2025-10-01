@@ -4,7 +4,7 @@ import styles from './VenueLocation.module.css'
 // Components
 import GoogleMapsEmbed from '../Embeds/Embed/GoogleMapsEmbed';
 
-import { formatOpeningHours } from '../../util/formatOpeningHours';
+import { formatOpeningHours } from '@/utils';
 import { OpeningHours } from '@/types';
 
 interface Props {
