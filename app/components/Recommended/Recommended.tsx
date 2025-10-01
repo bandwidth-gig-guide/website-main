@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './Recommended.module.css'
 import SectionHeader from '../SectionHeader/SectionHeader';
 import CardGrid from "../CardGrid/CardGrid";
-import { PageType } from '../../enums/PageType';
+import { PageType } from '@/enums';
 
 // External
 import axios from "axios"
