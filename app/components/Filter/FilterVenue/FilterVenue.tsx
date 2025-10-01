@@ -141,7 +141,7 @@ const FilterVenue: React.FC<FilterVenueProps> = ({ setVenueIds }) => {
 					className={`${styles.reset} ${(filtersActive) ? styles.filterActive : ''}`}
 					onClick={resetFilters}
 				>
-					<img src="./circle-cross.svg" alt="reset filters" />
+					<img src="./icons/circle-cross.svg" alt="reset filters" />
 					<span>Reset Filters</span>
 				</div>
 

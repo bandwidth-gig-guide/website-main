@@ -141,7 +141,7 @@ const FilterArtist: React.FC<FilterArtistProps> = ({ setArtistIds }) => {
 					className={`${styles.reset} ${(filtersActive) ? styles.filterActive : ''}`}
 					onClick={resetFilters}
 				>
-					<img src="./circle-cross.svg" alt="reset filters" />
+					<img src="./icons/circle-cross.svg" alt="reset filters" />
 					<span>Reset Filters</span>
 				</div>
 

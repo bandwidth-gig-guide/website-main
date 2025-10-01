@@ -12,7 +12,7 @@ interface Props {
 
 const PageHeader: React.FC<Props> = ({ title, pageType, isFeatured,  subtitle, getTicketsUrl, minTicketPrice }) => {
 
-	const icon = pageType === "venue" ? '/location-pin.svg' : "";
+	const icon = pageType === "venue" ? '/icons/location-pin.svg' : "";
 	const pageTypeUppercase = pageType.charAt(0).toUpperCase() + pageType.slice(1)
 
 	const recordType = minTicketPrice === 0
