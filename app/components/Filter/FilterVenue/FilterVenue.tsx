@@ -12,10 +12,7 @@ import camelcaseKeys from 'camelcase-keys';
 import getConfig from "next/config";
 
 // Constants
-import {
-	FILTER_VENUE_NAME_KEY,
-	FILTER_VENUE_CITY_KEY,
-} from '../../../constants/localstorage';
+import { FILTER_VENUE_NAME_KEY, FILTER_VENUE_CITY_KEY } from '@/constants';
 
 interface FilterVenueProps {
 	setVenueIds: React.Dispatch<React.SetStateAction<uuid[]>>;
