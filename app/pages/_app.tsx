@@ -4,12 +4,8 @@ import { useState } from 'react';
 import '../styles/global.css';
 
 import type { AppProps } from 'next/app';
-import Header from '../components/Header/Header';
-import Footer from '../components/Footer/Footer'
+import { Header, Footer, Banner, Disclaimer, SubHeaderMessage } from '@/components';
 import { LocationScope } from '@/enums';
-import Banner from '../components/Banner/Banner';
-import Disclaimer from '../components/Disclaimer/Disclaimer';
-import SubHeaderMessage from '../components/SubHeaderMessage/SubHeaderMessage';
 
 function MyApp({ Component, pageProps }: AppProps) {
 	const [location, setLocation] = useState<LocationScope>(LocationScope.Melbourne);

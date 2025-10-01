@@ -18,16 +18,9 @@ import { PageType } from "@/enums"
 import styles from "../../styles/page.module.css"
 
 // Components
-import Carousel from "../../components/Carousel/Carousel"
-import Description from "../../components/Description/Description"
-import Embeds from "../../components/Embeds/Embeds";
-import FeatureHighlight from "../../components/FeatureHighlight/FeatureHighlight";
-import PageHeader from "../../components/PageHeader/PageHeader";
-import Socials from "../../components/Socials/Socials";
-import UpcomingEvents from "../../components/UpcomingEvents/UpcomingEvents";
-import VenueLocation from "../../components/VenueLocation/VenueLocation";
+import { Carousel, Description, PageHeader, Socials, UpcomingEvents, VenueLocation, Recommended } from '@/components'
 import { formatLocation } from "@/utils";
-import Recommended from "../../components/Recommended/Recommended";
+
 
 
 const VenueDetail = () => {

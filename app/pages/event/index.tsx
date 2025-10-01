@@ -2,13 +2,8 @@ import React, { useState, useMemo } from "react"
 import Head from "next/head"
 
 // Custom
-import SectionHeader from "../../components/SectionHeader/SectionHeader"
-import DateHeader from "../../components/DateHeader/DateHeader"
-import CardGrid from "../../components/CardGrid/CardGrid"
+import { SectionHeader, DateHeader, CardGrid, FilterEvent, Button, Hero } from '@/components'
 import { CardGridType } from "@/enums"
-import FilterEvent from "../../components/Filter/FilterEvent/FilterEvent"
-import Button from "../../components/Button/Button"
-import Hero from "../../components/Hero/Hero"
 
 const DAYS_LOADED = 10;
 

@@ -7,11 +7,7 @@ import axios from 'axios';
 import camelcaseKeys from 'camelcase-keys';
 
 // Components
-import SectionHeader from "../components/SectionHeader/SectionHeader";
-import CardGrid from "../components/CardGrid/CardGrid";
-import Hero from "../components/Hero/Hero"
-import CardRow from "../components/CardRow/CardRow";
-import EmbedsLocalScene from "../components/Embeds/EmbedsLocalScene";
+import { SectionHeader, CardGrid, Hero, EmbedsLocalScene } from '@/components';
 
 // Config
 import getConfig from "next/config";

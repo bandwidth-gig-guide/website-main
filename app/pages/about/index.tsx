@@ -1,8 +1,7 @@
 // React / Next
 import React from "react"
 import Head from 'next/head';
-import SectionHeader from "../../components/SectionHeader/SectionHeader";
-import Hero from "../../components/Hero/Hero"
+import { SectionHeader, Hero } from '@/components';
 
 const Venue = () => {
 

@@ -21,14 +21,7 @@ import styles from "../../styles/page.module.css"
 import { formatDateLong } from "@/utils";
 
 // Components
-import Carousel from "../../components/Carousel/Carousel"
-import Description from "../../components/Description/Description"
-import FeatureHighlight from "../../components/FeatureHighlight/FeatureHighlight";
-import PageHeader from "../../components/PageHeader/PageHeader";
-import Socials from "../../components/Socials/Socials";
-import PerformanceTimes from "../../components/PerformanceTimes/PerformanceTimes";
-import Tickets from "../../components/Tickets/Tickets";
-import Recommended from "../../components/Recommended/Recommended";
+import { Carousel, Description, PageHeader, Socials, PerformanceTimes, Recommended } from '@/components'
 
 const EventDetail = () => {
 

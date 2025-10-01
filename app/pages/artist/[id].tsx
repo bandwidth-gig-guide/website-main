@@ -18,15 +18,7 @@ import { PageType } from "@/enums"
 import styles from "../../styles/page.module.css"
 
 // Components
-import Carousel from "../../components/Carousel/Carousel"
-import Description from "../../components/Description/Description"
-import Embeds from "../../components/Embeds/Embeds";
-import FeatureHighlight from "../../components/FeatureHighlight/FeatureHighlight";
-import PageHeader from "../../components/PageHeader/PageHeader";
-import Socials from "../../components/Socials/Socials";
-import UpcomingEvents from "../../components/UpcomingEvents/UpcomingEvents";
-import Recommended from "../../components/Recommended/Recommended";
-
+import { Carousel, Description, Embeds, PageHeader, Socials, UpcomingEvents, Recommended } from '@/components'
 
 const ArtistDetail = () => {
 
