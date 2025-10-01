@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Socials.module.css';
 import SectionHeader from '../SectionHeader/SectionHeader';
-import { Social } from '../../types/models/Social';
+import { Social } from '../../models/Social';
 import { icons } from './Icons';
 
 interface Props {

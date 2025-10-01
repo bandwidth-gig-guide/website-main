@@ -1,6 +1,6 @@
 import React from 'react'
-import { EventPerformance } from '../../types/models/EventPerformance'
-import { EventVenue } from '../../types/models/EventVenue';
+import { EventPerformance } from '../../models/EventPerformance'
+import { EventVenue } from '../../models/EventVenue';
 import Chip from "../Chip/Chip"
 import styles from './PerformanceTimes.module.css'
 import { PageType } from '../../enums/PageType';

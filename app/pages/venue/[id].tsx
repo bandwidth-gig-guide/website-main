@@ -11,7 +11,7 @@ import camelcaseKeys from "camelcase-keys";
 import getConfig from "next/config";
 
 // Custom
-import { Venue } from "../../types/models/Venue"
+import { Venue } from "../../models/Venue"
 import { PageType } from "../../enums/PageType"
 
 // Styling
