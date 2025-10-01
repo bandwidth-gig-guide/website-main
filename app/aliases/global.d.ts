@@ -1,4 +1,4 @@
-import { StateCode } from '../enums/StateCode';
+import { StateCode } from '@/enums';
 
 declare global {
   type uuid = string;
