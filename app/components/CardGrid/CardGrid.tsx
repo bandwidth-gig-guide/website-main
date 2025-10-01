@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import styles from './CardGrid.module.css'
-import { CardGridType } from '../../types/enums/CardGridType'
+import { CardGridType } from '../../enums/CardGridType'
 import CardArtist from '../Card/CardArtist/CardArtist'
 import CardVenue from '../Card/CardVenue/CardVenue'
 import CardEvent from '../Card/CardEvent/CardEvent'

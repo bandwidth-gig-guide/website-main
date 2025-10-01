@@ -1,5 +1,5 @@
 import React from 'react'
-import { PageType } from '../../types/enums/PageType';
+import { PageType } from '../../enums/PageType';
 import styles from './Chip.module.css'
 import Link from "next/link";
 

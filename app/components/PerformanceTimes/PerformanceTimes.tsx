@@ -1,9 +1,9 @@
 import React from 'react'
-import { EventPerformance } from '../../types/models/EventPerformance'
-import { EventVenue } from '../../types/models/EventVenue';
+import { EventPerformance } from '../../types/EventPerformance'
+import { EventVenue } from '../../types/EventVenue';
 import Chip from "../Chip/Chip"
 import styles from './PerformanceTimes.module.css'
-import { PageType } from '../../types/enums/PageType';
+import { PageType } from '../../enums/PageType';
 import { formatDateToTime } from '../../util/formatDateToTime';
 
 interface Props {

@@ -11,8 +11,8 @@ import camelcaseKeys from "camelcase-keys";
 import getConfig from "next/config";
 
 // Types
-import { Artist } from "../../types/models/Artist"
-import { PageType } from "../../types/enums/PageType"
+import { Artist } from "../../types/Artist"
+import { PageType } from "../../enums/PageType"
 
 // Styling
 import styles from "../../styles/page.module.css"

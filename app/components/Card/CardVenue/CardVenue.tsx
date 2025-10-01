@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 
-import { VenueBrief } from '../../../types/models/VenueBrief'
+import { VenueBrief } from '../../../types/VenueBrief'
 import axios from 'axios'
 import camelcaseKeys from 'camelcase-keys'
 import getConfig from "next/config";
