@@ -12,16 +12,10 @@ import camelcaseKeys from 'camelcase-keys';
 import getConfig from "next/config";
 
 // Constants
-import { TAGS } from '../../../constants/tags';
-import {
-	FILTER_TAGS_KEY,
-	FILTER_EVENT_NAME_KEY,
-	FILTER_EVENT_STATECODE_KEY,
-	FILTER_EVENT_CITY_KEY,
-	FILTER_EVENT_MAX_PRICE_KEY,
-	FILTER_EVENT_TYPE_KEY,
-	FILTER_EVENT_DATE_KEY
-} from '../../../constants/localstorage';
+import { 
+	TAGS, FILTER_TAGS_KEY, FILTER_EVENT_NAME_KEY, FILTER_EVENT_STATECODE_KEY, FILTER_EVENT_CITY_KEY, 
+	FILTER_EVENT_MAX_PRICE_KEY, FILTER_EVENT_TYPE_KEY, FILTER_EVENT_DATE_KEY 
+} from '@/constants';
 
 interface FilterEventProps {
 	setEventIds?: React.Dispatch<React.SetStateAction<uuid[]>>;
