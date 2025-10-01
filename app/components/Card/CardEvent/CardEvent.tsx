@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { EventBrief } from '../../../types/EventBrief'
+import { EventBrief } from '@/types'
 import axios from 'axios'
 import camelcaseKeys from 'camelcase-keys'
 import getConfig from "next/config";

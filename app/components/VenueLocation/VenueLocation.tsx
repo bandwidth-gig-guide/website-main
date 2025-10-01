@@ -5,7 +5,7 @@ import styles from './VenueLocation.module.css'
 import GoogleMapsEmbed from '../Embeds/Embed/GoogleMapsEmbed';
 
 import { formatOpeningHours } from '../../util/formatOpeningHours';
-import { OpeningHours } from '../../types/OpeningHours';
+import { OpeningHours } from '@/types';
 
 interface Props {
 	location: string

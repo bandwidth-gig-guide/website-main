@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { ArtistBrief } from '../../../types/ArtistBrief'
+import { ArtistBrief } from '@/types'
 import axios from 'axios'
 import camelcaseKeys from 'camelcase-keys'
 import getConfig from "next/config";
