@@ -6,7 +6,7 @@ import camelcaseKeys from 'camelcase-keys'
 import getConfig from "next/config";
 import CardBase from '../CardBase/CardBase'
 import CardLoading from '../CardLoading/CardLoading'
-import { formatDateShort } from '../../../utils/formatDateShort'
+import { formatDateShort } from '@/utils'
 
 interface Props {
 	eventId: uuid

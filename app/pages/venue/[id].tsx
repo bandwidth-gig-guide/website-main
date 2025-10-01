@@ -26,7 +26,7 @@ import PageHeader from "../../components/PageHeader/PageHeader";
 import Socials from "../../components/Socials/Socials";
 import UpcomingEvents from "../../components/UpcomingEvents/UpcomingEvents";
 import VenueLocation from "../../components/VenueLocation/VenueLocation";
-import { formatLocation } from "../../utils/formatLocation";
+import { formatLocation } from "@/utils";
 import Recommended from "../../components/Recommended/Recommended";
 
 
