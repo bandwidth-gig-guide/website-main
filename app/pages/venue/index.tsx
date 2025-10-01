@@ -2,12 +2,8 @@
 import React, { useState } from "react"
 import Head from 'next/head';
 
-import SectionHeader from "../../components/SectionHeader/SectionHeader";
-import CardGrid from "../../components/CardGrid/CardGrid";
+import { SectionHeader, CardGrid, FilterVenue, CityMap, Hero } from '@/components';
 import { CardGridType } from "@/enums";
-import FilterVenue from "../../components/Filter/FilterVenue/FilterVenue";
-import CityMap from "../../components/CityMap/CityMap";
-import Hero from "../../components/Hero/Hero"
 
 
 
