@@ -10,7 +10,7 @@ Run the following command to start the project.
 docker compose up -d --build
 ```
 
-The application is accessible through a reverse proxy on [localhost](https://localhost):
+The application is accessible through a reverse proxy on [localhost](https://localhost).
 
 Hot reloading is enabled for local development.
 
