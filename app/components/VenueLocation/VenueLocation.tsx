@@ -31,20 +31,20 @@ const VenueLocation: React.FC<Props> = ({
 			</div>
 			<div className={styles.infoWrapper}>
 				<div className={styles.info}>
-					<img src="/location-pin.svg" alt="Location Icon" />
+					<img src="/icons/location-pin.svg" alt="Location Icon" />
 					<span>{location}</span>
 				</div>
 				<div className={styles.info}>
-					<img src="/website.svg" alt="Website Icon" />
+					<img src="/icons/website.svg" alt="Website Icon" />
 					<a href={websiteUrl} target='_blank'>{websiteUrl}</a>
 				</div>
 				<div className={styles.info}>
-					<img src="/mobile.svg" alt="Phone Icon" />
+					<img src="/icons/mobile.svg" alt="Phone Icon" />
 					<span>{phoneNumber}</span>
 				</div>
 				{openingHours && 
 					<div className={styles.info}>
-						<img className={styles.selfAlignStart} src="/date.svg" alt="Date Icon" />
+						<img className={styles.selfAlignStart} src="/icons/date.svg" alt="Date Icon" />
 						<div className={styles.hoursWrapper}>
 							<div className={styles.hours}>
 								<span>Monday</span>

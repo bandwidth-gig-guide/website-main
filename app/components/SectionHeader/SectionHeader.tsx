@@ -15,7 +15,7 @@ const SectionHeader: React.FC<Props> = ({ title, route, scrollToTopOnClick }) =>
 			) : (
 				<h2>{title}</h2>
 			)}
-			<img src="/arrow-down-left.svg" alt="Arrow down left" />
+			<img src="/icons/arrow-down-left.svg" alt="Arrow down left" />
 		</div>
 	)
 };

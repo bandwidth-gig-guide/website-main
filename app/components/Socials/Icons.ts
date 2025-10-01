@@ -1,12 +1,12 @@
 export const icons = {
-    Website: '/website.svg',
-    Facebook: '/facebook.svg',
-    Twitter: '/twitter.svg',
-    Instagram: '/instagram.svg',
-    TikTok: '/tiktok.svg',
-    SoundCloud: '/soundcloud.svg',
-    Spotify: '/spotify.svg',
-    Bandcamp: '/bandcamp.svg',
-    YouTube: '/youtube.svg',
-    default: '/generic.svg'
+    Website: '/icons/website.svg',
+    Facebook: '/icons/facebook.svg',
+    Twitter: '/icons/twitter.svg',
+    Instagram: '/icons/instagram.svg',
+    TikTok: '/icons/tiktok.svg',
+    SoundCloud: '/icons/soundcloud.svg',
+    Spotify: '/icons/spotify.svg',
+    Bandcamp: '/icons/bandcamp.svg',
+    YouTube: '/icons/youtube.svg',
+    default: '/icons/generic.svg'
 };
