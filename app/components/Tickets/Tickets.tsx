@@ -1,5 +1,5 @@
 import React from 'react'
-import { EventPrice } from '../../models/EventPrice'
+import { EventPrice } from '../../types/EventPrice'
 import styles from './TIckets.module.css'
 
 interface Props {
