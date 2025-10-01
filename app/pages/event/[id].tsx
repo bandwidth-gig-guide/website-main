@@ -18,7 +18,7 @@ import { PageType } from "@/enums"
 import styles from "../../styles/page.module.css"
 
 // Utils
-import { formatDateLong } from "../../util/formatDateLong";
+import { formatDateLong } from "../../utils/formatDateLong";
 
 // Components
 import Carousel from "../../components/Carousel/Carousel"

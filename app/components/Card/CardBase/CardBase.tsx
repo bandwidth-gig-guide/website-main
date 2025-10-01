@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './CardBase.module.css'
-import { stringToHex } from '../../../util/stringToHex'
+import { stringToHex } from '../../../utils/stringToHex'
 
 interface Props {
 	topLeft: string,

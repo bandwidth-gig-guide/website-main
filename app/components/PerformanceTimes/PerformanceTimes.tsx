@@ -3,7 +3,7 @@ import { EventPerformance, EventVenue } from '@/types'
 import Chip from "../Chip/Chip"
 import styles from './PerformanceTimes.module.css'
 import { PageType } from '@/enums';
-import { formatDateToTime } from '../../util/formatDateToTime';
+import { formatDateToTime } from '../../utils/formatDateToTime';
 
 interface Props {
     eventPerformances: EventPerformance[];
