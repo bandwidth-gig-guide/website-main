@@ -1,18 +1,9 @@
-// React
 import React, { useEffect, useState } from 'react';
-
-// Styling
-import styles from './FilterVenue.module.css'
-
-// External libraries
+import { FILTER_VENUE_NAME_KEY, FILTER_VENUE_CITY_KEY } from '@/constants';
+import getConfig from "next/config";
 import axios from 'axios';
 import camelcaseKeys from 'camelcase-keys';
-
-// Config
-import getConfig from "next/config";
-
-// Constants
-import { FILTER_VENUE_NAME_KEY, FILTER_VENUE_CITY_KEY } from '@/constants';
+import styles from './FilterVenue.module.css'
 
 interface FilterVenueProps {
 	setVenueIds: React.Dispatch<React.SetStateAction<uuid[]>>;

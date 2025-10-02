@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
-import styles from './Carousel.module.css';
 import { stringToHex } from '@/utils';
+import styles from './Carousel.module.css';
+
 
 interface Props {
   imageUrls: string[];

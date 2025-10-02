@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import styles from "./Disclaimer.module.css"
 import { pipes } from "./pipes"
+import styles from "./Disclaimer.module.css"
+
 
 const Disclaimer = () => {
   const [snackbar, setSnackbar] = useState<string | null>(null)

@@ -1,11 +1,9 @@
 import React from 'react'
-import styles from './VenueLocation.module.css'
-
-// Components
-import GoogleMapsEmbed from '../Embeds/Embed/GoogleMapsEmbed';
-
+import { GoogleMapsEmbed } from '@/components';
 import { formatOpeningHours } from '@/utils';
 import { OpeningHours } from '@/types';
+import styles from './VenueLocation.module.css'
+
 
 interface Props {
 	location: string

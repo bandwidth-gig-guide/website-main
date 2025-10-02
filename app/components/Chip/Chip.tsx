@@ -1,7 +1,7 @@
 import React from 'react'
 import { PageType } from '@/enums';
-import styles from './Chip.module.css'
 import Link from "next/link";
+import styles from './Chip.module.css'
 
 
 interface Props {

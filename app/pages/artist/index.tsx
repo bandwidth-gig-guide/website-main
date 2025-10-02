@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
-import Head from "next/head";
-
+import React, { useState } from 'react';
 import { SectionHeader, CardGrid, FilterArtist, Hero } from '@/components';
-import { CardGridType } from "@/enums";
+import { CardGridType } from '@/enums';
+import Head from 'next/head';
 
 
 const Artist = () => {

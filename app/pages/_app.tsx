@@ -1,11 +1,10 @@
-import Head from 'next/head';
 import { useState } from 'react';
-
+import { Header, Footer, Banner, Disclaimer } from '@/components';
+import { LocationScope } from '@/enums';
+import Head from 'next/head';
+import type { AppProps } from 'next/app';
 import '../styles/global.css';
 
-import type { AppProps } from 'next/app';
-import { Header, Footer, Banner, Disclaimer, SubHeaderMessage } from '@/components';
-import { LocationScope } from '@/enums';
 
 function MyApp({ Component, pageProps }: AppProps) {
 	const [location, setLocation] = useState<LocationScope>(LocationScope.Melbourne);

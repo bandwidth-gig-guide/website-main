@@ -1,17 +1,8 @@
-// React
 import React, { useEffect, useState } from 'react';
-
-// Styling
-import styles from './FilterArtist.module.css'
-
-// External libraries
+import getConfig from "next/config";
 import axios from 'axios';
 import camelcaseKeys from 'camelcase-keys';
-
-// Config
-import getConfig from "next/config";
-
-// Constants
+import styles from './FilterArtist.module.css'
 import { 
 	TAGS, FILTER_TAGS_KEY, FILTER_ARTIST_NAME_KEY, FILTER_ARTIST_CITY_KEY, 
 	FILTER_ARTIST_UPCOMING_KEY 

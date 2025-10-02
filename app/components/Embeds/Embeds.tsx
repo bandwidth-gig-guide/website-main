@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { SectionHeader, SpotifyEmbed, YoutubeEmbed} from '@/components'
 import styles from './Embeds.module.css';
-import SectionHeader from '../SectionHeader/SectionHeader';
-import SpotifyEmbed from './Embed/SpotifyEmbed';
-import YoutubeEmbed from './Embed/YoutubeEmbed';
+
 
 interface Props {
   spotifyEmbedUrl?: string;

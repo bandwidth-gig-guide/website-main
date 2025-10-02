@@ -1,6 +1,6 @@
 import Link from "next/link";
-import styles from './SectionHeader.module.css'
 import { Props } from './Props'
+import styles from './SectionHeader.module.css'
 
 
 const SectionHeader: React.FC<Props> = ({ title, route, scrollToTopOnClick }) => {

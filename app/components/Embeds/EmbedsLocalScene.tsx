@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { SectionHeader, SpotifyEmbed } from '@/components'
 import Link from 'next/link'
 import styles from './Embeds.module.css';
-import SectionHeader from '../SectionHeader/SectionHeader';
-import SpotifyEmbed from './Embed/SpotifyEmbed';
+
 
 const embedData = [
   {

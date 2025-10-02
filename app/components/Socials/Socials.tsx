@@ -1,8 +1,9 @@
 import React from 'react';
-import styles from './Socials.module.css';
-import SectionHeader from '../SectionHeader/SectionHeader';
+import { SectionHeader } from '@/components';
 import { Social } from '@/types';
 import { icons } from './Icons';
+import styles from './Socials.module.css';
+
 
 interface Props {
   socials: Social[];

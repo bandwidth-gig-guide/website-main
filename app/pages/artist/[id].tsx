@@ -1,24 +1,13 @@
-// React / Next
-import React, { useState, useEffect } from "react"
-import Head from 'next/head';
-import { useRouter } from "next/router";
-
-// External
-import axios from "axios"
-import camelcaseKeys from "camelcase-keys";
-
-// Config
-import getConfig from "next/config";
-
-// Types
-import { Artist } from '@/types'
-import { PageType } from "@/enums"
-
-// Styling
-import styles from "../../styles/page.module.css"
-
-// Components
+import React, { useState, useEffect } from 'react'
 import { Carousel, Description, Embeds, PageHeader, Socials, UpcomingEvents, Recommended } from '@/components'
+import { PageType } from '@/enums'
+import { Artist } from '@/types'
+import { useRouter } from 'next/router';
+import Head from 'next/head';
+import getConfig from 'next/config';
+import axios from 'axios'
+import camelcaseKeys from 'camelcase-keys';
+import styles from '../../styles/page.module.css'
 
 const ArtistDetail = () => {
 

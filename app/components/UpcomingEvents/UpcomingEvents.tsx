@@ -1,7 +1,7 @@
 import React from 'react';
+import { CardGrid, SectionHeader } from '@/components';
 import styles from './UpcomingEvents.module.css'
-import SectionHeader from '../SectionHeader/SectionHeader';
-import CardGrid from '../CardGrid/CardGrid';
+
 
 interface Props {
   eventIds?: uuid[];

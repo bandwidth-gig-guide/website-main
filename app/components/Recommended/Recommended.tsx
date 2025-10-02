@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import styles from './Recommended.module.css'
-import SectionHeader from '../SectionHeader/SectionHeader';
-import CardGrid from "../CardGrid/CardGrid";
+import { CardGrid, SectionHeader } from '@/components';
 import { PageType } from '@/enums';
+import getConfig from 'next/config';
+import axios from 'axios'
+import styles from './Recommended.module.css'
 
-// External
-import axios from "axios"
-
-// Config
-import getConfig from "next/config";
 
 interface Props {
   id: uuid;

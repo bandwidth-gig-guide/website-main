@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import Link from 'next/link'
+import { CardBase, CardLoading } from '@/components'
 import { ArtistBrief } from '@/types'
+import Link from 'next/link'
+import getConfig from "next/config";
 import axios from 'axios'
 import camelcaseKeys from 'camelcase-keys'
-import getConfig from "next/config";
-import CardBase from '../CardBase/CardBase'
-import CardLoading from '../CardLoading/CardLoading'
+
 
 interface Props {
 	artistId: uuid
