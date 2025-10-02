@@ -9,6 +9,7 @@ env:
   TAG: latest
   REGISTRY: ghcr.io
   ORG: bandwidth-gig-guide
+  PATH_TO_DOCKER_COMPOSE_FOLDER: deployment/
 
 on:
   push:
@@ -50,7 +51,7 @@ jobs:
           username: ${{ secrets.DO_USER }}
           key: ${{ secrets.DO_SSH_KEY }}
           script: |
-            cd /deployment/
+            cd ${{ env.PATH_TO_DOCKER_COMPOSE_FOLDER }}
             docker-compose pull ${{ env.CONTAINER_NAME }}
             docker-compose up -d --remove-orphans ${{ env.CONTAINER_NAME }}
             docker image prune -af || true
