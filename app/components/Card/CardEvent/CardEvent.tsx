@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import Link from 'next/link'
+import { CardBase, CardLoading } from '@/components'
 import { EventBrief } from '@/types'
+import { formatDateShort } from '@/utils'
+import Link from 'next/link'
+import getConfig from "next/config";
 import axios from 'axios'
 import camelcaseKeys from 'camelcase-keys'
-import getConfig from "next/config";
-import CardBase from '../CardBase/CardBase'
-import CardLoading from '../CardLoading/CardLoading'
-import { formatDateShort } from '@/utils'
+
 
 interface Props {
 	eventId: uuid

@@ -1,17 +1,8 @@
-// React
 import React, { useEffect, useState } from 'react';
-
-// Styling
-import styles from './FilterEvent.module.css'
-
-// External libraries
+import getConfig from "next/config";
 import axios from 'axios';
 import camelcaseKeys from 'camelcase-keys';
-
-// Config
-import getConfig from "next/config";
-
-// Constants
+import styles from './FilterEvent.module.css'
 import { 
 	TAGS, FILTER_TAGS_KEY, FILTER_EVENT_NAME_KEY, FILTER_EVENT_STATECODE_KEY, FILTER_EVENT_CITY_KEY, 
 	FILTER_EVENT_MAX_PRICE_KEY, FILTER_EVENT_TYPE_KEY, FILTER_EVENT_DATE_KEY 

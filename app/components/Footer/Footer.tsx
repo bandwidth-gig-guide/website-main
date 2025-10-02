@@ -1,6 +1,6 @@
-import styles from './Footer.module.css'
 import Link from "next/link";
 import { routes } from './Routes'
+import styles from './Footer.module.css'
 
 const Footer = () => {
 	return (

@@ -2,6 +2,7 @@ import React from 'react';
 import Link from "next/link";
 import styles from "./Hero.module.css";
 
+
 const artwork = {
   artwork_21x7: "./heros/0001-21x7.png",
   artwork_24x36: "",

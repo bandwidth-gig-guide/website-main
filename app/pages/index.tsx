@@ -1,17 +1,9 @@
-// React / Next
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect } from 'react'
+import { SectionHeader, CardGrid, Hero, EmbedsLocalScene } from '@/components';
 import Head from 'next/head';
-
-// External libraries
+import getConfig from 'next/config';
 import axios from 'axios';
 import camelcaseKeys from 'camelcase-keys';
-
-// Components
-import { SectionHeader, CardGrid, Hero, EmbedsLocalScene } from '@/components';
-
-// Config
-import getConfig from "next/config";
-import { CardGridType } from "@/enums";
 
 
 const Home = () => {

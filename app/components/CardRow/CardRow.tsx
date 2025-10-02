@@ -1,8 +1,7 @@
 import React from 'react'
+import { CardArtist, CardEvent, CardVenue } from '@/components'
 import styles from './CardRow.module.css'
-import CardEvent from '../Card/CardEvent/CardEvent'
-import CardArtist from '../Card/CardArtist/CardArtist'
-import CardVenue from '../Card/CardVenue/CardVenue'
+
 
 interface Props {
   eventIds?: uuid[],

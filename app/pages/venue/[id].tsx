@@ -1,26 +1,14 @@
-// React / Next
-import React, { useState, useEffect } from "react"
-import Head from 'next/head';
-import { useRouter } from "next/router";
-
-// External
-import axios from "axios"
-import camelcaseKeys from "camelcase-keys";
-
-// Config
-import getConfig from "next/config";
-
-// Custom
-import { Venue } from '@/types'
-import { PageType } from "@/enums"
-
-// Styling
-import styles from "../../styles/page.module.css"
-
-// Components
+import React, { useState, useEffect } from 'react'
 import { Carousel, Description, PageHeader, Socials, UpcomingEvents, VenueLocation, Recommended } from '@/components'
-import { formatLocation } from "@/utils";
-
+import { PageType } from '@/enums'
+import { Venue } from '@/types'
+import { formatLocation } from '@/utils';
+import { useRouter } from 'next/router';
+import getConfig from 'next/config';
+import Head from 'next/head';
+import axios from 'axios'
+import camelcaseKeys from 'camelcase-keys';
+import styles from '../../styles/page.module.css'
 
 
 const VenueDetail = () => {

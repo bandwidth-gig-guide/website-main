@@ -1,5 +1,5 @@
-import styles from './DateHeader.module.css'
 import { Props } from './Props'
+import styles from './DateHeader.module.css'
 
 
 const SectionHeader: React.FC<Props> = ({ date }) => {

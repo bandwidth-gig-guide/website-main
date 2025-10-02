@@ -1,10 +1,7 @@
-// React / Next
 import React, { useState } from "react"
-import Head from 'next/head';
-
 import { SectionHeader, CardGrid, FilterVenue, CityMap, Hero } from '@/components';
 import { CardGridType } from "@/enums";
-
+import Head from 'next/head';
 
 
 const Venue = () => {

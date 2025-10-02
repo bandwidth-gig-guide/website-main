@@ -1,5 +1,5 @@
-import styles from './FilterBase.module.css'
 import React from 'react'
+import styles from './FilterBase.module.css'
 
 const FilterBase = () => {
   return (

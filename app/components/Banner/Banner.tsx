@@ -1,6 +1,6 @@
 import React from 'react';
-import styles from "./Banner.module.css";
 import Link from "next/link";
+import styles from "./Banner.module.css";
 
 const bannerImages = [
   "/banners/banner-01.jpg",

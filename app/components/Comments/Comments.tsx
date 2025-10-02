@@ -1,6 +1,6 @@
 import React from 'react';
+import { SectionHeader } from '@/components';
 import styles from './Comments.module.css'
-import SectionHeader from '../SectionHeader/SectionHeader';
 
 interface Props {
   artistId?: uuid;

@@ -1,9 +1,8 @@
-import React, { useState, useMemo } from "react"
-import Head from "next/head"
-
-// Custom
+import React, { useState, useMemo } from 'react'
 import { SectionHeader, DateHeader, CardGrid, FilterEvent, Button, Hero } from '@/components'
-import { CardGridType } from "@/enums"
+import { CardGridType } from '@/enums'
+import Head from 'next/head'
+
 
 const DAYS_LOADED = 10;
 

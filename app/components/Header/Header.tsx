@@ -1,7 +1,8 @@
 import Link from "next/link";
-import styles from './Header.module.css'
-import { routes } from './Routes'
 import { LocationScope } from "@/enums";
+import { routes } from './Routes'
+import styles from './Header.module.css'
+
 
 interface Props {
 	location: LocationScope;
