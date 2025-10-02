@@ -52,6 +52,6 @@ jobs:
           key: ${{ secrets.DO_SSH_KEY }}
           script: |
             cd ${{ env.PATH_TO_DOCKER_COMPOSE_FOLDER }}
-            docker-compose pull ${{ env.CONTAINER_NAME }}
-            docker-compose up -d --remove-orphans ${{ env.CONTAINER_NAME }}
+            docker compose pull ${{ env.CONTAINER_NAME }}
+            docker compose up -d --remove-orphans ${{ env.CONTAINER_NAME }}
             docker image prune -af || true
