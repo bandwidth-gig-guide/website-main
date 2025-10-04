@@ -4,7 +4,7 @@ import axios from 'axios';
 import camelcaseKeys from 'camelcase-keys';
 import styles from './FilterEvent.module.css'
 import { 
-	TAGS, FILTER_TAGS_KEY, FILTER_EVENT_NAME_KEY, FILTER_EVENT_STATECODE_KEY, FILTER_EVENT_CITY_KEY, 
+	TAGS, FILTER_TAGS_KEY, FILTER_EVENT_NAME_KEY, FILTER_EVENT_STATECODE_KEY, FILTER_CITIES_KEY, 
 	FILTER_EVENT_MAX_PRICE_KEY, FILTER_EVENT_TYPE_KEY, FILTER_EVENT_DATE_KEY 
 } from '@/constants';
 
@@ -33,7 +33,7 @@ const FilterEvent: React.FC<FilterEventProps> = ({ setEventIds, setEventIdsByDat
 	useEffect(() => {
 		setName(localStorage.getItem(FILTER_EVENT_NAME_KEY) || '');
 		setStateCode(localStorage.getItem(FILTER_EVENT_STATECODE_KEY) || '');
-		setSelectedCities(JSON.parse(localStorage.getItem(FILTER_EVENT_CITY_KEY) || '[]'));
+		setSelectedCities(JSON.parse(localStorage.getItem(FILTER_CITIES_KEY) || '[]'));
 		setMaxPrice(Number(localStorage.getItem(FILTER_EVENT_MAX_PRICE_KEY)) || 9999);
 		setSelectedTypes(JSON.parse(localStorage.getItem(FILTER_EVENT_TYPE_KEY) || '[]'));
 		setSelectedDates(JSON.parse(localStorage.getItem(FILTER_EVENT_DATE_KEY) || '[]'));
@@ -97,7 +97,7 @@ const FilterEvent: React.FC<FilterEventProps> = ({ setEventIds, setEventIdsByDat
 		// Save filters so that they persist
 		localStorage.setItem(FILTER_EVENT_NAME_KEY, name);
 		localStorage.setItem(FILTER_EVENT_STATECODE_KEY, stateCode);
-		localStorage.setItem(FILTER_EVENT_CITY_KEY, JSON.stringify(selectedCities));
+		localStorage.setItem(FILTER_CITIES_KEY, JSON.stringify(selectedCities));
 		localStorage.setItem(FILTER_EVENT_MAX_PRICE_KEY, maxPrice.toString());
 		localStorage.setItem(FILTER_EVENT_TYPE_KEY, JSON.stringify(selectedTypes));
 		localStorage.setItem(FILTER_EVENT_DATE_KEY, JSON.stringify(selectedDates));
@@ -132,7 +132,7 @@ const FilterEvent: React.FC<FilterEventProps> = ({ setEventIds, setEventIdsByDat
 
 		localStorage.removeItem(FILTER_EVENT_NAME_KEY);
 		localStorage.removeItem(FILTER_EVENT_STATECODE_KEY);
-		localStorage.removeItem(FILTER_EVENT_CITY_KEY);
+		localStorage.removeItem(FILTER_CITIES_KEY);
 		localStorage.removeItem(FILTER_EVENT_MAX_PRICE_KEY);
 		localStorage.removeItem(FILTER_EVENT_TYPE_KEY);
 		localStorage.removeItem(FILTER_EVENT_DATE_KEY);

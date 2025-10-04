@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FILTER_VENUE_NAME_KEY, FILTER_VENUE_CITY_KEY, FILTER_VENUE_UPCOMING_KEY } from '@/constants';
+import { FILTER_VENUE_NAME_KEY, FILTER_CITIES_KEY, FILTER_VENUE_UPCOMING_KEY } from '@/constants';
 import getConfig from "next/config";
 import axios from 'axios';
 import camelcaseKeys from 'camelcase-keys';
@@ -24,7 +24,7 @@ const FilterVenue: React.FC<FilterVenueProps> = ({ setVenueIds }) => {
 	// Load filters from localStorage on mount
 	useEffect(() => {
 		setName(localStorage.getItem(FILTER_VENUE_NAME_KEY) || '');
-		setSelectedCities(JSON.parse(localStorage.getItem(FILTER_VENUE_CITY_KEY) || '[]'));
+		setSelectedCities(JSON.parse(localStorage.getItem(FILTER_CITIES_KEY) || '[]'));
 		setHasUpcomingEvent(localStorage.getItem(FILTER_VENUE_UPCOMING_KEY) === 'true');
 
 		setFiltersLoaded(true); 
@@ -75,7 +75,7 @@ const FilterVenue: React.FC<FilterVenueProps> = ({ setVenueIds }) => {
 
 		// Save filters so that they persist
 		localStorage.setItem(FILTER_VENUE_NAME_KEY, name);
-		localStorage.setItem(FILTER_VENUE_CITY_KEY, JSON.stringify(selectedCities));
+		localStorage.setItem(FILTER_CITIES_KEY, JSON.stringify(selectedCities));
 		localStorage.setItem(FILTER_VENUE_UPCOMING_KEY, hasUpcomingEvent.toString());
 
 		fetchVenues();
@@ -98,7 +98,7 @@ const FilterVenue: React.FC<FilterVenueProps> = ({ setVenueIds }) => {
 		setHasUpcomingEvent(false);
 
 		localStorage.removeItem(FILTER_VENUE_NAME_KEY);
-		localStorage.removeItem(FILTER_VENUE_CITY_KEY);
+		localStorage.removeItem(FILTER_CITIES_KEY);
 		localStorage.removeItem(FILTER_VENUE_UPCOMING_KEY);
 	};
 
