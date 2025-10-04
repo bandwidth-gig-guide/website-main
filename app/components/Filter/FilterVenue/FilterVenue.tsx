@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FILTER_VENUE_NAME_KEY, FILTER_VENUE_CITY_KEY } from '@/constants';
+import { FILTER_VENUE_NAME_KEY, FILTER_VENUE_CITY_KEY, FILTER_VENUE_UPCOMING_KEY } from '@/constants';
 import getConfig from "next/config";
 import axios from 'axios';
 import camelcaseKeys from 'camelcase-keys';
@@ -25,6 +25,7 @@ const FilterVenue: React.FC<FilterVenueProps> = ({ setVenueIds }) => {
 	useEffect(() => {
 		setName(localStorage.getItem(FILTER_VENUE_NAME_KEY) || '');
 		setSelectedCities(JSON.parse(localStorage.getItem(FILTER_VENUE_CITY_KEY) || '[]'));
+		setHasUpcomingEvent(localStorage.getItem(FILTER_VENUE_UPCOMING_KEY) === 'true');
 
 		setFiltersLoaded(true); 
 	}, []);
@@ -57,6 +58,7 @@ const FilterVenue: React.FC<FilterVenueProps> = ({ setVenueIds }) => {
 
 				// Check params
 				if (name) params.append('name', name);
+				if (hasUpcomingEvent) params.append('hasUpcomingEvent', 'true');
 				selectedCities.forEach(city => params.append('city', city));
 
 				// Create Request
@@ -74,26 +76,30 @@ const FilterVenue: React.FC<FilterVenueProps> = ({ setVenueIds }) => {
 		// Save filters so that they persist
 		localStorage.setItem(FILTER_VENUE_NAME_KEY, name);
 		localStorage.setItem(FILTER_VENUE_CITY_KEY, JSON.stringify(selectedCities));
+		localStorage.setItem(FILTER_VENUE_UPCOMING_KEY, hasUpcomingEvent.toString());
 
 		fetchVenues();
 
-	}, [name, selectedCities]);
+	}, [name, selectedCities, hasUpcomingEvent]);
 
 	// Check if filters are being applied
 	useEffect(() => {
 		setFiltersActive(
 			name !== '' ||
-			selectedCities.length > 0
+			selectedCities.length > 0 ||
+			hasUpcomingEvent
 		);
-	}, [name, selectedCities]);
+	}, [name, selectedCities, hasUpcomingEvent]);
 
 	// Clear all filters
 	const resetFilters = () => {
 		setName('');
 		setSelectedCities([]);
+		setHasUpcomingEvent(false);
 
 		localStorage.removeItem(FILTER_VENUE_NAME_KEY);
 		localStorage.removeItem(FILTER_VENUE_CITY_KEY);
+		localStorage.removeItem(FILTER_VENUE_UPCOMING_KEY);
 	};
 
 	// Handles selection / deselection of tag
