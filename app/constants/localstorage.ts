@@ -21,3 +21,4 @@ export const FILTER_VENUE_NAME_KEY = "FilterVenueName";
 export const FILTER_VENUE_STATECODE_KEY = "FilterVenueStateCode";
 export const FILTER_VENUE_TYPE_KEY = "FilterVenueType";
 export const FILTER_VENUE_UPCOMING_KEY = "filterVenueHasUpcomingPerformance";
+export const FILTER_VENUE_IS_MONITORED = "filterVenueIsMonitored";

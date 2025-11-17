@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FILTER_VENUE_NAME_KEY, FILTER_CITIES_KEY, FILTER_VENUE_UPCOMING_KEY } from '@/constants';
+import { FILTER_VENUE_NAME_KEY, FILTER_CITIES_KEY, FILTER_VENUE_UPCOMING_KEY, FILTER_VENUE_IS_MONITORED } from '@/constants';
 import getConfig from "next/config";
 import axios from 'axios';
 import camelcaseKeys from 'camelcase-keys';
@@ -16,6 +16,7 @@ const FilterVenue: React.FC<FilterVenueProps> = ({ setVenueIds }) => {
 	const [selectableCities, setSelectableCities] = useState<string[]>([]);
 	const [selectedCities, setSelectedCities] = useState<string[]>([]);
 	const [hasUpcomingEvent, setHasUpcomingEvent] = useState<boolean>(false);
+	const [isMonitored, setIsMonitored] = useState<boolean>(false);
 	const [filtersActive, setFiltersActive] = useState(false);
 	const [filtersLoaded, setFiltersLoaded] = useState(false);
 
@@ -26,6 +27,7 @@ const FilterVenue: React.FC<FilterVenueProps> = ({ setVenueIds }) => {
 		setName(localStorage.getItem(FILTER_VENUE_NAME_KEY) || '');
 		setSelectedCities(JSON.parse(localStorage.getItem(FILTER_CITIES_KEY) || '[]'));
 		setHasUpcomingEvent(localStorage.getItem(FILTER_VENUE_UPCOMING_KEY) === 'true');
+		setIsMonitored(localStorage.getItem(FILTER_VENUE_IS_MONITORED) === 'true');
 
 		setFiltersLoaded(true); 
 	}, []);
@@ -59,6 +61,7 @@ const FilterVenue: React.FC<FilterVenueProps> = ({ setVenueIds }) => {
 				// Check params
 				if (name) params.append('name', name);
 				if (hasUpcomingEvent) params.append('hasUpcomingEvent', 'true');
+				if (isMonitored) params.append('isMonitored', 'true');
 				selectedCities.forEach(city => params.append('city', city));
 
 				// Create Request
@@ -80,7 +83,7 @@ const FilterVenue: React.FC<FilterVenueProps> = ({ setVenueIds }) => {
 
 		fetchVenues();
 
-	}, [name, selectedCities, hasUpcomingEvent]);
+	}, [name, selectedCities, hasUpcomingEvent, isMonitored]);
 
 	// Check if filters are being applied
 	useEffect(() => {
@@ -96,10 +99,12 @@ const FilterVenue: React.FC<FilterVenueProps> = ({ setVenueIds }) => {
 		setName('');
 		setSelectedCities([]);
 		setHasUpcomingEvent(false);
+		setIsMonitored(false);
 
 		localStorage.removeItem(FILTER_VENUE_NAME_KEY);
 		localStorage.removeItem(FILTER_CITIES_KEY);
 		localStorage.removeItem(FILTER_VENUE_UPCOMING_KEY);
+		localStorage.removeItem(FILTER_VENUE_IS_MONITORED);
 	};
 
 	// Handles selection / deselection of tag
@@ -124,10 +129,19 @@ const FilterVenue: React.FC<FilterVenueProps> = ({ setVenueIds }) => {
 				{/* Monitored by Bandwidth */}
 				<button
 					type="button"
+					className={`${styles.chip} ${isMonitored ? styles.active : ''}`}
+					onClick={() => setIsMonitored(prev => !prev)}
+				>
+					Monitored by Bandwidth
+				</button>
+
+				{/* Has Upcoming Events */}
+				<button
+					type="button"
 					className={`${styles.chip} ${hasUpcomingEvent ? styles.active : ''}`}
 					onClick={() => setHasUpcomingEvent(prev => !prev)}
 				>
-					Monitored by Bandwidth
+					Upcoming Events
 				</button>
 
 				{/* Reset */}
