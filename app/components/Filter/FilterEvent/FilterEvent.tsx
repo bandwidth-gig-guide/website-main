@@ -36,8 +36,10 @@ const FilterEvent: React.FC<FilterEventProps> = ({ setEventIds, setEventIdsByDat
 		setSelectedCities(JSON.parse(localStorage.getItem(FILTER_CITIES_KEY) || '[]'));
 		setMaxPrice(Number(localStorage.getItem(FILTER_EVENT_MAX_PRICE_KEY)) || 9999);
 		setSelectedTypes(JSON.parse(localStorage.getItem(FILTER_EVENT_TYPE_KEY) || '[]'));
-		setSelectedDates(JSON.parse(localStorage.getItem(FILTER_EVENT_DATE_KEY) || '[]'));
 		setSelectedTags(JSON.parse(localStorage.getItem(FILTER_TAGS_KEY) || '[]'));
+
+		const storedDates = JSON.parse(localStorage.getItem(FILTER_EVENT_DATE_KEY) || '[]');
+  	setSelectedDates(storedDates.map((date: Date) => new DateObject(date)));
 
 		setFiltersLoaded(true);
 	}, []);
@@ -100,7 +102,7 @@ const FilterEvent: React.FC<FilterEventProps> = ({ setEventIds, setEventIdsByDat
 		localStorage.setItem(FILTER_CITIES_KEY, JSON.stringify(selectedCities));
 		localStorage.setItem(FILTER_EVENT_MAX_PRICE_KEY, maxPrice.toString());
 		localStorage.setItem(FILTER_EVENT_TYPE_KEY, JSON.stringify(selectedTypes));
-		localStorage.setItem(FILTER_EVENT_DATE_KEY, JSON.stringify(selectedDates));
+		localStorage.setItem(FILTER_EVENT_DATE_KEY, JSON.stringify(selectedDates.map(date => date.format('YYYY-MM-DD'))));
 		localStorage.setItem(FILTER_TAGS_KEY, JSON.stringify(selectedTags));
 
 		fetchEvents();
