@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { routes } from './Routes'
+import { internalRoutes, externalRoutes } from './route'
+import { faqs } from './faqs'
 import styles from './Footer.module.css'
 
 const Footer = () => {
@@ -11,7 +12,7 @@ const Footer = () => {
 					<div className={styles.siteMap}>
 						<h4>Site Map</h4>
 						<div className={styles.siteMapLinks}>
-							{routes.map((route, index) => (
+							{internalRoutes.map((route, index) => (
 								<Link key={index} href={route.href} className={styles.link}>
 									{route.label}
 								</Link>
@@ -23,29 +24,12 @@ const Footer = () => {
 					<div className={styles.faqs}>
 						<h4>FAQs</h4>
 						<div className={styles.accordion}>
-							<details>
-								<summary>What is Bandwidth?</summary>
-								<p>
-									Bandwidth is the definitive Melbourne Gig Guide website that let's you search for
-									upcoming events, local venues, and your favorite artists.
-								</p>
-							</details>
-							<details>
-								<summary>How do we decide which artists to include?</summary>
-								<p>
-									Artists are added to our database when they are first identified as performing a
-									gig at a venue in Melbourne. If your favorite artist isn't on the site yet, tell
-									them to start playing some gigs in Melbourne!
-								</p>
-							</details>
-							<details>
-								<summary>Why can't I see my favorite venue on here?</summary>
-								<p>
-									Gathering information takes time! The more venues we track, the long it takes each
-									week. We're growing slowly, and making sure to only add more venues when we're
-									confident that we can handle the load.
-								</p>
-							</details>
+							{faqs.map((question, index) => (
+								<details key={index}>
+									<summary>{question.title}</summary>
+									<p>{question.content}</p>
+								</details>
+							))}
 						</div>
 					</div>
 
@@ -53,20 +37,19 @@ const Footer = () => {
 						<h4 className={styles.title}>Bandwidth</h4>
 						<p className={styles.tagline}>Melbourne Gig Guide</p>
 						<p><strong>SITE UNDER DEVELOPMENT</strong></p>
-						<p>Check back for the official release on:</p>
-						<p>Dec 01, 2025</p>
 						<br />
 						<p><em>"It's not poorly designed, it's punk"</em></p>
 					</div>
 
 				</div>
 				<div className={styles.bottom}>
-					<p>&copy; {new Date().getFullYear()} Matthew Cross. All rights reserved.</p>
+					<p>&copy; {new Date().getFullYear()} <a href="https://www.linkedin.com/in/matthew-cross-b02b9a268/" target="blank">Matthew Cross</a>. All rights reserved.</p>
 					<div className={styles.external}>
-						<img src="/icons/facebook-white.svg" alt="Facebook" />
-						<img src="/icons/instagram-white.svg" alt="Instagram" />
-						<img src="/icons/discord-white.svg" alt="Discord" />
-						<img src="/icons/github-white.svg" alt="GitHub" />
+						{externalRoutes.map((route, index) => (
+							<a key={index} href={route.href} target="blank">
+								<img src={`/icons/${route.img}`} alt={route.label} />
+							</a>
+						))}
 					</div>
 				</div>
 			</footer>
