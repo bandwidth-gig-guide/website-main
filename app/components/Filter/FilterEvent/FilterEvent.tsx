@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import getConfig from "next/config";
 import axios from 'axios';
 import camelcaseKeys from 'camelcase-keys';
+import DatePicker, { DateObject } from "react-multi-date-picker";
+import DatePanel from "react-multi-date-picker/plugins/date_panel";
 import styles from './FilterEvent.module.css'
 import { 
 	TAGS, FILTER_TAGS_KEY, FILTER_EVENT_NAME_KEY, FILTER_EVENT_STATECODE_KEY, FILTER_CITIES_KEY, 
@@ -14,21 +16,22 @@ interface FilterEventProps {
 }
 
 const FilterEvent: React.FC<FilterEventProps> = ({ setEventIds, setEventIdsByDate }) => {
-
-	// State
 	const [name, setName] = useState('');
+	const [maxPrice, setMaxPrice] = useState<number>(9999);
 	const [stateCode, setStateCode] = useState('');
 	const [selectableCities, setSelectableCities] = useState<string[]>([]);
 	const [selectedCities, setSelectedCities] = useState<string[]>([]);
-	const [maxPrice, setMaxPrice] = useState<number>(999);
 	const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
-	const [selectedDates, setSelectedDates] = useState<Date[]>([]);
+	const [selectedDates, setSelectedDates] = useState<DateObject[]>([]);
 	const [selectedTags, setSelectedTags] = useState<string[]>([]);
 	const [filtersActive, setFiltersActive] = useState(false);
 	const [filtersLoaded, setFiltersLoaded] = useState(false);
 
-  const api = getConfig().publicRuntimeConfig.SERVICE_PUBLIC_API_URL
+  const datePickerRef = useRef<any>(null);
+  
+	const api = getConfig().publicRuntimeConfig.SERVICE_PUBLIC_API_URL
 
+	
 	// Load filters from localStorage on mount
 	useEffect(() => {
 		setName(localStorage.getItem(FILTER_EVENT_NAME_KEY) || '');
@@ -36,8 +39,10 @@ const FilterEvent: React.FC<FilterEventProps> = ({ setEventIds, setEventIdsByDat
 		setSelectedCities(JSON.parse(localStorage.getItem(FILTER_CITIES_KEY) || '[]'));
 		setMaxPrice(Number(localStorage.getItem(FILTER_EVENT_MAX_PRICE_KEY)) || 9999);
 		setSelectedTypes(JSON.parse(localStorage.getItem(FILTER_EVENT_TYPE_KEY) || '[]'));
-		setSelectedDates(JSON.parse(localStorage.getItem(FILTER_EVENT_DATE_KEY) || '[]'));
 		setSelectedTags(JSON.parse(localStorage.getItem(FILTER_TAGS_KEY) || '[]'));
+
+		const storedDates = JSON.parse(localStorage.getItem(FILTER_EVENT_DATE_KEY) || '[]');
+  	setSelectedDates(storedDates.map((date: Date) => new DateObject(date)));
 
 		setFiltersLoaded(true);
 	}, []);
@@ -59,8 +64,6 @@ const FilterEvent: React.FC<FilterEventProps> = ({ setEventIds, setEventIdsByDat
 
 	// Save and fetch on filter change
 	useEffect(() => {
-
-		// Async function to retrieve IDs
 		const fetchEvents = async () => {
 			if (!filtersLoaded) return;
 
@@ -70,11 +73,11 @@ const FilterEvent: React.FC<FilterEventProps> = ({ setEventIds, setEventIdsByDat
 
 				// Check params
 				if (name) params.append('name', name);
+				if (maxPrice) params.append('maxPrice', maxPrice.toString());
 				if (stateCode) params.append('stateCode', stateCode);
 				selectedCities.forEach(city => params.append('city', city));
-				if (maxPrice) params.append('maxPrice', maxPrice.toString());
 				selectedTypes.forEach(type => params.append('types', type));
-				selectedDates.forEach(date => params.append('dates', date.toString()));
+        selectedDates.forEach(date => params.append('dates', date.format('YYYY-MM-DD')));
 				selectedTags.forEach(tag => params.append('tags', tag));
 
 				if (setEventIds) {
@@ -94,13 +97,12 @@ const FilterEvent: React.FC<FilterEventProps> = ({ setEventIds, setEventIdsByDat
 			}
 		};
 
-		// Save filters so that they persist
 		localStorage.setItem(FILTER_EVENT_NAME_KEY, name);
 		localStorage.setItem(FILTER_EVENT_STATECODE_KEY, stateCode);
 		localStorage.setItem(FILTER_CITIES_KEY, JSON.stringify(selectedCities));
 		localStorage.setItem(FILTER_EVENT_MAX_PRICE_KEY, maxPrice.toString());
 		localStorage.setItem(FILTER_EVENT_TYPE_KEY, JSON.stringify(selectedTypes));
-		localStorage.setItem(FILTER_EVENT_DATE_KEY, JSON.stringify(selectedDates));
+		localStorage.setItem(FILTER_EVENT_DATE_KEY, JSON.stringify(selectedDates.map(date => date.format('YYYY-MM-DD'))));
 		localStorage.setItem(FILTER_TAGS_KEY, JSON.stringify(selectedTags));
 
 		fetchEvents();
@@ -164,6 +166,39 @@ const FilterEvent: React.FC<FilterEventProps> = ({ setEventIds, setEventIdsByDat
 					value={name}
 					onChange={e => setName(e.target.value)}
 				/>
+
+        {/* Dates */}
+        <div className={styles.datePickerWrapper}>
+          <div 
+            className={`${styles.chip} ${selectedDates.length > 0 ? styles.active : ''}`} 
+            onClick={() => datePickerRef.current?.openCalendar()}
+          >
+            Filter Dates
+            <DatePicker
+              ref={datePickerRef}
+              className={styles.datePicker}
+              value={selectedDates}
+              onChange={setSelectedDates}
+              minDate={new Date()}
+              multiple
+              sort
+              highlightToday={false}
+              format={'ddd, MMM DD'}
+              calendarPosition="bottom-center"
+              plugins={[<DatePanel />]}
+              style={{ display: 'none' }}
+              mapDays={({ date, selectedDate, currentMonth, isSameDate }) => {
+                if (date.toDate() < new Date()) {
+                  return {
+                      disabled: true,
+                      style: { color: '#ccc' }
+                    };
+                  }
+                return {};
+              }}
+            />
+          </div>
+        </div>
 
 				{/* Reset */}
 				<div

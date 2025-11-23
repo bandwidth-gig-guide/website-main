@@ -17,6 +17,11 @@
         border: none;
     }
 
+    input:focus {
+        border: none;
+        outline: none;
+    }
+
     select:disabled {
         opacity: .5;
         cursor: default;
@@ -85,6 +90,7 @@
         color: white;
         border-color: #791d1d;
     }
+
 }
 
 @media (max-width: 671px) {
