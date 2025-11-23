@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { internalRoutes, externalRoutes } from './routes'
+import { internalRoutes, externalRoutes } from './route'
 import { faqs } from './faqs'
 import styles from './Footer.module.css'
 
