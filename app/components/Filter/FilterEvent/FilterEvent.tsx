@@ -167,6 +167,39 @@ const FilterEvent: React.FC<FilterEventProps> = ({ setEventIds, setEventIdsByDat
 					onChange={e => setName(e.target.value)}
 				/>
 
+				{/* Price */}
+				<div className={styles.priceContainer}>
+					<div className={styles.priceToggle}>
+						<button
+							onClick={() => {
+								if (maxPrice === 9999) {
+									setMaxPrice(1);
+								} else if (maxPrice === 1) {
+									setMaxPrice(50);
+								} else {
+									setMaxPrice(9999);
+								}
+							}}
+							className={`${styles.chip} ${maxPrice !== 9999 ? styles.active : ''}`}
+						>
+							{maxPrice === 9999 ? 'Any Price' : maxPrice === 1 ? 'Free Events' : `Under $${maxPrice}`}
+						</button>
+						{maxPrice !== 9999 && maxPrice !== 1 && (
+							<div className={styles.priceSliderContainer}>
+								<input
+									type="range"
+									min="10"
+									max="200"
+									step="5"
+									value={maxPrice}
+									onChange={(e) => setMaxPrice(Number(e.target.value))}
+									className={styles.priceSlider}
+								/>
+							</div>
+						)}
+					</div>
+				</div>
+
         {/* Dates */}
         <div className={styles.datePickerWrapper}>
           <div 

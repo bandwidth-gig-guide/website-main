@@ -32,7 +32,7 @@
         flex-direction: row;
         justify-content: center;
         align-items: center;
-        gap: var(--spacing-gap);
+        gap: 8px;
         padding: 0px 20px;
         border-radius: 8px;
         background-color: var(--color-background);
@@ -53,6 +53,7 @@
         gap: 4px;
         opacity: .5;
         transition: all 0.2 ease;
+        margin-left: 12px;
     }
 
     .reset img {
@@ -89,6 +90,29 @@
         background-color: #8d1717;
         color: white;
         border-color: #791d1d;
+    }
+
+    .priceToggle {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+
+        .chip {
+            width: 120px;
+        }
+    }
+
+    .priceSliderContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        input {
+            cursor: pointer;
+            accent-color: #8d1717;
+        }
     }
 
 }
