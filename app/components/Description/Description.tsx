@@ -8,19 +8,11 @@ interface Props {
 }
 
 const Description: React.FC<Props> = ({ text = '', tags = [], types = [] }) => {
-
   const chips = [...types, ...tags];
-
-  const formattedText = text.split('\\n').map((line, idx) => (
-    <React.Fragment key={idx}>
-      {line}
-      {idx < text.split('\\n').length - 1 && <br />}
-    </React.Fragment>
-  ));
 
   return (
     <div className={styles.wrapper}>
-      <p>{formattedText}</p>
+      <p>{text}</p>
       {chips.length > 0 && 
         <div className={styles.chipsWrapper}>
           {chips.map((chip, index) => (

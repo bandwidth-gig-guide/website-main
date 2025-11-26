@@ -3,6 +3,10 @@
     border-bottom: 1px solid var(--color-muted);
     text-align: justify;
 
+    p {
+        white-space: pre-line;
+    }
+
     .chipsWrapper {
         margin-top: var(--spacing-06);
         display: flex;
