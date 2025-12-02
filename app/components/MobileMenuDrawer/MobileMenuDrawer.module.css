@@ -1,0 +1,110 @@
+.wrapper {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    pointer-events: none;
+}
+
+.wrapper::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    pointer-events: none;
+    z-index: 1;
+    backdrop-filter: blur(1px);
+    -webkit-backdrop-filter: blur(1px);
+}
+
+.drawerWrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 33%;
+    height: 100vh;
+    background: var(--color-background);
+    box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15), inset -2px 0 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    pointer-events: auto;
+    z-index: 2;
+
+    ul {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        li {
+            width: 100%;
+            color: var(--color-text-muted);
+            padding: 12px 24px;
+            font-size: var(--font-size-02);
+            text-align: right;
+        }
+
+    }
+}
+
+.open {
+    pointer-events: auto;
+}
+
+.open::before {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.open .drawerWrapper {
+    transform: translateX(0);
+}
+
+
+.topRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    height: 64px;
+    padding: var(--spacing-03) var(--spacing-edge);
+    background-color: var(--color-surface);
+
+
+    .menuToggle {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        width: 24px;
+        aspect-ratio: 1/1;
+        z-index: 2;
+        position: relative;
+        padding-top: 2px;
+        
+
+        span {
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            background-color: var(--color-text);
+            border-radius: 50px;
+            transition: transform 0.3s ease;
+        }
+
+        span:first-child {
+            transform: rotate(45deg);
+        }
+
+        span:last-child {
+            transform: rotate(-45deg);
+        }
+    }
+
+}
