@@ -1,4 +1,6 @@
+import { useState } from 'react'
 import Link from "next/link";
+import { MobileMenuDrawer } from "@/components"
 import { LocationScope } from "@/enums";
 import { routes } from './Routes'
 import styles from './Header.module.css'
@@ -9,6 +11,8 @@ interface Props {
 }
 
 const Header: React.FC<Props> = ({ location }) => {
+	const [isMobileMenuDrawerOpen, setIsMobileMenuDrawerOpen] = useState(false);
+
 	return (
 		<div className={styles.wrapper}>
 			<header>
@@ -25,12 +29,17 @@ const Header: React.FC<Props> = ({ location }) => {
 						))}
 					</ul>
 				</nav>
-				<div className={styles.menuToggle}>
+				<div className={styles.menuToggle} onClick={() => setIsMobileMenuDrawerOpen(!isMobileMenuDrawerOpen)}>
 					<span />
 					<span />
 					<span />
 				</div>
 			</header>
+
+			<MobileMenuDrawer 
+				isOpen={isMobileMenuDrawerOpen}
+				setIsOpen={setIsMobileMenuDrawerOpen}
+			/>
 		</div >
 	);
 };
