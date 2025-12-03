@@ -36,7 +36,7 @@ jobs:
       - name: Determine Step Type
         id: get_step
         run: |
-          commit_message=$(git log -1 --pretty=%B)
+          COMMIT_MESSAGE=$(git log -1 --pretty=%B)
 
           if echo "$COMMIT_MESSAGE" | grep -q "(minor)"; then
             STEP="minor"
@@ -53,7 +53,7 @@ jobs:
       - name: Set New Tag
         id: set_version
         run: |
-          step=${{ steps.get_step.outputs.step }}
+          STEP=${{ steps.get_step.outputs.STEP }}
           PREVIOUS_TAG=${{ steps.get_tag.outputs.PREVIOUS_TAG }}
           IFS='.' read -r MAJOR MINOR PATCH <<< "$PREVIOUS_TAG"
 
