@@ -1,155 +1,213 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import getConfig from "next/config";
 import axios from 'axios';
 import camelcaseKeys from 'camelcase-keys';
-import styles from './FilterArtist.module.css'
-import { 
-	TAGS, FILTER_TAGS_KEY, FILTER_ARTIST_NAME_KEY, FILTER_ARTIST_CITY_KEY, 
-	FILTER_ARTIST_UPCOMING_KEY 
+import styles from '../Filter.module.css';
+import {
+  TAGS,
+  FILTER_TAGS_KEY,
+  FILTER_ARTIST_NAME_KEY,
+  FILTER_ARTIST_CITY_KEY,
+  FILTER_ARTIST_UPCOMING_KEY
 } from '@/constants';
 
 interface FilterArtistProps {
-	setArtistIds: React.Dispatch<React.SetStateAction<uuid[]>>;
+  setArtistIds: React.Dispatch<React.SetStateAction<uuid[]>>;
 }
 
 const FilterArtist: React.FC<FilterArtistProps> = ({ setArtistIds }) => {
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [name, setName] = useState('');
+  const [city, setCity] = useState('');
+  const [hasUpcomingEvent, setHasUpcomingEvent] = useState(false);
+  const [filtersActive, setFiltersActive] = useState(false);
+  const [filtersLoaded, setFiltersLoaded] = useState(false);
+  const [expanded, setExpanded] = useState(false);
+  const [openSection, setOpenSection] = useState<string | null>(null);
 
-	// State
-	const [selectedTags, setSelectedTags] = useState<string[]>([]);
-	const [name, setName] = useState('');
-	const [city, setCity] = useState('');
-	const [hasUpcomingEvent, setHasUpcomingEvent] = useState(false);
-	const [filtersActive, setFiltersActive] = useState(false);
-	const [filtersLoaded, setFiltersLoaded] = useState(false);
+  const componentRef = useRef<HTMLDivElement>(null);
+  const api = getConfig().publicRuntimeConfig.SERVICE_PUBLIC_API_URL;
 
-  const api = getConfig().publicRuntimeConfig.SERVICE_PUBLIC_API_URL
+  const toggleSection = (section: string) =>
+    setOpenSection(openSection === section ? null : section);
 
-	// Load filters from localStorage on mount
+  const resetFilters = () => {
+    setName('');
+    setCity('');
+    setHasUpcomingEvent(false);
+    setSelectedTags([]);
+
+    localStorage.removeItem(FILTER_ARTIST_NAME_KEY);
+    localStorage.removeItem(FILTER_ARTIST_CITY_KEY);
+    localStorage.removeItem(FILTER_ARTIST_UPCOMING_KEY);
+    localStorage.removeItem(FILTER_TAGS_KEY);
+  };
+
+  const handleTagChange = (tag: string) => {
+    setSelectedTags(prev =>
+      prev.includes(tag) ? prev.filter(t => t !== tag) : [...prev, tag]
+    );
+  };
+
+
 	useEffect(() => {
-		setName(localStorage.getItem(FILTER_ARTIST_NAME_KEY) || '');
-		setHasUpcomingEvent(localStorage.getItem(FILTER_ARTIST_UPCOMING_KEY) === 'true');
-		setCity(localStorage.getItem(FILTER_ARTIST_CITY_KEY) || '');
-		setSelectedTags(JSON.parse(localStorage.getItem(FILTER_TAGS_KEY) || '[]'));
+    setName(localStorage.getItem(FILTER_ARTIST_NAME_KEY) || '');
+    setCity(localStorage.getItem(FILTER_ARTIST_CITY_KEY) || '');
+    setHasUpcomingEvent(localStorage.getItem(FILTER_ARTIST_UPCOMING_KEY) === 'true');
+    setSelectedTags(JSON.parse(localStorage.getItem(FILTER_TAGS_KEY) || '[]'));
+    setFiltersLoaded(true);
+  }, []);
 
-		setFiltersLoaded(true); 
-	}, []);
 
-	// Save and fetch on filter change
 	useEffect(() => {
+    if (!filtersLoaded) return;
 
-		// Async function to retrieve IDs
-		const fetchArtists = async () => {
-			if (!filtersLoaded) return;
+    const fetchArtists = async () => {
+      try {
+        const params = new URLSearchParams();
 
-			try {
-				// Get params
-				const params = new URLSearchParams();
+        if (name) params.append('name', name);
+        if (city) params.append('city', city);
+        if (hasUpcomingEvent) params.append('hasUpcomingEvent', 'true');
+        selectedTags.forEach(tag => params.append('tags', tag));
 
-				// Check params
-				if (name) params.append('name', name);
-				if (hasUpcomingEvent) params.append('hasUpcomingEvent', 'true');
-				if (city) params.append('city', city);
-				selectedTags.forEach(tag => params.append('tags', tag));
+        const url = `${api}/artist/${params.toString() ? `?${params.toString()}` : ''}`;
+        const response = await axios.get(url);
+        setArtistIds(camelcaseKeys(response.data, { deep: true }));
+      } catch (err) {
+        console.error("Error fetching artists:", err);
+      }
+    };
 
-				// Create Request
-				const url = `${api}/artist/${params.toString() ? `?${params.toString()}` : ''}`;
+    localStorage.setItem(FILTER_ARTIST_NAME_KEY, name);
+    localStorage.setItem(FILTER_ARTIST_CITY_KEY, city);
+    localStorage.setItem(FILTER_ARTIST_UPCOMING_KEY, hasUpcomingEvent.toString());
+    localStorage.setItem(FILTER_TAGS_KEY, JSON.stringify(selectedTags));
 
-				// Send Request
-				const response = await axios.get(url);
-				setArtistIds(camelcaseKeys(response.data, { deep: true }));
+    fetchArtists();
+  }, [name, city, hasUpcomingEvent, selectedTags]);
 
-			} catch (error) {
-				console.error('Error fetching artists:', error);
-			}
-		};
 
-		// Save filters so that they persist
-		localStorage.setItem(FILTER_ARTIST_NAME_KEY, name);
-		localStorage.setItem(FILTER_ARTIST_UPCOMING_KEY, hasUpcomingEvent.toString());
-		localStorage.setItem(FILTER_ARTIST_CITY_KEY, city);
-		localStorage.setItem(FILTER_TAGS_KEY, JSON.stringify(selectedTags));
-
-		fetchArtists();
-
-	}, [name, hasUpcomingEvent, city, selectedTags]);
-
-	// Check if filters are being applied
 	useEffect(() => {
-		setFiltersActive(
-			selectedTags.length > 0 ||
-			name !== '' ||
-			city !== '' ||
-			hasUpcomingEvent
-		);
-	}, [name, hasUpcomingEvent, city, selectedTags]);
+    setFiltersActive(
+      name !== '' || city !== '' || hasUpcomingEvent || selectedTags.length > 0
+    );
+  }, [name, city, hasUpcomingEvent, selectedTags]);
 
-	// Clear all filters
-	const resetFilters = () => {
-		setName('');
-		setHasUpcomingEvent(false);
-		setCity('');
-		setSelectedTags([]);
 
-		localStorage.removeItem(FILTER_ARTIST_NAME_KEY);
-		localStorage.removeItem(FILTER_ARTIST_UPCOMING_KEY);
-		localStorage.removeItem(FILTER_ARTIST_CITY_KEY);
-		localStorage.removeItem(FILTER_TAGS_KEY);
-	};
+	useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (componentRef.current && !componentRef.current.contains(e.target as Node)) {
+        setExpanded(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
-	// Handles selection / deselection of tag
-	const handleTagChange = (tag: string) => {
-		setSelectedTags(prev =>
-			prev.includes(tag) ? prev.filter(t => t !== tag) : [...prev, tag]
-		);
-	};
+	
+  return (
+    <div className={styles.wrapper} ref={componentRef}>
+      <div className={`${styles.internalWrapper} ${expanded ? styles.expanded : ''}`}>
 
-	return (
-		<div className={styles.wrapper}>
-			<div className={styles.topRow}>
+        {/* Top Row */}
+        <div className={styles.topRow}>
+          <input
+            type="text"
+            placeholder="Artist Name..."
+            value={name}
+            onChange={e => setName(e.target.value)}
+          />
 
-				{/* Title */}
-				<input
-					type="text"
-					placeholder="Artist Title..."
-					value={name}
-					onChange={e => setName(e.target.value)}
-				/>
+          <div
+            className={`${styles.reset} ${filtersActive ? styles.resetVisible : ''}`}
+            onClick={resetFilters}
+          >
+            <span>Clear</span>
+            <img src="./icons/circle-cross.svg" alt="reset" />
+          </div>
 
-				{/* Has Upcoming Events */}
-				<button
-					type="button"
-					className={`${styles.chip} ${hasUpcomingEvent ? styles.active : ''}`}
-					onClick={() => setHasUpcomingEvent(prev => !prev)}
-				>
-					Performing Soon
-				</button>
+          <button
+            className={`${styles.chip} ${styles.filterToggle} ${expanded ? styles.active : ''}`}
+            onClick={() => setExpanded(!expanded)}
+          >
+            Filter <span className={`${styles.arrow} ${expanded ? styles.expandedArrow : ''}`} />
+          </button>
+        </div>
 
-				{/* Reset */}
-				<div
-					className={`${styles.reset} ${(filtersActive) ? styles.filterActive : ''}`}
-					onClick={resetFilters}
-				>
-					<img src="./icons/circle-cross.svg" alt="reset filters" />
-					<span>Reset Filters</span>
-				</div>
+        {/* Filters */}
+        {expanded && (
+          <div className={styles.filtersContainer}>
 
-			</div>
+            {/* Flags */}
+            <details className={styles.section} open={openSection === 'flags'}>
+              <summary
+                className={styles.sectionTitle}
+                onClick={(e) => { e.preventDefault(); toggleSection('flags'); }}
+              >
+                <span>Flags</span>
+                {hasUpcomingEvent && <span className={styles.count}>(1)</span>}
+              </summary>
 
-			{/* Tags */}
-			<div className={styles.chipContainer}>
-				{TAGS.map(tag => (
-					<button
-						key={tag}
-						onClick={() => handleTagChange(tag)}
-						className={`${styles.chip} ${selectedTags.includes(tag) ? styles.active : ''}`}
-					>
-						{tag}
-					</button>
-				))}
-			</div>
+              <div className={styles.chipContainer}>
+                <button
+                  className={`${styles.chip} ${hasUpcomingEvent ? styles.active : ''}`}
+                  onClick={() => setHasUpcomingEvent(prev => !prev)}
+                >
+                  Performing Soon
+                </button>
+              </div>
+            </details>
 
-		</div >
-	);
+            {/* City */}
+            {/* <details className={styles.section} open={openSection === 'city'}>
+              <summary
+                className={styles.sectionTitle}
+                onClick={(e) => { e.preventDefault(); toggleSection('city'); }}
+              >
+                <span>City</span>
+                {city && <span className={styles.count}>(1)</span>}
+              </summary>
+
+              <div className={styles.chipContainer}>
+                <input
+                  type="text"
+                  placeholder="City..."
+                  value={city}
+                  onChange={e => setCity(e.target.value)}
+                  className={styles.inputField}
+                />
+              </div>
+            </details> */}
+
+            {/* Tags */}
+            <details className={styles.section} open={openSection === 'tags'}>
+              <summary
+                className={styles.sectionTitle}
+                onClick={(e) => { e.preventDefault(); toggleSection('tags'); }}
+              >
+                <span>Tags</span>
+                {selectedTags.length > 0 && <span className={styles.count}>({selectedTags.length})</span>}
+              </summary>
+
+              <div className={styles.chipContainer}>
+                {TAGS.map(tag => (
+                  <button
+                    key={tag}
+                    onClick={() => handleTagChange(tag)}
+                    className={`${styles.chip} ${selectedTags.includes(tag) ? styles.active : ''}`}
+                  >
+                    {tag}
+                  </button>
+                ))}
+              </div>
+            </details>
+
+          </div>
+        )}
+      </div>
+    </div>
+  );
 };
 
 export default FilterArtist;
