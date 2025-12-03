@@ -16,7 +16,7 @@ import {
   FILTER_EVENT_DATE_KEY
 } from '@/constants';
 
-import styles from './FilterEvent.module.css';
+import styles from '../Filter.module.css';
 
 interface FilterEventProps {
   setEventIds?: React.Dispatch<React.SetStateAction<uuid[]>>;
