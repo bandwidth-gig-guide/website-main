@@ -3,9 +3,13 @@
 }
 
 localhost {
-    handle_path /api/* {
-        reverse_proxy service-public:80
-    }
-    
-    reverse_proxy website-main:3000
+	handle_path /api/search* {
+		reverse_proxy service-search:80
+	}
+
+	handle_path /api/* {
+		reverse_proxy service-public:80
+	}
+
+	reverse_proxy website-main:3000
 }
