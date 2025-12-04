@@ -9,6 +9,16 @@ on:
       PATH_TO_DOCKER_COMPOSE_FOLDER:
         required: true
         type: string
+    secrets:  
+      DO_HOST:  
+        required: true  
+        type: string
+      DO_USER:  
+        required: true  
+        type: string
+      DO_SSH_KEY:  
+        required: true  
+        type: string
 
 jobs:
   deploy:
