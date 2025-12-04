@@ -92,7 +92,7 @@ const ArtistDetail = () => {
         <meta property="og:type" content="profile" />
         <meta
           property="og:url"
-          content={`https://bandwidth.melbourne/artist/${artist.artistId || id}`}
+          content={`https://bandwidthmelbourne.com/artist/${artist.artistId || id}`}
         />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -120,7 +120,7 @@ const ArtistDetail = () => {
         {/* Canonical */}
         <link
           rel="canonical"
-          href={`https://bandwidth.melbourne/artist/${artist.artistId || id}`}
+          href={`https://bandwidthmelbourne.com/artist/${artist.artistId || id}`}
         />
 
         {/* JSON-LD Structured Data */}
@@ -132,7 +132,7 @@ const ArtistDetail = () => {
               "@type": "MusicGroup",
               name: artist.title,
               image: artist.imageUrls?.[0] || "/default-artist.jpg",
-              url: `https://bandwidth.melbourne/artist/${artist.artistId || id}`,
+              url: `https://bandwidthmelbourne.com/artist/${artist.artistId || id}`,
               sameAs: artist.socials || [],
               genre: artist.tags || [],
               foundingLocation: artist.city

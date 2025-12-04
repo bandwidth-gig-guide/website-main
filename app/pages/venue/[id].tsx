@@ -96,7 +96,7 @@ const VenueDetail = () => {
         <meta property="og:type" content="place" />
         <meta
           property="og:url"
-          content={`https://bandwidth.melbourne/venue/${venue.venueId || id}`}
+          content={`https://bandwidthmelbourne.com/venue/${venue.venueId || id}`}
         />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -123,7 +123,7 @@ const VenueDetail = () => {
         {/* Canonical */}
         <link
           rel="canonical"
-          href={`https://bandwidth.melbourne/venue/${venue.venueId || id}`}
+          href={`https://bandwidthmelbourne.com/venue/${venue.venueId || id}`}
         />
 
         {/* JSON-LD Structured Data */}
@@ -135,7 +135,7 @@ const VenueDetail = () => {
               "@type": "MusicVenue",
               name: venue.title,
               image: venue.imageUrls?.[0] || "/default-venue.jpg",
-              url: `https://bandwidth.melbourne/venue/${venue.venueId || id}`,
+              url: `https://bandwidthmelbourne.com/venue/${venue.venueId || id}`,
               address: {
                 "@type": "PostalAddress",
                 streetAddress: venue.streetAddress,

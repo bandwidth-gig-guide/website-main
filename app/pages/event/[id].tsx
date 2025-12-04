@@ -96,7 +96,7 @@ const EventDetail = () => {
         <meta property="og:type" content="event" />
         <meta
           property="og:url"
-          content={`https://bandwidth.melbourne/event/${event.eventId || id}`}
+          content={`https://bandwidthmelbourne.com/event/${event.eventId || id}`}
         />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -123,7 +123,7 @@ const EventDetail = () => {
         {/* Canonical */}
         <link
           rel="canonical"
-          href={`https://bandwidth.melbourne/event/${event.eventId || id}`}
+          href={`https://bandwidthmelbourne.com/event/${event.eventId || id}`}
         />
 
         {/* JSON-LD Structured Data */}
@@ -163,7 +163,7 @@ const EventDetail = () => {
               organizer: {
                 "@type": "Organization",
                 name: "Bandwidth Melbourne",
-                url: "https://bandwidth.melbourne",
+                url: "https://bandwidthmelbourne.com",
               },
             }),
           }}

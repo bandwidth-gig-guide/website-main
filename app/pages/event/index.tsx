@@ -72,7 +72,7 @@ const Event = () => {
         />
         <meta property="og:image" content="/default-event.jpg" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://bandwidth.melbourne/event" />
+        <meta property="og:url" content="https://bandwidthmelbourne.com/event" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
 
@@ -87,7 +87,7 @@ const Event = () => {
         <meta name="twitter:site" content="@BandwidthMelb" />
 
         {/* Canonical */}
-        <link rel="canonical" href="https://bandwidth.melbourne/event" />
+        <link rel="canonical" href="https://bandwidthmelbourne.com/event" />
 
         {/* JSON-LD Structured Data (CollectionPage of MusicEvents) */}
         <script
@@ -99,11 +99,11 @@ const Event = () => {
               name: "Melbourne Live Music Events",
               description:
                 "Find live music events, concerts, and gigs in Melbourne. Browse upcoming shows by date, venue, and genre — all in one place on Bandwidth.",
-              url: "https://bandwidth.melbourne/event",
+              url: "https://bandwidthmelbourne.com/event",
               isPartOf: {
                 "@type": "WebSite",
                 name: "Bandwidth Melbourne Gig Guide",
-                url: "https://bandwidth.melbourne",
+                url: "https://bandwidthmelbourne.com",
               },
               about: {
                 "@type": "MusicEvent",

@@ -34,7 +34,7 @@ const Venue = () => {
         />
         <meta property="og:image" content="/default-venue.jpg" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://bandwidth.melbourne/venue" />
+        <meta property="og:url" content="https://bandwidthmelbourne.com/venue" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
 
@@ -49,7 +49,7 @@ const Venue = () => {
         <meta name="twitter:site" content="@BandwidthMelb" />
 
         {/* Canonical */}
-        <link rel="canonical" href="https://bandwidth.melbourne/venue" />
+        <link rel="canonical" href="https://bandwidthmelbourne.com/venue" />
 
         {/* JSON-LD Structured Data (CollectionPage of MusicVenues) */}
         <script
@@ -61,11 +61,11 @@ const Venue = () => {
               name: "Melbourne Music Venues",
               description:
                 "Discover the best live music venues in Melbourne. Explore gig locations, bars, clubs, and iconic spaces hosting concerts and events — all on Bandwidth.",
-              url: "https://bandwidth.melbourne/venue",
+              url: "https://bandwidthmelbourne.com/venue",
               isPartOf: {
                 "@type": "WebSite",
                 name: "Bandwidth Melbourne Gig Guide",
-                url: "https://bandwidth.melbourne",
+                url: "https://bandwidthmelbourne.com",
               },
               about: {
                 "@type": "MusicVenue",

@@ -33,7 +33,7 @@ const Artist = () => {
         />
         <meta property="og:image" content="/default-artist.jpg" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://bandwidth.melbourne/artist" />
+        <meta property="og:url" content="https://bandwidthmelbourne.com/artist" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
 
@@ -48,7 +48,7 @@ const Artist = () => {
         <meta name="twitter:site" content="@BandwidthMelb" />
 
         {/* Canonical */}
-        <link rel="canonical" href="https://bandwidth.melbourne/artist" />
+        <link rel="canonical" href="https://bandwidthmelbourne.com/artist" />
 
         {/* JSON-LD Structured Data (CollectionPage of MusicGroup) */}
         <script
@@ -60,11 +60,11 @@ const Artist = () => {
               name: "Melbourne Artists & Bands",
               description:
                 "Browse Melbourne artists and bands across every genre. Discover local talent, explore profiles, and find your next favourite act with Bandwidth.",
-              url: "https://bandwidth.melbourne/artist",
+              url: "https://bandwidthmelbourne.com/artist",
               isPartOf: {
                 "@type": "WebSite",
                 name: "Bandwidth Melbourne Gig Guide",
-                url: "https://bandwidth.melbourne",
+                url: "https://bandwidthmelbourne.com",
               },
               about: {
                 "@type": "MusicGroup",
