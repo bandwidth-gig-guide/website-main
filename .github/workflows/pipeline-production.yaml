@@ -1,0 +1,47 @@
+name: Production Pipeline
+
+env:
+  CONTAINER_NAME: website-main
+  REGISTRY: ghcr.io
+  ORG: bandwidth-gig-guide
+  PATH_TO_DOCKER_COMPOSE_FOLDER: deployment/
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  version_bump:
+    uses: ./.github/workflows/production/version-bump.yaml
+    permissions:
+      contents: write
+
+  publish:
+    needs: version_bump
+    uses: ./.github/workflows/production/publish.yaml
+    permissions:
+      packages: write
+      contents: read
+    with:
+      TAG: ${{ needs.version_bump.outputs.TAG }}
+      CONTAINER_NAME: ${{ env.CONTAINER_NAME }}
+      REGISTRY: ${{ env.REGISTRY }}
+      ORG: ${{ env.ORG }}
+    secrets:
+      PAYLOAD_SECRET: ${{ secrets.PAYLOAD_SECRET }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  deploy:
+    needs: publish
+    uses: ./.github/workflows/production/deploy.yaml
+    permissions:
+      packages: write
+      contents: read
+    with:
+      CONTAINER_NAME: ${{ env.CONTAINER_NAME }}
+      PATH_TO_DOCKER_COMPOSE_FOLDER: ${{ env.PATH_TO_DOCKER_COMPOSE_FOLDER }}
+    secrets:
+      DO_HOST: ${{ secrets.DO_HOST }}
+      DO_USER: ${{ secrets.DO_USER }}
+      DO_SSH_KEY: ${{ secrets.DO_SSH_KEY }}

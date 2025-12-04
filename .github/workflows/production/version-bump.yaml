@@ -1,0 +1,82 @@
+name: Auto Version Bump
+
+on:
+  workflow_call:
+    outputs:
+      TAG:
+        value: ${{ jobs.update-version-tag.outputs.TAG }}
+
+jobs:
+  update-version-tag:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    outputs:
+      TAG: ${{ steps.set_version.outputs.TAG }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get Previous Tag
+        id: get_tag
+        run: |
+          PREVIOUS_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "0.0.0")
+          echo "Previous tag: $PREVIOUS_TAG"
+
+          if ! echo "$PREVIOUS_TAG" | grep -qE '^[0-9]+\.[0-9]+\.[0-9]+$'; then
+            echo "Error: Tag '$PREVIOUS_TAG' does not match format '0.0.0'. Please set a valid tag manually."
+            exit 1
+          fi
+
+          echo "PREVIOUS_TAG=$PREVIOUS_TAG" >> $GITHUB_OUTPUT
+
+      - name: Determine Step Type
+        id: get_step
+        run: |
+          COMMIT_MESSAGE=$(git log -1 --pretty=%B)
+
+          if echo "$COMMIT_MESSAGE" | grep -q "(minor)"; then
+            STEP="minor"
+          elif echo "$COMMIT_MESSAGE" | grep -q "(major)"; then
+            STEP="major"
+          else
+            STEP="patch"
+          fi
+
+          echo "Commit message: $COMMIT_MESSAGE"
+          echo "Step: $STEP"
+          echo "STEP=$STEP" >> $GITHUB_OUTPUT
+
+      - name: Set New Tag
+        id: set_version
+        run: |
+          STEP=${{ steps.get_step.outputs.STEP }}
+          PREVIOUS_TAG=${{ steps.get_tag.outputs.PREVIOUS_TAG }}
+          IFS='.' read -r MAJOR MINOR PATCH <<< "$PREVIOUS_TAG"
+
+          if [ "$STEP" = "minor" ]; then
+            MINOR=$((MINOR + 1))
+            PATCH=0
+          elif [ "$STEP" = "major" ]; then
+            MAJOR=$((MAJOR + 1))
+            MINOR=0
+            PATCH=0
+          else
+            PATCH=$((PATCH + 1))
+          fi
+
+          TAG="${MAJOR}.${MINOR}.${PATCH}"
+          
+          echo "New tag: $TAG"
+          echo "TAG=$TAG" >> $GITHUB_OUTPUT
+
+      - name: Create and Push New Tag
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag ${{ steps.set_version.outputs.TAG }}
+          git push origin ${{ steps.set_version.outputs.TAG }}
+          
