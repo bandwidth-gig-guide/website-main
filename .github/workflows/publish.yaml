@@ -18,8 +18,6 @@ on:
     secrets:
       PAYLOAD_SECRET:
         required: true
-      GITHUB_TOKEN:
-        required: true
 
 permissions:
   packages: write
