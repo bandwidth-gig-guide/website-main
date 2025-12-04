@@ -1,11 +1,5 @@
 name: Production Pipeline
 
-env:
-  CONTAINER_NAME: website-main
-  REGISTRY: ghcr.io
-  ORG: bandwidth-gig-guide
-  PATH_TO_DOCKER_COMPOSE_FOLDER: deployment/
-
 on:
   push:
     branches:
@@ -25,9 +19,9 @@ jobs:
       contents: read
     with:
       TAG: ${{ needs.version_bump.outputs.TAG }}
-      CONTAINER_NAME: ${{ env.CONTAINER_NAME }}
-      REGISTRY: ${{ env.REGISTRY }}
-      ORG: ${{ env.ORG }}
+      CONTAINER_NAME: ${{ vars.CONTAINER_NAME }}
+      REGISTRY: ${{ vars.REGISTRY }}
+      ORG: ${{ vars.ORG }}
     secrets:
       PAYLOAD_SECRET: ${{ secrets.PAYLOAD_SECRET }}
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -39,8 +33,8 @@ jobs:
       packages: write
       contents: read
     with:
-      CONTAINER_NAME: ${{ env.CONTAINER_NAME }}
-      PATH_TO_DOCKER_COMPOSE_FOLDER: ${{ env.PATH_TO_DOCKER_COMPOSE_FOLDER }}
+      CONTAINER_NAME: ${{ vars.CONTAINER_NAME }}
+      PATH_TO_DOCKER_COMPOSE_FOLDER: ${{ vars.PATH_TO_DOCKER_COMPOSE_FOLDER }}
     secrets:
       DO_HOST: ${{ secrets.DO_HOST }}
       DO_USER: ${{ secrets.DO_USER }}
