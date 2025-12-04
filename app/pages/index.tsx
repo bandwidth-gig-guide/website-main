@@ -77,7 +77,7 @@ const Home = () => {
         />
         <meta property="og:image" content="/default-hero.jpg" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://bandwidth.melbourne" />
+        <meta property="og:url" content="https://bandwidthmelbourne.com" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
 
@@ -95,7 +95,7 @@ const Home = () => {
         <meta name="twitter:site" content="@BandwidthMelb" />
 
         {/* Canonical */}
-        <link rel="canonical" href="https://bandwidth.melbourne" />
+        <link rel="canonical" href="https://bandwidthmelbourne.com" />
 
         {/* JSON-LD Structured Data */}
         <script
@@ -105,12 +105,12 @@ const Home = () => {
               "@context": "https://schema.org",
               "@type": "WebSite",
               name: "Bandwidth Melbourne Gig Guide",
-              url: "https://bandwidth.melbourne",
+              url: "https://bandwidthmelbourne.com",
               description:
                 "Discover live music in Melbourne with Bandwidth. Explore upcoming gigs, local artists, and venues across the city.",
               potentialAction: {
                 "@type": "SearchAction",
-                target: "https://bandwidth.melbourne/search?q={search_term_string}",
+                target: "https://bandwidthmelbourne.com/search?q={search_term_string}",
                 "query-input": "required name=search_term_string",
               },
             }),
