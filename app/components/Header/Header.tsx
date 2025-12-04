@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from "next/link";
-import { MobileMenuDrawer } from "@/components"
+import { MobileMenuDrawer, SearchBar, FloatingSearchBar } from "@/components"
 import { LocationScope } from "@/enums";
 import { routes } from './Routes'
 import styles from './Header.module.css'
@@ -11,7 +11,19 @@ interface Props {
 }
 
 const Header: React.FC<Props> = ({ location }) => {
+	const [isMobile, setIsMobile] = useState<boolean>(false);
 	const [isMobileMenuDrawerOpen, setIsMobileMenuDrawerOpen] = useState(false);
+
+	useEffect(() => {
+		const checkMobile = () => {
+			setIsMobile(window.innerWidth <= 768);
+		};
+
+		checkMobile();
+		window.addEventListener('resize', checkMobile);
+
+		return () => window.removeEventListener('resize', checkMobile);
+	}, []);
 
 	return (
 		<div className={styles.wrapper}>
@@ -28,6 +40,7 @@ const Header: React.FC<Props> = ({ location }) => {
 							</li>
 						))}
 					</ul>
+					<SearchBar />
 				</nav>
 				<div className={styles.menuToggle} onClick={() => setIsMobileMenuDrawerOpen(!isMobileMenuDrawerOpen)}>
 					<span />
@@ -36,10 +49,17 @@ const Header: React.FC<Props> = ({ location }) => {
 				</div>
 			</header>
 
-			<MobileMenuDrawer 
-				isOpen={isMobileMenuDrawerOpen}
-				setIsOpen={setIsMobileMenuDrawerOpen}
-			/>
+			{isMobile &&
+				<>
+					<MobileMenuDrawer
+						isOpen={isMobileMenuDrawerOpen}
+						setIsOpen={setIsMobileMenuDrawerOpen}
+					/>
+
+					<FloatingSearchBar />
+				</>
+			}
+
 		</div >
 	);
 };

@@ -35,6 +35,17 @@ services:
     networks:
       - bandwidth
 
+  service-search:
+    image: ghcr.io/bandwidth-gig-guide/service-search:latest
+    container_name: service-search
+    restart: unless-stopped
+    env_file:
+      - ./dev/dev.env
+    depends_on:
+      - db-main
+    networks:
+      - bandwidth
+
   reverse-proxy:
     image: caddy:2-alpine
     container_name: reverse-proxy
@@ -49,6 +60,7 @@ services:
     depends_on:
       - website-main
       - service-public
+      - service-search
     networks:
       - bandwidth
 
