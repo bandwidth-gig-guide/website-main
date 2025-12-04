@@ -47,7 +47,7 @@ jobs:
           echo "Building Docker image for tag: $TAG_NAME"
           docker build \
             --build-arg PAYLOAD_SECRET=${{ secrets.PAYLOAD_SECRET }} \
-            -t ${{ inputs.REGISTRY }}/${{ inputs.ORG }}/${{ inputs.CONTAINER_NAME }}:$TAG_NAME ./frontend
+            -t ${{ inputs.REGISTRY }}/${{ inputs.ORG }}/${{ inputs.CONTAINER_NAME }}:$TAG_NAME .
 
       - name: Push Versioned Image
         run: |
