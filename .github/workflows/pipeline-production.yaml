@@ -7,13 +7,13 @@ on:
 
 jobs:
   version_bump:
-    uses: ./.github/workflows/production/version-bump.yaml
+    uses: ./.github/workflows/version-bump.yaml
     permissions:
       contents: write
 
   publish:
     needs: version_bump
-    uses: ./.github/workflows/production/publish.yaml
+    uses: ./.github/workflows/publish.yaml
     permissions:
       packages: write
       contents: read
@@ -28,7 +28,7 @@ jobs:
 
   deploy:
     needs: publish
-    uses: ./.github/workflows/production/deploy.yaml
+    uses: ./.github/workflows/deploy.yaml
     permissions:
       packages: write
       contents: read
