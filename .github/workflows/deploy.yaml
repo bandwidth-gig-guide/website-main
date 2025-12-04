@@ -12,13 +12,10 @@ on:
     secrets:  
       DO_HOST:  
         required: true  
-        type: string
       DO_USER:  
         required: true  
-        type: string
       DO_SSH_KEY:  
         required: true  
-        type: string
 
 jobs:
   deploy:
