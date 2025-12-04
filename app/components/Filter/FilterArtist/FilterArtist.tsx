@@ -3,11 +3,12 @@ import getConfig from "next/config";
 import axios from 'axios';
 import camelcaseKeys from 'camelcase-keys';
 import styles from '../Filter.module.css';
+import { StateCode } from '@/enums';
 import {
   TAGS,
   FILTER_TAGS_KEY,
   FILTER_ARTIST_NAME_KEY,
-  FILTER_ARTIST_CITY_KEY,
+  FILTER_ARTIST_STATECODE_KEY,
   FILTER_ARTIST_UPCOMING_KEY
 } from '@/constants';
 
@@ -18,7 +19,7 @@ interface FilterArtistProps {
 const FilterArtist: React.FC<FilterArtistProps> = ({ setArtistIds }) => {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [name, setName] = useState('');
-  const [city, setCity] = useState('');
+  const [selectedStateCodes, setSelectedStateCodes] = useState<string[]>([]);
   const [hasUpcomingEvent, setHasUpcomingEvent] = useState(false);
   const [filtersActive, setFiltersActive] = useState(false);
   const [filtersLoaded, setFiltersLoaded] = useState(false);
@@ -33,12 +34,12 @@ const FilterArtist: React.FC<FilterArtistProps> = ({ setArtistIds }) => {
 
   const resetFilters = () => {
     setName('');
-    setCity('');
+    setSelectedStateCodes([]);
     setHasUpcomingEvent(false);
     setSelectedTags([]);
 
     localStorage.removeItem(FILTER_ARTIST_NAME_KEY);
-    localStorage.removeItem(FILTER_ARTIST_CITY_KEY);
+    localStorage.removeItem(FILTER_ARTIST_STATECODE_KEY);
     localStorage.removeItem(FILTER_ARTIST_UPCOMING_KEY);
     localStorage.removeItem(FILTER_TAGS_KEY);
   };
@@ -49,17 +50,23 @@ const FilterArtist: React.FC<FilterArtistProps> = ({ setArtistIds }) => {
     );
   };
 
+  const handleStateCodeChange = (stateCode: StateCode) => {
+    setSelectedStateCodes(prev =>
+      prev.includes(stateCode) ? prev.filter(t => t !== stateCode) : [...prev, stateCode]
+    );
+  };
 
-	useEffect(() => {
+
+  useEffect(() => {
     setName(localStorage.getItem(FILTER_ARTIST_NAME_KEY) || '');
-    setCity(localStorage.getItem(FILTER_ARTIST_CITY_KEY) || '');
     setHasUpcomingEvent(localStorage.getItem(FILTER_ARTIST_UPCOMING_KEY) === 'true');
     setSelectedTags(JSON.parse(localStorage.getItem(FILTER_TAGS_KEY) || '[]'));
+    setSelectedStateCodes(JSON.parse(localStorage.getItem(FILTER_ARTIST_STATECODE_KEY) || '[]'));
     setFiltersLoaded(true);
   }, []);
 
 
-	useEffect(() => {
+  useEffect(() => {
     if (!filtersLoaded) return;
 
     const fetchArtists = async () => {
@@ -67,9 +74,9 @@ const FilterArtist: React.FC<FilterArtistProps> = ({ setArtistIds }) => {
         const params = new URLSearchParams();
 
         if (name) params.append('name', name);
-        if (city) params.append('city', city);
         if (hasUpcomingEvent) params.append('hasUpcomingEvent', 'true');
         selectedTags.forEach(tag => params.append('tags', tag));
+        selectedStateCodes.forEach(stateCode => params.append('stateCodes', stateCode));
 
         const url = `${api}/artist/${params.toString() ? `?${params.toString()}` : ''}`;
         const response = await axios.get(url);
@@ -80,22 +87,22 @@ const FilterArtist: React.FC<FilterArtistProps> = ({ setArtistIds }) => {
     };
 
     localStorage.setItem(FILTER_ARTIST_NAME_KEY, name);
-    localStorage.setItem(FILTER_ARTIST_CITY_KEY, city);
     localStorage.setItem(FILTER_ARTIST_UPCOMING_KEY, hasUpcomingEvent.toString());
     localStorage.setItem(FILTER_TAGS_KEY, JSON.stringify(selectedTags));
+    localStorage.setItem(FILTER_ARTIST_STATECODE_KEY, JSON.stringify(selectedStateCodes));
 
     fetchArtists();
-  }, [name, city, hasUpcomingEvent, selectedTags]);
+  }, [name, selectedStateCodes, hasUpcomingEvent, selectedTags]);
 
 
-	useEffect(() => {
+  useEffect(() => {
     setFiltersActive(
-      name !== '' || city !== '' || hasUpcomingEvent || selectedTags.length > 0
+      name !== '' || selectedStateCodes.length > 0 || hasUpcomingEvent || selectedTags.length > 0
     );
-  }, [name, city, hasUpcomingEvent, selectedTags]);
+  }, [name, selectedStateCodes, hasUpcomingEvent, selectedTags]);
 
 
-	useEffect(() => {
+  useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (componentRef.current && !componentRef.current.contains(e.target as Node)) {
         setExpanded(false);
@@ -159,26 +166,37 @@ const FilterArtist: React.FC<FilterArtistProps> = ({ setArtistIds }) => {
               </div>
             </details>
 
-            {/* City */}
-            {/* <details className={styles.section} open={openSection === 'city'}>
+            {/* Hometown */}
+            <details className={styles.section} open={openSection === 'hometown'}>
               <summary
                 className={styles.sectionTitle}
-                onClick={(e) => { e.preventDefault(); toggleSection('city'); }}
+                onClick={(e) => { e.preventDefault(); toggleSection('hometown'); }}
               >
-                <span>City</span>
-                {city && <span className={styles.count}>(1)</span>}
+                <span>Hometown</span>
+                {selectedTags.length > 0 && <span className={styles.count}>({selectedTags.length})</span>}
               </summary>
-
               <div className={styles.chipContainer}>
-                <input
-                  type="text"
-                  placeholder="City..."
-                  value={city}
-                  onChange={e => setCity(e.target.value)}
-                  className={styles.inputField}
-                />
+                <button
+                  onClick={() => {
+                    const allStateCodes = Object.values(StateCode).slice(0, -1);
+                    const allSelected = allStateCodes.every(code => selectedStateCodes.includes(code));
+                    setSelectedStateCodes(allSelected ? [] : allStateCodes);
+                  }}
+                  className={`${styles.chip} ${Object.values(StateCode).slice(0, -1).every(code => selectedStateCodes.includes(code)) ? styles.active : ''}`}
+                >
+                  AUSTRALIA
+                </button>
+                {Object.values(StateCode).slice(0, -1).map(stateCode => (
+                  <button
+                    key={stateCode}
+                    onClick={() => handleStateCodeChange(stateCode)}
+                    className={`${styles.chip} ${selectedStateCodes.includes(stateCode) ? styles.active : ''}`}
+                  >
+                    {stateCode}
+                  </button>
+                ))}
               </div>
-            </details> */}
+            </details>
 
             {/* Tags */}
             <details className={styles.section} open={openSection === 'tags'}>

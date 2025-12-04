@@ -1,6 +1,6 @@
 export enum StateCode {
-    NSW = "NSW",
     VIC = "VIC",
+    NSW = "NSW",
     QLD = "QLD",
     WA = "WA",
     SA = "SA",
