@@ -30,6 +30,7 @@ export { default as MobileMenuDrawer } from './MobileMenuDrawer/MobileMenuDrawer
 export { default as PageHeader } from './PageHeader/PageHeader'
 export { default as PerformanceTimes } from './PerformanceTimes/PerformanceTimes'
 export { default as Recommended } from './Recommended/Recommended'
+export { default as SearchBar } from './SearchBar/SearchBar'
 export { default as SectionHeader } from './SectionHeader/SectionHeader'
 export { default as Socials } from './Socials/Socials'
 export { default as SubHeaderMessage } from './SubHeaderMessage/SubHeaderMessage'
