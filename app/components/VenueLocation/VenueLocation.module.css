@@ -10,12 +10,13 @@
 
     .mapWrapper {
         min-width: 320px;
-        width: 100%;
+        flex: 2;
     }
 
     .infoWrapper {
         min-width: 320px;
         max-width: 100%;
+        flex: 1;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -89,8 +90,16 @@
     }
 }
 
+@media (max-width: 1200px) {
+    .wrapper {
+        gap: var(--spacing-03)
+    }
+}
+
 @media (max-width: 671px) {
     .wrapper {
         border-bottom: none;
+        gap: var(--spacing-07)
+
     }
 }
