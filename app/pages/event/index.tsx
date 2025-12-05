@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react'
-import { SectionHeader, DateHeader, CardGrid, FilterEvent, Button, Hero } from '@/components'
+import { SectionHeader, DateHeader, CardGrid, FilterEvent, Button, Hero, MetaInfo } from '@/components'
 import { CardGridType } from '@/enums'
 import Head from 'next/head'
 
@@ -55,65 +55,12 @@ const Event = () => {
         )}
       </div>
 
-      <Head>
-        {/* Title & Meta */}
-        <title>Bandwidth | Live Music Events in Melbourne</title>
-        <meta
-          name="description"
-          content="Find live music events, concerts, and gigs in Melbourne. Browse upcoming shows by date, venue, and genre — all in one place on Bandwidth."
-        />
-
-        {/* Open Graph */}
-        <meta property="og:site_name" content="Bandwidth Melbourne Gig Guide" />
-        <meta property="og:title" content="Bandwidth | Live Music Events in Melbourne" />
-        <meta
-          property="og:description"
-          content="Find live music events, concerts, and gigs in Melbourne. Browse upcoming shows by date, venue, and genre — all in one place on Bandwidth."
-        />
-        <meta property="og:image" content="/default-event.jpg" />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://bandwidthmelbourne.com/event" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-
-        {/* Twitter */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Bandwidth | Live Music Events in Melbourne" />
-        <meta
-          name="twitter:description"
-          content="Find live music events, concerts, and gigs in Melbourne. Browse upcoming shows by date, venue, and genre — all in one place on Bandwidth."
-        />
-        <meta name="twitter:image" content="/default-event.jpg" />
-        <meta name="twitter:site" content="@BandwidthMelb" />
-
-        {/* Canonical */}
-        <link rel="canonical" href="https://bandwidthmelbourne.com/event" />
-
-        {/* JSON-LD Structured Data (CollectionPage of MusicEvents) */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "CollectionPage",
-              name: "Melbourne Live Music Events",
-              description:
-                "Find live music events, concerts, and gigs in Melbourne. Browse upcoming shows by date, venue, and genre — all in one place on Bandwidth.",
-              url: "https://bandwidthmelbourne.com/event",
-              isPartOf: {
-                "@type": "WebSite",
-                name: "Bandwidth Melbourne Gig Guide",
-                url: "https://bandwidthmelbourne.com",
-              },
-              about: {
-                "@type": "MusicEvent",
-                name: "Live Music Events in Melbourne",
-              },
-            }),
-          }}
-        />
-      </Head>
-
+      <MetaInfo
+        pageType="search"
+        title="Discover Melbourne Gigs, Events & Concerts"
+        description="Find live music events, concerts, and gigs in Melbourne. Browse upcoming shows by date, venue, and genre — all in one place on Bandwidth."
+        url="https://bandwidthmelbourne.com/event"
+      />
     </>
   )
 }

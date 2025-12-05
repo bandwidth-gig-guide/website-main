@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { SectionHeader, CardGrid, Hero, EmbedsLocalScene } from '@/components';
-import Head from 'next/head';
+import { SectionHeader, CardGrid, Hero, EmbedsLocalScene, MetaInfo } from '@/components';
 import getConfig from 'next/config';
 import axios from 'axios';
 import camelcaseKeys from 'camelcase-keys';
@@ -33,10 +32,7 @@ const Home = () => {
       }
     }
 
-    fetch('event');
-    fetch('artist');
-    fetch('venue');
-
+    ['event', 'artist', 'venue'].map(record => fetch(record));
   }, []);
 
 
@@ -57,67 +53,12 @@ const Home = () => {
       </div>
       <EmbedsLocalScene />
 
-      <Head>
-        {/* Title & Meta */}
-        <title>Bandwidth | Melbourne Gig Guide – Live Music, Artists & Venues</title>
-        <meta
-          name="description"
-          content="Discover live music in Melbourne with Bandwidth. Explore upcoming gigs, local artists, and venues across the city. Your ultimate Melbourne gig guide."
-        />
-
-        {/* Open Graph */}
-        <meta property="og:site_name" content="Bandwidth Melbourne Gig Guide" />
-        <meta
-          property="og:title"
-          content="Bandwidth | Melbourne Gig Guide – Live Music, Artists & Venues"
-        />
-        <meta
-          property="og:description"
-          content="Discover live music in Melbourne with Bandwidth. Explore upcoming gigs, local artists, and venues across the city. Your ultimate Melbourne gig guide."
-        />
-        <meta property="og:image" content="/default-hero.jpg" />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://bandwidthmelbourne.com" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-
-        {/* Twitter */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta
-          name="twitter:title"
-          content="Bandwidth | Melbourne Gig Guide – Live Music, Artists & Venues"
-        />
-        <meta
-          name="twitter:description"
-          content="Discover live music in Melbourne with Bandwidth. Explore upcoming gigs, local artists, and venues across the city. Your ultimate Melbourne gig guide."
-        />
-        <meta name="twitter:image" content="/default-hero.jpg" />
-        <meta name="twitter:site" content="@BandwidthMelb" />
-
-        {/* Canonical */}
-        <link rel="canonical" href="https://bandwidthmelbourne.com" />
-
-        {/* JSON-LD Structured Data */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "WebSite",
-              name: "Bandwidth Melbourne Gig Guide",
-              url: "https://bandwidthmelbourne.com",
-              description:
-                "Discover live music in Melbourne with Bandwidth. Explore upcoming gigs, local artists, and venues across the city.",
-              potentialAction: {
-                "@type": "SearchAction",
-                target: "https://bandwidthmelbourne.com/search?q={search_term_string}",
-                "query-input": "required name=search_term_string",
-              },
-            }),
-          }}
-        />
-      </Head>
-
+      <MetaInfo
+        pageType="homepage"
+        title="Melbourne Gig Guide"
+        description="Discover live music in Melbourne with Bandwidth. Explore upcoming gigs, local artists, and venues across the city."
+        url="https://bandwidthmelbourne.com"
+      />
     </>
   );
 };
