@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { Carousel, Description, Embeds, PageHeader, Socials, UpcomingEvents, Recommended } from '@/components'
+import { Carousel, Description, Embeds, PageHeader, Socials, UpcomingEvents, Recommended, MetaInfo } from '@/components'
 import { PageType } from '@/enums'
 import { Artist } from '@/types'
 import { useRouter } from 'next/router';
-import Head from 'next/head';
 import getConfig from 'next/config';
 import axios from 'axios'
 import camelcaseKeys from 'camelcase-keys';
@@ -59,90 +58,17 @@ const ArtistDetail = () => {
         <Recommended id={artist.artistId} pageType={PageType.Artist} />
       </div>
 
-      <Head>
-        {/* Title & Meta */}
-        <title>{artist.title ? `Bandwidth | ${artist.title}` : "Bandwidth Artist"}</title>
-        <meta
-          name="description"
-          content={
-            artist.description ||
-            `${artist.title || "Artist"} from ${artist.city || "Melbourne"} ${artist.country ? `(${artist.country})` : ""
-            } — discover music, gigs, and events on Bandwidth.`
-          }
-        />
-
-        {/* Open Graph */}
-        <meta property="og:site_name" content="Bandwidth Melbourne Gig Guide" />
-        <meta
-          property="og:title"
-          content={artist.title ? `Bandwidth | ${artist.title}` : "Bandwidth Artist"}
-        />
-        <meta
-          property="og:description"
-          content={
-            artist.description ||
-            `${artist.title || "This artist"} from ${artist.city || "Melbourne"} ${artist.country ? `(${artist.country})` : ""
-            } — discover music, gigs, and events on Bandwidth.`
-          }
-        />
-        <meta
-          property="og:image"
-          content={artist.imageUrls?.[0] || "/default-artist.jpg"}
-        />
-        <meta property="og:type" content="profile" />
-        <meta
-          property="og:url"
-          content={`https://bandwidthmelbourne.com/artist/${artist.artistId || id}`}
-        />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-
-        {/* Twitter */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta
-          name="twitter:title"
-          content={artist.title ? `Bandwidth | ${artist.title}` : "Bandwidth Artist"}
-        />
-        <meta
-          name="twitter:description"
-          content={
-            artist.description ||
-            `${artist.title || "This artist"} from ${artist.city || "Melbourne"} ${artist.country ? `(${artist.country})` : ""
-            } — discover music, gigs, and events on Bandwidth.`
-          }
-        />
-        <meta
-          name="twitter:image"
-          content={artist.imageUrls?.[0] || "/default-artist.jpg"}
-        />
-        <meta name="twitter:site" content="@BandwidthMelb" />
-
-        {/* Canonical */}
-        <link
-          rel="canonical"
-          href={`https://bandwidthmelbourne.com/artist/${artist.artistId || id}`}
-        />
-
-        {/* JSON-LD Structured Data */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "MusicGroup",
-              name: artist.title,
-              image: artist.imageUrls?.[0] || "/default-artist.jpg",
-              url: `https://bandwidthmelbourne.com/artist/${artist.artistId || id}`,
-              sameAs: artist.socials || [],
-              genre: artist.tags || [],
-              foundingLocation: artist.city
-                ? `${artist.city}${artist.country ? `, ${artist.country}` : ""}`
-                : undefined,
-              foundingDate: artist.yearFounded || undefined,
-            }),
-          }}
-        />
-      </Head>
+      <MetaInfo
+        pageType='artist'
+        title={artist.title}
+        description={`${artist.title} from ${artist.city}, ${artist.country}. ${artist.description?.split('.')[0]}. Discover artists on Bandwidth.`}
+        url={`https://bandwidthmelbourne.com/artist/${artist.artistId}`}
+        image={artist?.imageUrls?.[0]}
+        keywords={[...(artist.tags || []), ...(artist.types || [])]}
+        schemaExtensions={{
+          artistTitles: [artist.title]
+        }}
+      />
     </>
   );
 };
