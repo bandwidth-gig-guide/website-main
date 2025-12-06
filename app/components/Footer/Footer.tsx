@@ -38,7 +38,7 @@ const Footer = () => {
 						<p className={styles.tagline}>Melbourne Gig Guide</p>
 						<p><strong>SITE UNDER DEVELOPMENT</strong></p>
 						<br />
-						<p><em>"It's not poorly designed, it's punk"</em></p>
+						<p><em>"It's not poor design, it's punk"</em></p>
 					</div>
 
 				</div>
