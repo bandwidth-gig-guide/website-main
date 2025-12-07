@@ -11,39 +11,24 @@ import styles from '../../styles/page.module.css'
 
 
 const VenueDetail = () => {
-
-  // State
   const [venue, setVenue] = useState<Venue>({} as Venue);
   const [location, setLocation] = useState<string>('');
-  const [isError, setIsError] = useState<boolean>(false);
 
   const api = getConfig().publicRuntimeConfig.SERVICE_PUBLIC_API_URL
-
-  // Router
   const router = useRouter();
   const { id } = router.query;
 
-  // Get Venue Details
   useEffect(() => {
     if (id === undefined) return;
 
     axios.get(`${api}/venue/${id}`)
-      .then(response => { 
-        setVenue(camelcaseKeys(response.data, { deep: true })),
-        setLocation(formatLocation(venue.streetAddress, venue.city, venue.stateCode, venue.postCode))
-      })
-      .catch(() => { setIsError(true) })
+      .then(response => { setVenue(camelcaseKeys(response.data, { deep: true })) })
   }, [id]);
 
-  // Handle Error
   useEffect(() => {
-    if (isError) {
-      // Display a snackbar.
-      // router.push('/venue');
-    }
-  }, [isError]);
+    setLocation(formatLocation(venue.streetAddress, venue.city, venue.stateCode, venue.postCode))
+  }, [venue])
 
-  // Return
   return (
     <>
       <div className={styles.pageWrapper}>
