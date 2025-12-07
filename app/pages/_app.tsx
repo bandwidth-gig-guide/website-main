@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Head from 'next/head';
 import { Header, Footer, Banner, Disclaimer } from '@/components';
 import { LocationScope } from '@/enums';
 import type { AppProps } from 'next/app';
@@ -10,6 +11,12 @@ function MyApp({ Component, pageProps }: AppProps) {
 
 	return (
 		<>
+			<Head>
+				<link rel="preconnect" href="https://fonts.googleapis.com" />
+				<link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+				<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" />
+			</Head>
+
 			<div className='app-wrapper'>
 				<Header location={location} />
 				<main><Component {...pageProps} /></main>
