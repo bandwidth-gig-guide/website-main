@@ -15,6 +15,7 @@
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
 }
+
 .slider::-webkit-scrollbar {
   display: none;
 }
@@ -25,6 +26,7 @@
   scroll-snap-align: start;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-rows: repeat(auto-fill, minmax(240px, 1fr));
   min-height: 0;
   gap: var(--spacing-gap);
   margin-right: var(--spacing-gap);
