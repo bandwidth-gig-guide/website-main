@@ -14,3 +14,7 @@ export type OpeningHours = {
     sunOpen: string
     sunClose: string
 }
+
+export function areAllOpeningHoursEqual(hours: OpeningHours, value: string): boolean {
+    return Object.values(hours).every(hour => hour === value);
+}

@@ -9,3 +9,5 @@ export type { OpeningHours } from './OpeningHours'
 export type { Social } from './Social'
 export type { Venue } from './Venue'
 export type { VenueBrief } from './VenueBrief'
+
+export { areAllOpeningHoursEqual } from './OpeningHours'
