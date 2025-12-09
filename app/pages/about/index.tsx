@@ -146,7 +146,7 @@ const About = () => {
               <li>
                 <a
                   className={styles.card}
-                  href="https://github.com/BandwidthMelbourne"
+                  href="https://github.com/bandwidth-gig-guide"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
