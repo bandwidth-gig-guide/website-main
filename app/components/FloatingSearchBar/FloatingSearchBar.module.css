@@ -4,15 +4,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 14px;
+    padding: 10px;
     background: var(--color-surface);
     border-radius: 50%;
     border: 1px solid #ddd;
     width: fit-content;
     cursor: pointer;
     position: absolute;
-    bottom: 32px;
-    right: 18px;
+    bottom: 20px;
+    right: 20px;
     position: fixed;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     z-index: 199;
