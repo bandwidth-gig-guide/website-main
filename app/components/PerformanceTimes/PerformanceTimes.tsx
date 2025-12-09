@@ -18,6 +18,21 @@ const PerformanceTimes: React.FC<Props> = ({ eventPerformances = [], eventVenue,
     (a, b) => new Date(b.startDateTime).getTime() - new Date(a.startDateTime).getTime()
   );
 
+  const getArtistSubtitle = (performer: EventPerformance, index: number): string => {
+    const time = formatDateToTime(performer.startDateTime);
+    const displayedTime = time != "12:01am" ? ` | ${time}` : '';
+    const title = `${index === 0 ? 'Headliner' : 'Support'}`
+
+    return `${title}${displayedTime}`;
+  };
+
+    const getVenueSubtitle = (): string => {
+    const time = formatDateToTime(doorsTime);
+    const displayedTime = time != "12:01am" ? ` | ${time}` : '';
+
+    return `Venue${displayedTime}`;
+  };
+
   return (
     <div className={styles.wrapper}>
 
@@ -26,7 +41,7 @@ const PerformanceTimes: React.FC<Props> = ({ eventPerformances = [], eventVenue,
           <Chip
             key={index}
             title={performer.title}
-            subtitle={`${index === 0 ? 'Headliner' : 'Support'} | ${formatDateToTime(performer.startDateTime)}`}
+            subtitle={getArtistSubtitle(performer, index)}
             imageUrl={performer.imageUrl}
             pageType={PageType.Artist}
             id={performer.artistId}
@@ -38,7 +53,7 @@ const PerformanceTimes: React.FC<Props> = ({ eventPerformances = [], eventVenue,
       <div className={styles.venueChip}>
         <Chip
           title={eventVenue.title}
-          subtitle={`Venue | Doors at ${formatDateToTime(doorsTime)}`}
+          subtitle={getVenueSubtitle()}
           imageUrl={eventVenue.imageUrl}
           pageType={PageType.Venue}
           id={eventVenue.venueId}
