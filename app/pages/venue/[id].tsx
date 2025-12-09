@@ -39,7 +39,7 @@ const VenueDetail = () => {
           isFeatured={venue.isFeatured}
           subtitle={`${venue.streetAddress}, ${venue.city} ${venue.stateCode} ${venue.postCode}`}
         />
-        <Description text={venue.description} types={venue.types} tags={venue.tags} />
+        <Description text={venue.description} types={venue.types}  />
         <VenueLocation
           location={location}
           websiteUrl={venue.websiteUrl}
@@ -58,7 +58,7 @@ const VenueDetail = () => {
         description={`${venue.title} in ${venue.city}. ${venue.description?.split('.')[0]}. Discover live music venues putting on gigs, events, and concerts in Melbourne's vibrant music scene on Bandwidth.`}
         url={`https://bandwidthmelbourne.com/venue/${venue.venueId}`}
         image={venue.imageUrls?.[0]}
-        keywords={[...(venue.tags || []), ...(venue.types || [])]}
+        keywords={venue.types}
         schemaExtensions={{
           venueName: venue.title,
           venueAddress: location,
