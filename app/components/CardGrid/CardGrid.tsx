@@ -82,7 +82,7 @@ const CardGrid: React.FC<Props> = ({
       ([entry]) => {
         setIsComponentBottomOnScreen(entry.isIntersecting)
       },
-      { threshold: 0 }
+      { threshold: 0.2 }
     )
 
     topObserver.observe(containerRef.current)
@@ -132,7 +132,7 @@ const CardGrid: React.FC<Props> = ({
         </div>
       )}
 
-      <div ref={containerBottomRef} />
+      <div className={styles.containerBottomRef} ref={containerBottomRef} />
     </div>
   )
 }

@@ -38,9 +38,8 @@
 }
 
 .pagePill {
-  left: 50%;
-  transform: translateX(-50%);
   z-index: 10;
+  left: 20px;
 
   font-size: 13px;
   font-weight: 500;
@@ -51,12 +50,10 @@
   background-color: var(--color-surface-dark);
   border-radius: 999px;
   padding: 6px 14px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 
   opacity: 0;
-  transform: translate(-50%, 10px);
-  transition:
-    opacity 0.25s ease,
-    transform 0.25s ease;
+  transition: opacity 0.5s ease-in-out,;
 }
 
 .pagePill span {
@@ -67,13 +64,11 @@
 }
 
 .pillVisible {
-  opacity: 1;
-  transform: translate(-50%, 0);
+  opacity: 0.9;
 }
 
 .pillHidden {
   opacity: 0;
-  transform: translate(-50%, 10px);
   pointer-events: none;
 }
 
@@ -84,5 +79,6 @@
 
 .pillAbsolute {
   position: absolute;
-  bottom: 0;
+  bottom: 24px;
+  left: calc(20px - var(--spacing-edge));
 }
