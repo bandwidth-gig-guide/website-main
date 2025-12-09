@@ -15,6 +15,7 @@
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
 }
+
 .slider::-webkit-scrollbar {
   display: none;
 }
@@ -25,6 +26,7 @@
   scroll-snap-align: start;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-rows: repeat(auto-fill, minmax(240px, 1fr));
   min-height: 0;
   gap: var(--spacing-gap);
   margin-right: var(--spacing-gap);
@@ -35,29 +37,52 @@
   margin-right: 0;
 }
 
-.dots {
-  position: absolute;
-  bottom: 0;
+.pagePill {
   left: 50%;
   transform: translateX(-50%);
-  display: flex;
-  gap: 8px;
-  z-index: 5;
-}
+  z-index: 10;
 
-.dot {
-  width: 10px;
-  height: 10px;
-  background-color: var(--color-surface-medium);
-  border-radius: 50%;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: #ccc;
 
-.dot:hover {
-background-color: color-mix(in srgb, var(--color-surface-medium) 90%, black 10%);
-}
-
-.dot.active {
+  border: 1px solid #ccc;
   background-color: var(--color-surface-dark);
+  border-radius: 999px;
+  padding: 6px 14px;
+
+  opacity: 0;
+  transform: translate(-50%, 10px);
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+
+.pagePill span {
+  display: inline-block;
+  min-width: 12px;
+  text-align: center;
+  color: #ccc;
+}
+
+.pillVisible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.pillHidden {
+  opacity: 0;
+  transform: translate(-50%, 10px);
+  pointer-events: none;
+}
+
+.pillFixed {
+  position: fixed;
+  bottom: 24px;
+}
+
+.pillAbsolute {
+  position: absolute;
+  bottom: 0;
 }
