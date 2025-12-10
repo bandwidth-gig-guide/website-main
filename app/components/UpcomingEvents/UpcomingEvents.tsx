@@ -17,7 +17,7 @@ const UpcomingEvents: React.FC<Props> = ({ eventIds }) => {
   return (
     <div className={styles.wrapper}>
       <SectionHeader title='Upcoming Events' route='/event' />
-      <CardGrid eventIds={eventIds} limit={8} isPaginated={true} />
+      <CardGrid eventIds={eventIds} allowLoadMore={true} />
       {eventIds?.length === 0 &&
         <>
           <p className={styles.noEventsMessage}>

@@ -11,7 +11,14 @@ const Venue = () => {
         <Hero />
         <SectionHeader title="Search Venues" />
         <FilterVenue setVenueIds={setVenueIds} />
-        <CardGrid venueIds={venueIds} cardGridType={CardGridType.Grid} isPaginated={true} limit={24} />
+        <CardGrid
+          venueIds={venueIds}
+          rowsPerPageDesktop={4}
+          rowsPerPageTablet={6}
+          rowsPerPageMobile={12}
+          allowLoadMore={true}
+          showTally={true}
+        />
         <CityMap />
       </div>
 

@@ -11,7 +11,14 @@ const Artist = () => {
         <Hero />
         <SectionHeader title="Search Artists" />
         <FilterArtist setArtistIds={setArtistIds} />
-        <CardGrid artistIds={artistIds} cardGridType={CardGridType.Grid} isPaginated={true} limit={12} />
+        <CardGrid
+          artistIds={artistIds}
+          rowsPerPageDesktop={4}
+          rowsPerPageTablet={6}
+          rowsPerPageMobile={12}
+          allowLoadMore={true}
+          showTally={true} 
+        />
       </div>
 
       <MetaInfo

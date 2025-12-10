@@ -40,10 +40,17 @@ const Event = () => {
         <SectionHeader title="Events" scrollToTopOnClick={true} />
         <FilterEvent setEventIdsByDate={setEventIdsByDate} />
 
-        {visibleDates.map(([date, ids]) => (
+        {visibleDates.map(([date, eventIds]) => (
           <div key={date} style={{ marginBottom: "var(--spacing-05)" }}>
             <DateHeader date={formatDate(date)} />
-            <CardGrid eventIds={ids} cardGridType={CardGridType.Grid} limit={8} isPaginated={true} />
+            <CardGrid
+              eventIds={eventIds}
+              rowsPerPageDesktop={4}
+              rowsPerPageTablet={6}
+              rowsPerPageMobile={12}
+              allowLoadMore={true}
+              showTally={true}
+            />
           </div>
         ))}
 
