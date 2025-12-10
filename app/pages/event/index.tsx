@@ -1,8 +1,5 @@
 import React, { useState, useMemo } from 'react'
 import { SectionHeader, DateHeader, CardGrid, FilterEvent, Button, Hero, MetaInfo } from '@/components'
-import { CardGridType } from '@/enums'
-import Head from 'next/head'
-
 
 const DAYS_LOADED = 10;
 
@@ -43,10 +40,17 @@ const Event = () => {
         <SectionHeader title="Events" scrollToTopOnClick={true} />
         <FilterEvent setEventIdsByDate={setEventIdsByDate} />
 
-        {visibleDates.map(([date, ids]) => (
+        {visibleDates.map(([date, eventIds]) => (
           <div key={date} style={{ marginBottom: "var(--spacing-05)" }}>
             <DateHeader date={formatDate(date)} />
-            <CardGrid eventIds={ids} cardGridType={CardGridType.Grid} limit={8} isPaginated={true} />
+            <CardGrid
+              eventIds={eventIds}
+              rowsPerPageDesktop={4}
+              rowsPerPageTablet={6}
+              rowsPerPageMobile={12}
+              allowLoadMore={true}
+              showTally={true}
+            />
           </div>
         ))}
 

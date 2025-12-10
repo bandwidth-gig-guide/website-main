@@ -26,9 +26,9 @@ const Recommended: React.FC<Props> = ({ id, pageType }) => {
   return (
     <div className={styles.wrapper}>
       <SectionHeader title='You May Also Like' route={`/${pageType}`}/>
-      {pageType == PageType.Artist && <CardGrid artistIds={ids} limit={8}/>}
-      {pageType == PageType.Event && <CardGrid eventIds={ids} limit={8}/>}
-      {pageType == PageType.Venue && <CardGrid venueIds={ids} limit={8}/>}
+      {pageType == PageType.Artist && <CardGrid artistIds={ids}/>}
+      {pageType == PageType.Event && <CardGrid eventIds={ids}/>}
+      {pageType == PageType.Venue && <CardGrid venueIds={ids}/>}
       
     </div>
   );

@@ -41,15 +41,15 @@ const Home = () => {
       <Hero />
       <div style={{ marginBottom: 20, marginTop: 40 }}>
         <SectionHeader title='Events' route='/event' />
-        <CardGrid eventIds={events} limit={8} isPaginated={true} />
+        <CardGrid eventIds={events} />
       </div>
       <div style={{ marginBottom: 20 }}>
         <SectionHeader title='Artists' route='/artist' />
-        <CardGrid artistIds={artists} limit={8} isPaginated={true} />
+        <CardGrid artistIds={artists} />
       </div>
       <div>
         <SectionHeader title='Venues' route='/venue' />
-        <CardGrid venueIds={venues} limit={8} isPaginated={true} />
+        <CardGrid venueIds={venues} />
       </div>
       <EmbedsLocalScene />
 

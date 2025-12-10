@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import { SectionHeader, CardGrid, FilterVenue, CityMap, Hero, MetaInfo } from '@/components';
-import { CardGridType } from "@/enums";
 
 
 const Venue = () => {
@@ -12,7 +11,14 @@ const Venue = () => {
         <Hero />
         <SectionHeader title="Search Venues" />
         <FilterVenue setVenueIds={setVenueIds} />
-        <CardGrid venueIds={venueIds} cardGridType={CardGridType.Grid} isPaginated={true} limit={24} />
+        <CardGrid
+          venueIds={venueIds}
+          rowsPerPageDesktop={4}
+          rowsPerPageTablet={6}
+          rowsPerPageMobile={12}
+          allowLoadMore={true}
+          showTally={true}
+        />
         <CityMap />
       </div>
 
