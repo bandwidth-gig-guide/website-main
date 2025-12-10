@@ -1,34 +1,34 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { CardArtist, CardEvent, CardVenue } from '@/components'
-import { CardGridType } from '@/enums'
 import styles from './CardGrid.module.css'
 
+const MIN_COLUMN_WIDTH = 320
+const GRID_GAP = 16
+
 interface Props {
-  eventIds?: uuid[]
-  artistIds?: uuid[]
-  venueIds?: uuid[]
-  cardGridType?: CardGridType
-  limit?: number
-  isPaginated?: boolean
+  eventIds?: string[]
+  artistIds?: string[]
+  venueIds?: string[]
+  rowsPerPageDesktop?: number
+  rowsPerPageTablet?: number
+  rowsPerPageMobile?: number
+  allowLoadMore?: boolean
+  showTally?: boolean
 }
 
 const CardGrid: React.FC<Props> = ({
   eventIds = [],
   artistIds = [],
   venueIds = [],
-  cardGridType = CardGridType.Grid,
-  limit = 8,
-  isPaginated = false
+  rowsPerPageDesktop = 2,
+  rowsPerPageTablet = 4,
+  rowsPerPageMobile = 8,
+  allowLoadMore = false,
+  showTally = false
 }) => {
-  const [page, setPage] = useState(0)
-  const [visitedPages, setVisitedPages] = useState<Set<number>>(new Set([0]))
-
   const containerRef = useRef<HTMLDivElement | null>(null)
-  const containerBottomRef = useRef<HTMLDivElement | null>(null)
-  const ticking = useRef(false)
-
-  const [isComponentOnScreen, setIsComponentOnScreen] = useState(false)
-  const [isComponentBottomOnScreen, setIsComponentBottomOnScreen] = useState(false)
+  const [cardsPerPage, setCardsPerPage] = useState(0)
+  const [visiblePages, setVisiblePages] = useState(1)
 
   const ids = [
     ...artistIds.map(id => ({ type: 'artist', id })),
@@ -36,105 +36,60 @@ const CardGrid: React.FC<Props> = ({
     ...eventIds.map(id => ({ type: 'event', id }))
   ]
 
-  const totalPages = Math.ceil(ids.length / limit)
-
-  const shouldPaginate =
-    isPaginated &&
-    totalPages > 1 &&
-    (cardGridType === CardGridType.Flex || cardGridType === CardGridType.Grid)
-
-  useEffect(() => {
-    setVisitedPages(prev => new Set(prev).add(page))
-  }, [page])
-
-  const handleScroll = useCallback(() => {
-    if (!shouldPaginate || !containerRef.current || ticking.current) return
-
-    ticking.current = true
-
-    requestAnimationFrame(() => {
-      const el = containerRef.current
-      if (!el) return
-
-      const scrollLeft = el.scrollLeft
-      const pageWidth = el.clientWidth
-      const newPage = Math.round(scrollLeft / pageWidth)
-
-      if (newPage !== page) {
-        setPage(newPage)
-      }
-
-      ticking.current = false
-    })
-  }, [page, shouldPaginate])
+  const getRowsPerPage = () => {
+    const width = window.innerWidth
+    if (width >= 1024) return rowsPerPageDesktop
+    if (width >= 768) return rowsPerPageTablet
+    return rowsPerPageMobile
+  }
 
   useEffect(() => {
-    if (!containerRef.current || !containerBottomRef.current) return
-
-    const topObserver = new IntersectionObserver(
-      ([entry]) => {
-        setIsComponentOnScreen(entry.isIntersecting)
-      },
-      { threshold: 0.1 }
-    )
-
-    const bottomObserver = new IntersectionObserver(
-      ([entry]) => {
-        setIsComponentBottomOnScreen(entry.isIntersecting)
-      },
-      { threshold: 0.2 }
-    )
-
-    topObserver.observe(containerRef.current)
-    bottomObserver.observe(containerBottomRef.current)
-
-    return () => {
-      topObserver.disconnect()
-      bottomObserver.disconnect()
+    const calculateCardsPerPage = () => {
+      if (!containerRef.current) return
+      const containerWidth = containerRef.current.offsetWidth
+      const cardsPerRow = Math.floor((containerWidth + GRID_GAP) / (MIN_COLUMN_WIDTH + GRID_GAP)) || 1
+      const rows = getRowsPerPage()
+      setCardsPerPage(cardsPerRow * rows)
     }
-  }, [])
+
+    calculateCardsPerPage()
+    window.addEventListener('resize', calculateCardsPerPage)
+    return () => window.removeEventListener('resize', calculateCardsPerPage)
+  }, [rowsPerPageDesktop, rowsPerPageTablet, rowsPerPageMobile])
+
+  const totalPages = cardsPerPage ? Math.ceil(ids.length / cardsPerPage) : 0
+  const handleLoadMore = () => setVisiblePages(prev => Math.min(prev + 1, totalPages))
+  const visibleCards = cardsPerPage ? ids.slice(0, visiblePages * cardsPerPage) : []
 
   return (
-    <div className={styles.wrapper}>
-      <div
-        className={styles.slider}
-        ref={containerRef}
-        onScroll={handleScroll}
-      >
-        {Array.from({ length: totalPages }).map((_, pageIndex) => (
-          <div key={pageIndex} className={styles.page}>
-            {visitedPages.has(pageIndex) &&
-              ids
-                .slice(pageIndex * limit, (pageIndex + 1) * limit)
-                .map((item, index) => {
-                  switch (item.type) {
-                    case 'artist':
-                      return ( <CardArtist key={`artist-${item.id}-${index}`} artistId={item.id} /> )
-                    case 'venue':
-                      return ( <CardVenue key={`venue-${item.id}-${index}`} venueId={item.id} /> )
-                    default:
-                      return ( <CardEvent key={`event-${item.id}-${index}`} eventId={item.id} /> )
-                  }
-                })}
-          </div>
-        ))}
+    <div className={styles.wrapper} ref={containerRef}>
+      <div className={styles.grid}>
+        {visibleCards.map((item, index) => {
+          switch (item.type) {
+            case 'artist':
+              return <CardArtist key={`artist-${item.id}-${index}`} artistId={item.id} />
+            case 'venue':
+              return <CardVenue key={`venue-${item.id}-${index}`} venueId={item.id} />
+            default:
+              return <CardEvent key={`event-${item.id}-${index}`} eventId={item.id} />
+          }
+        })}
       </div>
 
-      {shouldPaginate && (
-        <div
-          className={`
-            ${styles.pagePill}
-            ${isComponentOnScreen && !isComponentBottomOnScreen ? styles.pillVisible : styles.pillHidden}
-            ${isComponentBottomOnScreen ? styles.pillAbsolute : styles.pillFixed}
-          `}
-        >
-          <span>{page + 1}</span> / <span>{totalPages}</span>
+        <div className={styles.loadMoreWrapper}>
+          {allowLoadMore && visiblePages < totalPages && (
+            <button className={styles.loadMoreButton} onClick={handleLoadMore}>
+              Load More
+            </button>
+          )}
+          {showTally &&
+            <p className={styles.counter}>
+              (Showing {visibleCards.length} of {ids.length})
+            </p>
+          }
         </div>
-      )}
-
-      <div className={styles.containerBottomRef} ref={containerBottomRef} />
     </div>
   )
 }
 
-export default CardGrid
+export default CardGrid;
