@@ -29,6 +29,10 @@
             justify-content: flex-start;
             gap: var(--spacing-gap);
 
+            span {
+                word-wrap: break-word;
+            }
+
         }
 
         .hoursWrapper {
