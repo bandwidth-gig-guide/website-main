@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { SectionHeader, CardGrid, FilterArtist, Hero, MetaInfo } from '@/components';
-import { CardGridType } from '@/enums';
 
 
 const Artist = () => {
