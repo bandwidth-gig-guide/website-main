@@ -1,6 +1,7 @@
 export { ARTIST_TYPES } from "./artistTypes"
 export { EVENT_TYPES } from "./eventTypes"
 export { PAGE_TYPE_MAP } from "./PageTypeMap"
+export { RESERVED_UUIDS } from "./RESERVED_UUIDS"
 export { TAGS } from "./tags"
 export { VENUE_TYPES } from "./venueTypes"
 export { 
