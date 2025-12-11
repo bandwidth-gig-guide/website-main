@@ -9,7 +9,7 @@ const CityMap = () => {
 
   return (
     <div className={styles.wrapper}>
-      <SectionHeader title="Explore" />
+      <SectionHeader title="Explore Melbourne" />
       <iframe
         src={melbourne}
         loading='lazy'
