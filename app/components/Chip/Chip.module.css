@@ -26,8 +26,6 @@
         }
     }
 
-
-
     h5 {
         font-size: var(--font-size);
         font-weight: 500;
@@ -44,6 +42,12 @@
 .wrapper:hover,
 .wrapper:active {
     background-color: var(--color-surface);
+    cursor: pointer;
+}
+
+.reserved:hover,
+.reserved:active {
+    background-color: transparent;
 }
 
 @media (max-width: 671px) {
