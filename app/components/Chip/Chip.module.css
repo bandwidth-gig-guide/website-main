@@ -48,6 +48,7 @@
 .reserved:hover,
 .reserved:active {
     background-color: transparent;
+    cursor: default;
 }
 
 @media (max-width: 671px) {
