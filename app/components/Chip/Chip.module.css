@@ -47,7 +47,6 @@
 
 .reserved:hover,
 .reserved:active {
-    background-color: transparent;
     cursor: default;
 }
 
