@@ -6,16 +6,10 @@ import styles from './Embeds.module.css';
 
 const embedData = [
   {
-    spotifyPlaylistEmbedUrl: 'https://open.spotify.com/embed/playlist/4HyHkwCfKg9ncqu6bYtbwv?utm_source=generator',
+    spotifyPlaylistEmbedUrl: 'https://open.spotify.com/embed/playlist/0arofMqb5C6gpqBgZ0Y0fD?utm_source=generator',
     creatorName: 'Matthew Cross',
-    creatorTagline: 'Bass, The Amazing Devil',
-    creatorArtistUuid: 'b7e8e7e2-7c6a-4e2e-9c2a-1a2b3c4d5e6f'
-  },
-  {
-    spotifyPlaylistEmbedUrl: 'https://open.spotify.com/embed/playlist/0IatferdsPVBKJwEACK6kE?utm_source=generator',
-    creatorName: 'Gavin Waldron',
-    creatorTagline: 'The Gasometer Hotel',
-    creatorVenueUuid: 'e3b0c442-98fc-1c14-9afb-4c1f1b6e8b8a'
+    creatorTagline: 'Bass, Amber Drift',
+    creatorArtistUuid: '96071829-3a4b-5c6d-7e8f-901223344556'
   },
 ];
 
