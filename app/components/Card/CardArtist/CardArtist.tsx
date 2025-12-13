@@ -1,21 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import { CardBase, CardLoading } from '@/components'
 import { ArtistBrief } from '@/types'
+import { formatUpcomingEvents } from '@/utils';
 import Link from 'next/link'
 import getConfig from "next/config";
 import axios from 'axios'
 import camelcaseKeys from 'camelcase-keys'
 
 
-interface Props {
-	artistId: uuid
-}
-
-const CardArtist: React.FC<Props> = ({ artistId }) => {
+const CardArtist: React.FC<{ artistId: uuid }> = ({ artistId }) => {
 	const [artist, setArtist] = useState<ArtistBrief>({} as ArtistBrief)
 	const [isLoading, setIsLoading] = useState(true)
-	const [isError, setIsError] = useState(false)
-	const [hasImage, setHasImage] = useState(true)
 
 	const api = getConfig().publicRuntimeConfig.SERVICE_PUBLIC_API_URL
 
@@ -23,28 +18,10 @@ const CardArtist: React.FC<Props> = ({ artistId }) => {
 		const fetchArtist = async () => {
 			try {
 				const response = await axios.get(`${api}/artist/brief/${artistId}`)
-				const artistData = camelcaseKeys(response.data, { deep: true })
-				setArtist(artistData)
-
-				if (artistData.imageUrl) {
-					const img = new Image()
-					img.src = artistData.imageUrl
-					let timeoutId: NodeJS.Timeout
-					img.onload = () => {
-						clearTimeout(timeoutId)
-						setIsLoading(false)
-					}
-					timeoutId = setTimeout(() => {
-						setHasImage(false)
-						setIsLoading(false)
-					}, 5000)
-					img.onerror = () => setHasImage(false)
-				} else {
-					setIsLoading(false)
-					setHasImage(false)
-				}
+				setArtist(camelcaseKeys(response.data, { deep: true }))
 			} catch (error) {
-				setIsError(true)
+				return
+			} finally {
 				setIsLoading(false)
 			}
 		}
@@ -53,20 +30,6 @@ const CardArtist: React.FC<Props> = ({ artistId }) => {
 	}, [artistId])
 
 	if (isLoading) return <CardLoading />
-	if (isError) return
-
-	let upcomingEventsString = ""
-	switch (artist.upcomingEvents) {
-		case 0:
-			upcomingEventsString = ""
-			break
-		case 1:
-			upcomingEventsString = "1 Upcoming Event"
-			break
-		default:
-			upcomingEventsString = `${artist.upcomingEvents} Upcoming Events`
-			break
-	}
 
 	return (
 		<div>
@@ -74,8 +37,8 @@ const CardArtist: React.FC<Props> = ({ artistId }) => {
 				<CardBase
 					topLeft={`${artist.city}, ${artist.country}`}
 					title={artist.title}
-					bottom={upcomingEventsString}
-					imgUrl={hasImage && artist.imageUrl ? artist.imageUrl : ''}
+					bottom={formatUpcomingEvents(artist.upcomingEvents)}
+					imgUrl={artist.imageUrl}
 				/>
 			</Link>
 		</div>
