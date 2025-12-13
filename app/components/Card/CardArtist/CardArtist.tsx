@@ -8,15 +8,9 @@ import axios from 'axios'
 import camelcaseKeys from 'camelcase-keys'
 
 
-interface Props {
-	artistId: uuid
-}
-
-const CardArtist: React.FC<Props> = ({ artistId }) => {
+const CardArtist: React.FC<{ artistId: uuid }> = ({ artistId }) => {
 	const [artist, setArtist] = useState<ArtistBrief>({} as ArtistBrief)
 	const [isLoading, setIsLoading] = useState(true)
-	const [isError, setIsError] = useState(false)
-	const [hasImage, setHasImage] = useState(true)
 
 	const api = getConfig().publicRuntimeConfig.SERVICE_PUBLIC_API_URL
 
@@ -24,28 +18,10 @@ const CardArtist: React.FC<Props> = ({ artistId }) => {
 		const fetchArtist = async () => {
 			try {
 				const response = await axios.get(`${api}/artist/brief/${artistId}`)
-				const artistData = camelcaseKeys(response.data, { deep: true })
-				setArtist(artistData)
-
-				if (artistData.imageUrl) {
-					const img = new Image()
-					img.src = artistData.imageUrl
-					let timeoutId: NodeJS.Timeout
-					img.onload = () => {
-						clearTimeout(timeoutId)
-						setIsLoading(false)
-					}
-					timeoutId = setTimeout(() => {
-						setHasImage(false)
-						setIsLoading(false)
-					}, 5000)
-					img.onerror = () => setHasImage(false)
-				} else {
-					setIsLoading(false)
-					setHasImage(false)
-				}
+				setArtist(camelcaseKeys(response.data, { deep: true }))
 			} catch (error) {
-				setIsError(true)
+				return
+			} finally {
 				setIsLoading(false)
 			}
 		}
