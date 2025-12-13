@@ -10,22 +10,6 @@
     gap: var(--spacing-gap);
     flex: 0;
 
-    .imgWrapper {
-        height: 100%;
-        border-radius: 50%;
-        overflow: hidden;
-        aspect-ratio: 1/1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        img {
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-    }
-
     h5 {
         font-size: var(--font-size);
         font-weight: 500;
@@ -49,6 +33,39 @@
 .reserved:active {
     cursor: default;
 }
+
+.imgWrapper {
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    aspect-ratio: 1/1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+}
+
+.imageFallback {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: white;
+    text-transform: uppercase;
+
+    span {
+        color: var(--color-background);
+    }
+}
+
+
 
 @media (max-width: 671px) {
     .wrapper {
