@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { CardBase, CardLoading } from '@/components'
 import { ArtistBrief } from '@/types'
+import { formatUpcomingEvents } from '@/utils';
 import Link from 'next/link'
 import getConfig from "next/config";
 import axios from 'axios'
@@ -53,20 +54,6 @@ const CardArtist: React.FC<Props> = ({ artistId }) => {
 	}, [artistId])
 
 	if (isLoading) return <CardLoading />
-	if (isError) return
-
-	let upcomingEventsString = ""
-	switch (artist.upcomingEvents) {
-		case 0:
-			upcomingEventsString = ""
-			break
-		case 1:
-			upcomingEventsString = "1 Upcoming Event"
-			break
-		default:
-			upcomingEventsString = `${artist.upcomingEvents} Upcoming Events`
-			break
-	}
 
 	return (
 		<div>
@@ -74,8 +61,8 @@ const CardArtist: React.FC<Props> = ({ artistId }) => {
 				<CardBase
 					topLeft={`${artist.city}, ${artist.country}`}
 					title={artist.title}
-					bottom={upcomingEventsString}
-					imgUrl={hasImage && artist.imageUrl ? artist.imageUrl : ''}
+					bottom={formatUpcomingEvents(artist.upcomingEvents)}
+					imgUrl={artist.imageUrl}
 				/>
 			</Link>
 		</div>

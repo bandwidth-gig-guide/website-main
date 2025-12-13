@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { CardBase, CardLoading } from '@/components'
 import { VenueBrief } from '@/types'
-import Link from 'next/link'
-import getConfig from "next/config";
+import { formatLocation, formatUpcomingEvents } from '@/utils';
 import axios from 'axios'
 import camelcaseKeys from 'camelcase-keys'
 
@@ -53,34 +52,10 @@ const CardVenue: React.FC<Props> = ({ venueId }) => {
 	}, [venueId])
 
 	if (isLoading) return <CardLoading />
-	if (isError) return
-
-	let addressString = `${venue.streetAddress ?? ''}${venue.streetAddress ? ',' : ''} ${venue.city ?? ''} ${venue.stateCode ?? ''} ${venue.postCode ?? ''}`
-
-	let upcomingEventsString = ""
-	switch (venue.upcomingEventCount) {
-		case 0:
-			upcomingEventsString = ""
-			break
-		case 1:
-			upcomingEventsString = "1 Upcoming Event"
-			break
-		default:
-			upcomingEventsString = `${venue.upcomingEventCount} Upcoming Events`
-			break
-	}
 
 	return (
-		<div>
-			<Link href={`/venue/${venueId}`}>
-				<CardBase
-					topLeft={addressString}
-					title={venue.title}
-					bottom={upcomingEventsString}
-					imgUrl={hasImage && venue.imageUrl ? venue.imageUrl : ''}
-				/>
-			</Link>
-		</div>
+				bottom={formatUpcomingEvents(venue.upcomingEventCount)}
+				imgUrl={venue.imageUrl}
 	)
 }
 
