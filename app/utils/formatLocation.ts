@@ -4,5 +4,5 @@ export function formatLocation(
     stateCode: statecode,
     postCode: number
 ): string {
-    return `${streetAddress}, ${city} ${stateCode} ${postCode}`
+    return `${streetAddress ?? ''}${streetAddress ? ',' : ''} ${city ?? ''} ${stateCode ?? ''} ${postCode ?? ''}`
 }
