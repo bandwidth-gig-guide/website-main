@@ -70,12 +70,7 @@ const EmbedsLocalScene: React.FC = () => {
       <div ref={containerRef} className={styles.embedContainer}>
         {embeds.map((embed, index) => {
           const creator = embedData[index];
-          const href = creator.creatorArtistUuid
-            ? `/artist/${creator.creatorArtistUuid}`
-            : creator.creatorVenueUuid
-              ? `/venue/${creator.creatorVenueUuid}`
-              : undefined;
-
+          const href = `/artist/${creator.creatorArtistUuid}`;
           const content = (
             <div className={styles.creator}>
               <p><strong>Playlist by {creator.creatorName}</strong></p>
