@@ -12,24 +12,25 @@ import styles from '../../styles/page.module.css'
 
 const VenueDetail = () => {
   const [venue, setVenue] = useState<Venue>({} as Venue);
-  const [location, setLocation] = useState<string>('');
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   const api = getConfig().publicRuntimeConfig.SERVICE_PUBLIC_API_URL
+
   const router = useRouter();
   const { id } = router.query;
 
+  
   useEffect(() => {
     if (id === undefined) return;
 
     axios.get(`${api}/venue/${id}`)
       .then(response => { setVenue(camelcaseKeys(response.data, { deep: true })) })
+      .then(() => { setIsLoaded(true) })
+      .catch(() => { router.push('/'); })
   }, [id]);
 
-  useEffect(() => {
-    setLocation(formatLocation(venue.streetAddress, venue.city, venue.stateCode, venue.postCode))
-  }, [venue])
 
-  return (
+  if (isLoaded) return (
     <>
       <div className={styles.pageWrapper}>
         <Carousel imageUrls={venue.imageUrls} title={venue.title} />
@@ -41,7 +42,7 @@ const VenueDetail = () => {
         />
         <Description text={venue.description} types={venue.types}  />
         <VenueLocation
-          location={location}
+          location={formatLocation(venue.streetAddress, venue.city, venue.stateCode, venue.postCode)}
           websiteUrl={venue.websiteUrl}
           phoneNumber={venue.phoneNumber}
           googleMapsEmbedUrl={venue.googleMapsEmbedUrl}
@@ -61,7 +62,7 @@ const VenueDetail = () => {
         keywords={venue.types}
         schemaExtensions={{
           venueName: venue.title,
-          venueAddress: location,
+          venueAddress: formatLocation(venue.streetAddress, venue.city, venue.stateCode, venue.postCode),
           googleMapsEmbed: venue?.googleMapsEmbedUrl
         }}
       />
